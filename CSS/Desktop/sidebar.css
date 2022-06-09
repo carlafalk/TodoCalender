@@ -12,6 +12,7 @@
   position: fixed;
   flex-direction: column;
   top: 69px;
+  min-width: 345px;
 }
 .welcome-segment-container {
   border: 1px solid black;
