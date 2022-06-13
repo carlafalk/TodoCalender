@@ -13,48 +13,55 @@
     <link rel="stylesheet" href="../CSS/Desktop/main.css" />
     <link rel="stylesheet" href="../CSS/mobile.css" />
     <link rel="stylesheet" href="../CSS/tablet.css" />
+    <link rel="stylesheet" href="../CSS/global.css" />
   </head>
   <body>
-    <header>
-      <div class="container">
-        <p class="title">Todo Calendar</p>
-      </div>
+    <header class="container">
+      <p class="title">Todo Calendar</p>
     </header>
 
-    <aside class="aside">
-      <div class="welcome-segment-container">
-        <div class="welcome-segment">
-          <div class="DateAndTime"></div>
-        </div>
-      </div>
-      <div class="todo-list-container">
-        <div class="add-todo-item">
-          <button class="add-todo-btn">
-            <p class="plus-btn">+</p>
-          </button>
-          <div class="expanded-content">
-            <form action="" id="todo-item" class="forms">
-              <label for="todo-title">Title</label><br />
-              <input type="text" id="todo-title" /><br />
+    <div class="asideMain">
+      <aside class="aside">
+        <!-- welcome-segment -->
 
-              <label for="todo-description" id="todo-desc">Description</label
-              ><br />
-              <input type="text" id="todo-desc" /><br />
-
-              <label for="date">Date</label><br />
-              <input type="date" name="date" id="date" /><br />
-            </form>
+        <div class="welcome-segment-container">
+          <div class="welcome-segment">
+            <div class="DateAndTime"></div>
           </div>
         </div>
-        <div class="todo-list">
-          todo items here (tillfällig height på container) fylls ut av items
-          senare
-        </div>
-      </div>
-    </aside>
+        <div class="todo-list-container">
+          <!-- add todo-item button -->
 
-    <main>
-      <div class="calendar-container"></div>
-    </main>
+          <div class="add-todo-item">
+            <button class="add-todo-btn">
+              <p class="plus-btn">+</p>
+            </button>
+            <div class="expanded-content">
+              <form action="" id="todo-item" class="forms">
+                <label for="todo-title">Title</label><br />
+                <input type="text" id="todo-title" /><br />
+
+                <label for="todo-description" id="todo-desc">Description</label
+                ><br />
+                <input type="text" id="todo-desc" /><br />
+
+                <label for="date">Date</label><br />
+                <input type="date" name="date" id="date" /><br />
+              </form>
+            </div>
+          </div>
+          <!-- todo list -->
+
+          <div class="todo-list">
+            todo items here (tillfällig height på container) fylls ut av items
+            senare
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <div class="calendar-container"></div>
+      </main>
+    </div>
   </body>
 </html>

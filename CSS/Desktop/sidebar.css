@@ -1,7 +1,9 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.asideMain {
+  position: fixed;
+  top: 69px;
+  display: flex;
+  height: 100%;
+  width: 100%;
 }
 
 .aside {
@@ -9,7 +11,6 @@
   width: 20%;
   height: 100%;
   background-color: rgb(92, 20, 20);
-  position: fixed;
   flex-direction: column;
   top: 69px;
   min-width: 345px;
