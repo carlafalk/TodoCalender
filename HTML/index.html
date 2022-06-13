@@ -28,8 +28,23 @@
         </div>
       </div>
       <div class="todo-list-container">
-        <div class="add-todo-btn">
-          <button>add todo</button>
+        <div class="add-todo-item">
+          <button class="add-todo-btn">
+            <p class="plus-btn">+</p>
+          </button>
+          <div class="expanded-content">
+            <form action="" id="todo-item" class="forms">
+              <label for="todo-title">Title</label><br />
+              <input type="text" id="todo-title" /><br />
+
+              <label for="todo-description" id="todo-desc">Description</label
+              ><br />
+              <input type="text" id="todo-desc" /><br />
+
+              <label for="date">Date</label><br />
+              <input type="date" name="date" id="date" /><br />
+            </form>
+          </div>
         </div>
         <div class="todo-list">
           todo items here (tillfällig height på container) fylls ut av items
