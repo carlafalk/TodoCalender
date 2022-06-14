@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", main);
 
-const currentDate2 = new Date();
 const prvBtn = document.querySelector(".prv-btn");
 const nxtBtn = document.querySelector(".nxt-btn");
 
-let selectedDate = currentDate2;
+let selectedDate = new Date();
 
 const getNumberOfDays = () => {
   return new Date(
@@ -16,72 +15,55 @@ const getNumberOfDays = () => {
 
 function main() {
   addEventListeners();
-  update();
+  renderCalendar();
 }
 
 function addEventListeners() {
   prvBtn.addEventListener("click", () => {
     selectedDate.setMonth(selectedDate.getMonth() - 1);
-    update();
+    renderCalendar();
   });
 
   nxtBtn.addEventListener("click", () => {
     selectedDate.setMonth(selectedDate.getMonth() + 1);
-    update();
+    renderCalendar();
   });
 }
 
-function update() {
-  const calendarContainer = document.querySelector(".calendar-container");
-  calendarContainer.innerHTML = "";
+function renderCalendar() {
 
-  const firstDateInMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1).getDay();
+  const numberOfDaysBefore = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 0).getDay();
   
-  let counter = 1;
-  for (let i = 1; i <= 42; i++) {
+  const calendarContainer = document.querySelector(".calendar-container");
 
-    const day = document.createElement("div");
-    if(i < firstDateInMonth) {
-      day.classList.add('extra');
-      day.innerHTML = getLastDay('prev-month') - (firstDateInMonth - 1) + i;
-      calendarContainer.appendChild(day);
+  calendarContainer.innerHTML="";
+
+  const numberOfDaysInMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0).getDate();
+
+  const daysToRender = 42;
+
+  const startPrevMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 0).getDate() - numberOfDaysBefore + 1;
+    
+  for (let i = 0; i < daysToRender; i++) {
+    
+    const dayDiv = document.createElement('div');
+
+    if(i < numberOfDaysBefore) {
+      dayDiv.classList.add('prev-month-day');
+      dayDiv.id = `${new Date(selectedDate.getFullYear(),selectedDate.getMonth(), i - 1).toLocaleDateString("sv-SE", {year: "numeric", month: "numeric", day: "numeric"})}`
+      dayDiv.innerHTML = startPrevMonth + i;
     }
-    else if(i > getNumberOfDays()+ firstDateInMonth -1) {
-      day.classList.add('extra');
-      day.innerHTML =  counter++;
-      calendarContainer.appendChild(day);
+    else if(i >= numberOfDaysBefore + numberOfDaysInMonth) {
+      dayDiv.classList.add('next-month-day');
+      dayDiv.id = `${new Date(selectedDate.getFullYear(),selectedDate.getMonth(), i - 1).toLocaleDateString("sv-SE", {year: "numeric", month: "numeric", day: "numeric"})}`
+      dayDiv.innerHTML = i - (numberOfDaysBefore + numberOfDaysInMonth) + 1;
     }
     else {
-      day.classList.add("day");
-      day.innerHTML = i - firstDateInMonth +1;
-      calendarContainer.appendChild(day);
+      dayDiv.classList.add('day');
+      dayDiv.id = `${new Date(selectedDate.getFullYear(),selectedDate.getMonth(), i + 1 - numberOfDaysBefore).toLocaleDateString("sv-SE", {year: "numeric", month: "numeric", day: "numeric"})}`;
+      dayDiv.innerHTML = i-numberOfDaysBefore + 1;
     }
+    calendarContainer.appendChild(dayDiv);
   }
 }
-
-
-function getLastDay() {
-  if(arguments.length === 0) {
-    return new Date(
-    selectedDate.getFullYear(),
-    selectedDate.getMonth() + 1,
-    0
-  ).getDate();
-  }
-  else if(arguments[0] === 'prev-month') {
-    return new Date(
-    selectedDate.getFullYear(),
-    selectedDate.getMonth() ,
-    0).getDate();
-  }
-  else if (arguments[0] === 'next-month'){
-    return new Date(
-    selectedDate.getFullYear(),
-    selectedDate.getMonth() + 2,
-    0).getDate();
-  }
-}
-
-const asd  = getLastDay();
-console.log(asd);
 
