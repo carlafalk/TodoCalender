@@ -15,6 +15,14 @@
   background-color: lightsalmon;
 }
 
+.prev-month-day {
+  background-color: blueviolet;
+}
+
+.next-month-day {
+  background-color: blueviolet;
+}
+
 .weekday-container {
   display:grid;
   grid-template-columns: repeat(7,1fr);
