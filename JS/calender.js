@@ -34,7 +34,11 @@ function addEventListeners() {
   });
 }
 
-function renderCalendar() {
+async function renderCalendar() {
+  const holidays = await getHolidays();
+
+  console.log(holidays.dagar[2]['datum']);
+
   const numberOfDaysBefore = new Date(
     selectedDate.getFullYear(),
     selectedDate.getMonth(),
@@ -60,7 +64,6 @@ function renderCalendar() {
     const dayDiv = document.createElement("div");
 
     dayDiv.addEventListener("click", () => {
-      // console.log(dayDiv.id);
       showDayInfo(dayDiv.id);
       dayDiv.classList.toggle("selected-Day");
 
@@ -95,6 +98,12 @@ function renderCalendar() {
       })}`;
       dayDiv.innerHTML = i - (numberOfDaysBefore + numberOfDaysInMonth) + 1;
     } else {
+
+      
+      if(holidays.dagar[i - numberOfDaysBefore]['röd dag'] === "Ja") {
+        dayDiv.classList.add('holiday');
+      }
+
       dayDiv.classList.add("day");
       dayDiv.id = `${new Date(
         selectedDate.getFullYear(),
@@ -130,7 +139,6 @@ function showDayInfo(dayDivId) {
 
   for (let i = 0; i < todoItems.length; i++) {
     if (todoItems[i].date === dayDivId) {
-  
       const todoTitleDiv = document.createElement("div");
       todoTitleDiv.innerHTML = `${todoItems[i].title}`;
 
@@ -147,7 +155,7 @@ function showDayInfo(dayDivId) {
       deleteBtn.innerHTML = "Remove";
       dayInfo.appendChild(todoTitleDiv);
       dayInfo.appendChild(todoDescriptionDiv);
-      dayInfo.appendChild(deleteBtn); 
+      dayInfo.appendChild(deleteBtn);
     }
   }
 
@@ -164,4 +172,16 @@ function deleteTodoItem(todoItem) {
   todoItems.splice(index, 1);
 
   setLocalstorage();
+}
+
+function getHolidays() {
+  const url = "http://sholiday.faboul.se/dagar/v2.1/";
+
+  const holidays = fetch(`${url}${selectedDate.getFullYear()}/${selectedDate.getMonth() + 1}`)
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    });
+
+    return holidays;
 }
