@@ -19,6 +19,10 @@
   background-color: lightsalmon;
 }
 
+.holiday {
+  color: red;
+}
+
 .prev-month-day {
   background-color: blueviolet;
 }
