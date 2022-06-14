@@ -11,6 +11,10 @@
   width: 100%;
 }
 
+.selected-Day {
+  border: solid 2px black;
+}
+
 .day:hover {
   background-color: lightsalmon;
 }
