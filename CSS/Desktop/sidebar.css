@@ -102,3 +102,13 @@
 .forms {
   margin: 1rem;
 }
+
+.add-btn {
+  margin-top: 1rem;
+  color: white;
+  border-radius: 10rem;
+  padding: 5px 15px;
+  border: none;
+  background-color: rgb(175, 51, 51);
+  cursor: pointer;
+}

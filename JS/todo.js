@@ -12,9 +12,9 @@ const addTodoItem = (ev) => {
 
   todoItems.push(todoItem);
 
+  localStorage.setItem("todoItems", JSON.stringify(todoItems));
+
   document.forms[0].reset();
 };
 
 document.getElementById("add-btn").addEventListener("click", addTodoItem);
-
-console.log(todoItems);
