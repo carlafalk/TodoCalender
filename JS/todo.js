@@ -15,12 +15,13 @@ const addTodoItem = (ev) => {
 
   todoItems.push(todoItem);
 
-  localStorage.setItem("todoItems", JSON.stringify(todoItems));
+  setLocalstorage();
 
   document.forms[0].reset();
 };
 
 document.getElementById("add-btn").addEventListener("click", addTodoItem);
+document.getElementById("add-btn").addEventListener("click", renderCalendar);
 
 function showAllTodos() {
   todoListDiv.innerHTML = "";
@@ -30,4 +31,8 @@ function showAllTodos() {
 
     todoListDiv.appendChild(todoTitle);
   }
+}
+
+function setLocalstorage() {
+  localStorage.setItem("todoItems", JSON.stringify(todoItems));
 }
