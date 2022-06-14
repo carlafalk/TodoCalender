@@ -19,10 +19,51 @@ function update() {
   const calendarContainer = document.querySelector(".calendar-container");
   calendarContainer.innerHTML = "";
 
-  for (let i = 0; i < getNumberOfDays(); i++) {
+  const firstDateInMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1).getDay();
+  
+  let counter = 1;
+  for (let i = 1; i <= 42; i++) {
+
     const day = document.createElement("div");
-    day.classList.add("day");
-    day.innerHTML = i + 1;
-    calendarContainer.appendChild(day);
+    if(i < firstDateInMonth) {
+      day.classList.add('extra');
+      day.innerHTML = getLastDay('prev-month') - (firstDateInMonth - 1) + i;
+      calendarContainer.appendChild(day);
+    }
+    else if(i > getNumberOfDays()+ firstDateInMonth -1) {
+      day.classList.add('extra');
+      day.innerHTML =  counter++;
+      calendarContainer.appendChild(day);
+    }
+    else {
+      day.classList.add("day");
+      day.innerHTML = i - firstDateInMonth +1;
+      calendarContainer.appendChild(day);
+    }
   }
 }
+
+function getLastDay() {
+  if(arguments.length === 0) {
+    return new Date(
+    selectedDate.getFullYear(),
+    selectedDate.getMonth() + 1,
+    0
+  ).getDate();
+  }
+  else if(arguments[0] === 'prev-month') {
+    return new Date(
+    selectedDate.getFullYear(),
+    selectedDate.getMonth() ,
+    0).getDate();
+  }
+  else if (arguments[0] === 'next-month'){
+    return new Date(
+    selectedDate.getFullYear(),
+    selectedDate.getMonth() + 2,
+    0).getDate();
+  }
+}
+
+const asd  = getLastDay();
+console.log(asd);

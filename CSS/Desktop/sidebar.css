@@ -1,6 +1,6 @@
 .asideMain {
   position: fixed;
-  top: 69px;
+  top: 68px;
   display: flex;
   height: 100%;
   width: 100%;
@@ -12,7 +12,7 @@
   height: 100%;
   background-color: rgb(92, 20, 20);
   flex-direction: column;
-  top: 69px;
+  top: 68px;
   min-width: 345px;
 }
 
