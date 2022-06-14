@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", main);
 
+const calendarContainer = document.querySelector(".calendar-container");
+const todoListDiv = document.querySelector(".todo-list");
+
 const prvBtn = document.querySelector(".prv-btn");
 const nxtBtn = document.querySelector(".nxt-btn");
+
 
 let selectedDate = new Date();
 
@@ -16,6 +20,7 @@ const getNumberOfDays = () => {
 function main() {
   addEventListeners();
   renderCalendar();
+  showAllTodos();
 }
 
 function addEventListeners() {
@@ -28,14 +33,13 @@ function addEventListeners() {
     selectedDate.setMonth(selectedDate.getMonth() + 1);
     renderCalendar();
   });
+
 }
 
 function renderCalendar() {
 
   const numberOfDaysBefore = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 0).getDay();
   
-  const calendarContainer = document.querySelector(".calendar-container");
-
   calendarContainer.innerHTML="";
 
   const numberOfDaysInMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0).getDate();
@@ -47,6 +51,17 @@ function renderCalendar() {
   for (let i = 0; i < daysToRender; i++) {
     
     const dayDiv = document.createElement('div');
+    
+    dayDiv.addEventListener("click", () => {
+      console.log(dayDiv.id),
+      showDayInfo(dayDiv.id);
+      dayDiv.classList.toggle("selected-Day")
+      
+      //TODO: Create separate toggle function later
+      if(!dayDiv.classList.contains('selected-Day')) {
+        showAllTodos();
+      }
+    });
 
     if(i < numberOfDaysBefore) {
       dayDiv.classList.add('prev-month-day');
@@ -65,5 +80,24 @@ function renderCalendar() {
     }
     calendarContainer.appendChild(dayDiv);
   }
+}
+
+function showDayInfo(dayDivId) {
+
+  todoListDiv.innerHTML = "";
+
+  const dayInfo = document.createElement('div');
+
+  for (let i = 0; i < todoItems.length; i++) {
+
+    if(todoItems[i].date === dayDivId) {
+      const todoDiv = document.createElement('div');
+      const textNode = document.createTextNode(`${todoItems[i].date} ${todoItems[i].description}` );
+      todoDiv.appendChild(textNode);
+      dayInfo.appendChild(todoDiv);
+    }
+  }
+
+  todoListDiv.appendChild(dayInfo);
 }
 
