@@ -126,14 +126,28 @@ function showDayInfo(dayDivId) {
 
   const dayInfo = document.createElement("div");
 
+  dayInfo.classList.add("flex");
+
   for (let i = 0; i < todoItems.length; i++) {
     if (todoItems[i].date === dayDivId) {
-      const todoDiv = document.createElement("div");
-      const textNode = document.createTextNode(
-        `${todoItems[i].date} ${todoItems[i].description}`
-      );
-      todoDiv.appendChild(textNode);
-      dayInfo.appendChild(todoDiv);
+  
+      const todoTitleDiv = document.createElement("div");
+      todoTitleDiv.innerHTML = `${todoItems[i].title}`;
+
+      const todoDescriptionDiv = document.createElement("div");
+      todoDescriptionDiv.innerHTML = `${todoItems[i].description}`;
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.classList.add("delete-btn");
+      deleteBtn.addEventListener("click", () => {
+        deleteTodoItem(todoItems[i]);
+        renderCalendar();
+      });
+
+      deleteBtn.innerHTML = "Remove";
+      dayInfo.appendChild(todoTitleDiv);
+      dayInfo.appendChild(todoDescriptionDiv);
+      dayInfo.appendChild(deleteBtn); 
     }
   }
 
@@ -142,4 +156,12 @@ function showDayInfo(dayDivId) {
 
 function getNumberOfTodos(date) {
   return todoItems.filter((todoItem) => todoItem.date === date).length;
+}
+
+function deleteTodoItem(todoItem) {
+  var index = todoItems.indexOf(todoItem);
+
+  todoItems.splice(index, 1);
+
+  setLocalstorage();
 }
