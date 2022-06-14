@@ -1,8 +1,7 @@
-let todoItems = [];
-
-todoItems = JSON.parse(localStorage.getItem('todoItems'));
-
-
+let todoItems = JSON.parse(localStorage.getItem("todoItems"));
+if (!todoItems) {
+  todoItems = [];
+}
 
 const addTodoItem = (ev) => {
   ev.preventDefault();
@@ -24,14 +23,11 @@ const addTodoItem = (ev) => {
 document.getElementById("add-btn").addEventListener("click", addTodoItem);
 
 function showAllTodos() {
-
   todoListDiv.innerHTML = "";
 
-  for(let i = 0; i < todoItems.length; i++) {
-
+  for (let i = 0; i < todoItems.length; i++) {
     const todoTitle = document.createTextNode(todoItems[i].title);
 
     todoListDiv.appendChild(todoTitle);
   }
-  
 }
