@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", main);
 
 const currentDate2 = new Date();
+const prvBtn = document.querySelector(".prv-btn");
+const nxtBtn = document.querySelector(".nxt-btn");
+
 let selectedDate = currentDate2;
 
 const getNumberOfDays = () => {
@@ -12,7 +15,20 @@ const getNumberOfDays = () => {
 };
 
 function main() {
+  addEventListeners();
   update();
+}
+
+function addEventListeners() {
+  prvBtn.addEventListener("click", () => {
+    selectedDate.setMonth(selectedDate.getMonth() - 1);
+    update();
+  });
+
+  nxtBtn.addEventListener("click", () => {
+    selectedDate.setMonth(selectedDate.getMonth() + 1);
+    update();
+  });
 }
 
 function update() {
@@ -43,6 +59,7 @@ function update() {
   }
 }
 
+
 function getLastDay() {
   if(arguments.length === 0) {
     return new Date(
@@ -67,3 +84,4 @@ function getLastDay() {
 
 const asd  = getLastDay();
 console.log(asd);
+
