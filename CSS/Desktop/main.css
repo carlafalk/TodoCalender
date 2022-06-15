@@ -17,7 +17,7 @@
 .todo-circle {
   height: 17%;
   width: 10%;
-  margin: 2px;
+  margin: 4px;
   border-radius: 200rem;
   background-color: orange;
   color: white;
@@ -38,10 +38,11 @@
 }
 
 .flag-day {
-  background: url("../../IMG/flagday.png") no-repeat center;
+  background: url("../../IMG/flagday-req.png") no-repeat center;
   background-size: cover;
   height: 17%;
   width: 10%;
+  margin: 4px;
 }
 
 .prev-month-day,

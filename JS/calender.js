@@ -144,9 +144,7 @@ async function renderCalendar() {
       if (holidays.dagar[i - numberOfDaysBefore].flaggdag !== "") {
         const flagDiv = document.createElement("div");
         flagDiv.classList.add("flag-day");
-        // flagDiv.innerHTML = `${
-        //   holidays.dagar[i - numberOfDaysBefore].flaggdag
-        // }`;
+
         dayDiv.append(flagDiv);
       }
     }
@@ -211,12 +209,3 @@ function getHolidays() {
 
   return holidays;
 }
-
-// async function isFlagday(date) {
-//   const holidays = await getHolidays();
-
-//   const dagjävel = holidays.dagar.find((dag) => dag.datum === date);
-
-//   console.log(dagjävel.flaggdag);
-//   return dagjävel.flaggdag !== "";
-// }

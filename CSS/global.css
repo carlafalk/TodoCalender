@@ -9,6 +9,7 @@ body::-webkit-scrollbar {
 
 body {
   font-family: "Courier New", Courier, monospace;
+  color: #133957;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
