@@ -5,9 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/1e55190e54.js"
+      crossorigin="anonymous"
+    ></script>
     <script defer src="../JS/today.js"></script>
     <script defer src="../JS/calender.js"></script>
     <script defer src="../JS/todo.js"></script>
+    <script defer src="../JS/header.js"></script>
     <link rel="stylesheet" href="../CSS/Desktop/header.css" />
     <link rel="stylesheet" href="../CSS/Desktop/sidebar.css" />
     <link rel="stylesheet" href="../CSS/Desktop/main.css" />
@@ -16,68 +21,76 @@
     <link rel="stylesheet" href="../CSS/global.css" />
   </head>
   <body>
-    <header class="container">
-      <p class="title">Todo Calendar</p>
-    </header>
-
-    <div class="asideMain">
-      <aside class="aside">
-        <!-- welcome-segment -->
-
-        <div class="welcome-segment-container">
-          <div class="welcome-segment">
-            <div class="DateAndTime"></div>
-          </div>
+    <div class="wrapper">
+      <header class="header-container">
+        <div class="header-separator"></div>
+        <div class="header-skew"></div>
+        <div class="header-content">
+          <img src="../IMG/colt-logo.png" />
+          <div class="month-controller"></div>
         </div>
-        <div class="todo-list-container">
-          <!-- add todo-item button -->
+        <div class="year-banner">
+          <div class="century"></div>
+          <div class="year"></div>
+        </div>
+      </header>
 
-          <div class="add-todo-item">
-            <button class="add-todo-btn">
-              <p class="plus-btn">+</p>
-            </button>
-            <div class="expanded-content">
-              <form action="" id="todo-item" class="forms">
-                <div class="formBox">
-                  <label for="todo-title">Title</label><br />
-                  <input type="text" id="todo-title" /><br />
-                </div>
+      <div class="asideMain">
+        <aside class="aside">
+          <!-- welcome-segment -->
 
-                <div class="formBox">
-                  <label for="todo-desc">Description</label><br />
-                  <input type="text" id="todo-desc" /><br />
-                </div>
-
-                <div class="formBox">
-                  <label for="date">Date</label><br />
-                  <input type="date" name="date" id="date" /><br />
-                </div>
-
-                <button id="add-btn" class="add-btn">Add</button>
-              </form>
+          <div class="welcome-segment-container">
+            <div class="welcome-segment">
+              <div class="DateAndTime"></div>
             </div>
           </div>
-          <!-- todo list -->
+          <div class="todo-list-container">
+            <!-- add todo-item button -->
 
-          <div class="todo-list"></div>
-        </div>
-      </aside>
+            <div class="add-todo-item">
+              <button class="add-todo-btn">
+                <p class="plus-btn">+</p>
+              </button>
+              <div class="expanded-content">
+                <form action="" id="todo-item" class="forms">
+                  <div class="formBox">
+                    <label for="todo-title">Title</label><br />
+                    <input type="text" id="todo-title" /><br />
+                  </div>
 
-      <main>
-        <button class="prv-btn">Prev month</button>
-        <button class="nxt-btn">Next month</button>
+                  <div class="formBox">
+                    <label for="todo-desc">Description</label><br />
+                    <input type="text" id="todo-desc" /><br />
+                  </div>
 
-        <div class="weekday-container">
-          <div>Monday</div>
-          <div>Tuesday</div>
-          <div>Wednesday</div>
-          <div>Thursday</div>
-          <div>Friday</div>
-          <div>Saturday</div>
-          <div>Sunday</div>
-        </div>
-        <div class="calendar-container"></div>
-      </main>
+                  <div class="formBox">
+                    <label for="date">Date</label><br />
+                    <input type="date" name="date" id="date" /><br />
+                  </div>
+
+                  <button id="add-btn" class="add-btn">Add</button>
+                </form>
+              </div>
+            </div>
+            <!-- todo list -->
+
+            <div class="todo-list"></div>
+          </div>
+        </aside>
+
+        <main>
+          <div class="weekday-container">
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+            <div>Sun</div>
+          </div>
+          <div class="calendar-container"></div>
+        </main>
+      </div>
     </div>
   </body>
 </html>

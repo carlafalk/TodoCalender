@@ -4,6 +4,19 @@
   margin: 0;
 }
 
+body {
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .flex {
   display: flex;
+}
+
+.wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.column {
+  flex-direction: column;
 }

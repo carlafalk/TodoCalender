@@ -1,8 +1,8 @@
 .asideMain {
-  position: fixed;
-  top: 68px;
+  /* position: fixed; */
+  height: 60vh;
   display: flex;
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
 }
 
