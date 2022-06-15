@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", main);
 const calendarContainer = document.querySelector(".calendar-container");
 const todoListDiv = document.querySelector(".todo-list");
 
-const prvBtn = document.querySelector(".prv-btn");
-const nxtBtn = document.querySelector(".nxt-btn");
+const prevBtn = document.createElement("i");
+const nextBtn = document.createElement("i");
 
 let selectedDate = new Date();
 
@@ -17,27 +17,41 @@ const getNumberOfDays = () => {
 };
 
 function main() {
+  renderHeaderMonth();
   addEventListeners();
   renderCalendar();
   showAllTodos();
+  renderYearLabel();
 }
 
 function addEventListeners() {
-  prvBtn.addEventListener("click", () => {
+  prevBtn.addEventListener("click", () => {
     selectedDate.setMonth(selectedDate.getMonth() - 1);
+    if (selectedDate.getMonth() === -1) {
+      selectedDate.setFullYear(selectedDate.getFullYear() - 1);
+      selectedDate.setMonth(11);
+    }
+    changeHeaderBackground();
     renderCalendar();
   });
 
-  nxtBtn.addEventListener("click", () => {
+  nextBtn.addEventListener("click", () => {
     selectedDate.setMonth(selectedDate.getMonth() + 1);
+    if (selectedDate.getMonth() === 12) {
+      selectedDate.setFullYear(selectedDate.getFullYear() + 1);
+      selectedDate.setMonth(0);
+    }
+    changeHeaderBackground();
     renderCalendar();
   });
 }
 
 async function renderCalendar() {
+  renderHeaderMonth();
+  renderYearLabel();
   const holidays = await getHolidays();
 
-  console.log(holidays.dagar[2]['datum']);
+  console.log(holidays.dagar[2]["datum"]);
 
   const numberOfDaysBefore = new Date(
     selectedDate.getFullYear(),
@@ -98,10 +112,8 @@ async function renderCalendar() {
       })}`;
       dayDiv.innerHTML = i - (numberOfDaysBefore + numberOfDaysInMonth) + 1;
     } else {
-
-      
-      if(holidays.dagar[i - numberOfDaysBefore]['röd dag'] === "Ja") {
-        dayDiv.classList.add('holiday');
+      if (holidays.dagar[i - numberOfDaysBefore]["röd dag"] === "Ja") {
+        dayDiv.classList.add("holiday");
       }
 
       dayDiv.classList.add("day");
@@ -177,11 +189,13 @@ function deleteTodoItem(todoItem) {
 function getHolidays() {
   const url = "http://sholiday.faboul.se/dagar/v2.1/";
 
-  const holidays = fetch(`${url}${selectedDate.getFullYear()}/${selectedDate.getMonth() + 1}`)
+  const holidays = fetch(
+    `${url}${selectedDate.getFullYear()}/${selectedDate.getMonth() + 1}`
+  )
     .then((response) => response.json())
     .then((data) => {
       return data;
     });
 
-    return holidays;
+  return holidays;
 }
