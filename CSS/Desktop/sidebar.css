@@ -7,6 +7,7 @@
 }
 
 .aside {
+  margin-right: 1rem;
   display: flex;
   width: 20%;
   height: 100%;
@@ -20,6 +21,7 @@
 
 .welcome-segment-container {
   color: black;
+  height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,8 +51,15 @@
 }
 
 .todo-list {
-  margin: 3rem;
+  height: 40vh;
+  margin: 1;
   color: white;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.todo-list::-webkit-scrollbar {
+  display: none;
 }
 
 /* add-todo------------------------------------------------ */
@@ -74,7 +83,7 @@
   float: right;
   transform: scale(1.5);
   margin-right: 1rem;
-  padding-top: 1rem;
+  padding-top: 8px;
 }
 
 .add-todo-btn--active {
@@ -94,7 +103,7 @@
 }
 .plus-btn {
   margin-left: 1rem;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .forms {
@@ -124,24 +133,18 @@
   flex-direction: column;
   color: black;
   background-color: rgba(255, 0, 0, 0);
-  overflow: hidden;
 }
 
 .date-div {
-  border-bottom: 1px solid black;
   background-color: rgb(255, 255, 255);
-  text-align: center;
+  margin-left: 1.5rem;
   font-size: 1.5rem;
-  font-family: "Courier New", Courier, monospace;
   font-weight: 600;
-  overflow: hidden;
 }
 
 .title-div {
-  font-family: "Courier New", Courier, monospace;
-  text-align: center;
+  margin-left: 2rem;
   font-weight: 500;
   background-color: white;
   padding: 4px 0;
-  overflow: hidden;
 }
