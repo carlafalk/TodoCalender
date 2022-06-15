@@ -1,14 +1,26 @@
 .calendar-container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-gap: 0.3rem;
-  grid-auto-rows: minmax(50px, auto);
+  grid-auto-rows: minmax(20px, auto);
+  grid-gap: 2px;
+  height: 93%;
 }
 
-.day {
-  height: 50px;
-  background-color: honeydew;
-  width: 100%;
+.day, .next-month-day, .prev-month-day {
+  display: flex;
+  background-color: rgba(243, 243, 243, 0.331);
+  font-size: 2rem;
+}
+
+.todo-circle {
+  height: 17%;
+  width: 10%;
+  margin: 2px;
+  border-radius:200rem;
+  background-color: orange;
+  color: white;
+  font-size: 0.7rem;
+  text-align: center;
 }
 
 .selected-Day {
@@ -16,24 +28,24 @@
 }
 
 .day:hover {
-  background-color: lightsalmon;
+  background-color: #1339476e;
 }
 
 .holiday {
   color: red;
 }
 
-.prev-month-day {
-  background-color: blueviolet;
-}
-
-.next-month-day {
-  background-color: blueviolet;
+.prev-month-day, .next-month-day {
+ 
+  color: #3b829c47;
 }
 
 .weekday-container {
   display:grid;
   grid-template-columns: repeat(7,1fr);
+  font-size: 2rem;
+  font-weight: bold;
+  height: 7%;
 }
 
 main {
