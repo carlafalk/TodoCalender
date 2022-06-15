@@ -1,3 +1,11 @@
+function changeHeaderBackground() {
+  const headerContainer = document.querySelector(".header-container");
+  headerContainer.style.background = `url(../../IMG/BG/${selectedDate.toLocaleString(
+    "en-EN",
+    { month: "long" }
+  )}.jpg)`;
+}
+
 function renderYearLabel() {
   const centuryDiv = document.querySelector(".century");
   centuryDiv.innerHTML = `${selectedDate
@@ -14,12 +22,16 @@ function renderYearLabel() {
 
 function renderHeaderMonth() {
   const monthControllerDiv = document.querySelector(".month-controller");
+  monthControllerDiv.innerHTML = ``;
   const monthDiv = document.createElement("div");
-  const prevBtn = document.createElement("button");
-  const nextBtn = document.createElement("button");
+
   monthDiv.classList.add("month");
 
   monthDiv.innerHTML = selectedDate.toLocaleString("en-EN", { month: "long" });
+  prevBtn.classList.add("fa-solid", "fa-chevron-left");
+  nextBtn.classList.add("fa-solid", "fa-chevron-right");
 
+  monthControllerDiv.appendChild(prevBtn);
   monthControllerDiv.appendChild(monthDiv);
+  monthControllerDiv.appendChild(nextBtn);
 }
