@@ -47,14 +47,76 @@ function showAllTodos() {
     if (dates.includes(todoItems[i].date)) {
       const dateDiv = document.getElementById(`${todoItems[i].date}`);
 
+      const trashcan = document.createElement("i");
+      trashcan.classList.add("trashcan", "fa-solid", "fa-trash-can");
+      trashcan.addEventListener("click", () => {
+        deleteTodoItem(todoItems[i]);
+        renderCalendar();
+      });
+
       const titleDiv = document.createElement("div");
       titleDiv.classList.add("title-div");
       const title = document.createTextNode(todoItems[i].title);
 
       dateDiv.appendChild(titleDiv);
       titleDiv.appendChild(title);
+      titleDiv.appendChild(trashcan);
     }
   }
+}
+
+function showDayInfo(dayDivId) {
+  todoListDiv.innerHTML = "";
+
+  const dayInfo = document.createElement("div");
+  dayInfo.classList.add("day-info");
+
+  for (let i = 0; i < todoItems.length; i++) {
+    if (todoItems[i].date === dayDivId) {
+      const todoTitleDiv = document.createElement("div");
+      todoTitleDiv.classList.add("selected-title-div");
+      todoTitleDiv.innerHTML = `${todoItems[i].title}`;
+
+      const todoDescriptionDiv = document.createElement("div");
+      todoDescriptionDiv.classList.add("selected-desc-div");
+      todoDescriptionDiv.innerHTML = `${todoItems[i].description}`;
+
+      const titleDescBox = document.createElement("div");
+      titleDescBox.classList.add("title-desc-box");
+
+      const editDeleteBox = document.createElement("div");
+      editDeleteBox.classList.add("edit-delete-box");
+
+      const selectedDateItem = document.createElement("div");
+      selectedDateItem.classList.add("selected-date-item");
+
+      const deleteDiv = document.createElement("div");
+      const deleteBtn = document.createElement("i");
+      deleteDiv.classList.add("delete-div");
+      deleteBtn.classList.add("delete-btn", "fa-solid", "fa-trash-can");
+      deleteBtn.addEventListener("click", () => {
+        deleteTodoItem(todoItems[i]);
+        renderCalendar();
+      });
+
+      const editDiv = document.createElement("div");
+      const editBtn = document.createElement("i");
+      editDiv.classList.add("edit-div");
+      editBtn.classList.add("edit-btn", "fa-solid", "fa-pen-to-square");
+
+      dayInfo.appendChild(selectedDateItem);
+      selectedDateItem.appendChild(titleDescBox);
+      selectedDateItem.appendChild(editDeleteBox);
+      titleDescBox.appendChild(todoTitleDiv);
+      titleDescBox.appendChild(todoDescriptionDiv);
+      editDeleteBox.appendChild(deleteDiv);
+      editDeleteBox.appendChild(editDiv);
+      editDiv.appendChild(editBtn);
+      deleteDiv.appendChild(deleteBtn);
+    }
+  }
+
+  todoListDiv.appendChild(dayInfo);
 }
 
 function setLocalstorage() {
