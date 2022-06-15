@@ -20,6 +20,8 @@ function main() {
   addEventListeners();
   renderCalendar();
   showAllTodos();
+  renderHeaderMonth();
+  renderYearLabel();
 }
 
 function addEventListeners() {
@@ -37,7 +39,7 @@ function addEventListeners() {
 async function renderCalendar() {
   const holidays = await getHolidays();
 
-  console.log(holidays.dagar[2]['datum']);
+  console.log(holidays.dagar[2]["datum"]);
 
   const numberOfDaysBefore = new Date(
     selectedDate.getFullYear(),
@@ -98,10 +100,8 @@ async function renderCalendar() {
       })}`;
       dayDiv.innerHTML = i - (numberOfDaysBefore + numberOfDaysInMonth) + 1;
     } else {
-
-      
-      if(holidays.dagar[i - numberOfDaysBefore]['röd dag'] === "Ja") {
-        dayDiv.classList.add('holiday');
+      if (holidays.dagar[i - numberOfDaysBefore]["röd dag"] === "Ja") {
+        dayDiv.classList.add("holiday");
       }
 
       dayDiv.classList.add("day");
@@ -177,11 +177,13 @@ function deleteTodoItem(todoItem) {
 function getHolidays() {
   const url = "http://sholiday.faboul.se/dagar/v2.1/";
 
-  const holidays = fetch(`${url}${selectedDate.getFullYear()}/${selectedDate.getMonth() + 1}`)
+  const holidays = fetch(
+    `${url}${selectedDate.getFullYear()}/${selectedDate.getMonth() + 1}`
+  )
     .then((response) => response.json())
     .then((data) => {
       return data;
     });
 
-    return holidays;
+  return holidays;
 }

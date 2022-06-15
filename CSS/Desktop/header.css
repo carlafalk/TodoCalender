@@ -1,4 +1,4 @@
-.container {
+/* .container {
   display: flex;
   background-color: rgb(126, 36, 36);
   position: fixed;
@@ -12,4 +12,81 @@
   font-family: "Courier New", Courier, monospace;
   font-size: xx-large;
   font-weight: 800;
+} */
+
+.header-container {
+  border-top: 15px solid #133957;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  background: url(../../IMG/may.jpg);
+  background-size: cover;
+  height: 40vh;
+}
+
+.header-skew {
+  background-color: white;
+  transform: skew(-20deg);
+  height: 100%;
+  width: 35%;
+}
+
+.header-separator {
+  background-color: rgba(255, 255, 255, 0.429);
+  transform: skew(-20deg);
+  width: 5%;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 35%;
+  height: 50%;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.logo {
+  width: 50%;
+}
+
+.header-content img {
+  margin-top: -10%;
+  width: 25%;
+}
+
+.month {
+  font-size: 3rem;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+.year-banner {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  top: -15px;
+  right: 5%;
+  height: 30%;
+  width: 7%;
+  background-color: orange;
+  color: white;
+  font-size: 3rem;
+}
+
+.month-controller {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 5px orange solid;
+  width: 80%;
+  margin-bottom: 25px;
 }
