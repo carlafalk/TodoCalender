@@ -128,10 +128,13 @@ async function renderCalendar() {
       })}`;
 
       const dayDate = document.createElement("div");
+      dayDate.classList.add("day-date");
       const nrOfTodos = document.createElement("div");
+      nrOfTodos.classList.add("todo-circle");
 
       dayDate.innerHTML = `${i - numberOfDaysBefore + 1}`;
-      nrOfTodos.innerHTML = `Todos: ${getNumberOfTodos(dayDiv.id)}`;
+
+      nrOfTodos.innerHTML = `${getNumberOfTodos(dayDiv.id)}`;
 
       dayDiv.appendChild(dayDate);
       if (getNumberOfTodos(dayDiv.id)) {
