@@ -98,12 +98,16 @@
   color: white;
   font-size: 0.7rem;
   font-style: italic;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .todo-container {
   display: flex;
   flex-direction: column;
   top: 25%;
+  width: 100%;
 }
 
 .holiday {
