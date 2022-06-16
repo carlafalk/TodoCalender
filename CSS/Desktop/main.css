@@ -22,28 +22,29 @@
 .day i {
   font-size: 0.8rem;
   margin: 4px;
+  padding: 0.1rem;
 }
 
-.todo-circle {
-  display: flex;
-  height: 17%;
-  width: 10%;
-  margin: 4px;
-  border-radius: 200rem;
+.todo-icon-container {
   background-color: orange;
-  color: white;
-  font-size: 0.7rem;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.5s;
+  height: 1.2rem;
+  border-radius: 10rem;
+  display: block;
 }
 
 .nr-of-todos {
-  display: flex;
+  font-size: 1rem;
+  padding: 0 0.3rem;
+  display: block;
 }
 
 .selected-Day {
   border: solid 2px black;
+}
+
+.flag-occasion {
+  display: none;
+  font-size: 0.7rem;
 }
 
 /* DAY HOVER -------------------------------------------------------------------------------- */
@@ -59,13 +60,24 @@
   flex-direction: column;
 }
 
+.day:hover .flag-occasion {
+  display: flex;
+}
+
+.day:hover .todo-icon-container {
+  display: none;
+}
 .day:hover .todo-circle,
 .flag-day {
   display: none;
 }
 
+.day:hover i {
+  color: orange;
+}
+
 .day:hover .flag-day {
-  display: none;
+  /* display: none; */
   background: none;
   position: absolute;
 }
@@ -80,10 +92,6 @@
 
 .day:hover .more-todos {
   display: block;
-}
-
-.day:hover .nr-of-todos {
-  display: none;
 }
 
 .day:hover .todo {
@@ -107,7 +115,6 @@
   display: flex;
   flex-direction: column;
   top: 25%;
-  width: 100%;
 }
 
 .holiday {
