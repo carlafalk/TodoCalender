@@ -96,7 +96,7 @@
 
 .expanded-content {
   overflow: hidden;
-  max-height: 0;
+  max-height: 0px;
   transition: max-height 0.2s;
   padding: 0, 15px;
   background-color: #eeeeee;

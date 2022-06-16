@@ -103,6 +103,7 @@ function showDayInfo(dayDivId) {
       const editBtn = document.createElement("i");
       editDiv.classList.add("edit-div");
       editBtn.classList.add("edit-btn", "fa-solid", "fa-pen-to-square");
+      editBtn.addEventListener("click", () => editTodoItem(todoItems[i]));
 
       dayInfo.appendChild(selectedDateItem);
       selectedDateItem.appendChild(titleDescBox);
@@ -121,4 +122,42 @@ function showDayInfo(dayDivId) {
 
 function setLocalstorage() {
   localStorage.setItem("todoItems", JSON.stringify(todoItems));
+}
+
+function editTodoItem(todoItem) {
+
+  const todoExpandendContent = document.querySelector(".expanded-content");
+  const todoItemBtn = document.querySelector(".add-todo-btn") 
+  
+  const titleInput = document.querySelector("#todo-title");
+  const descInput = document.querySelector("#todo-desc");
+  const dateInput = document.querySelector("#date");
+
+  // console.log(window.getComputedStyle(todoExpandendContent).maxHeight);
+  if(todoExpandendContent.style.maxHeight === "0px") {
+   
+    todoExpandendContent.style.maxHeight = "186px";
+
+    todoItemBtn.classList.toggle("add-todo-btn--active");
+  } 
+  else if(todoExpandendContent.style.maxHeight === "186px") {
+
+    todoExpandendContent.style.maxHeight = "0px"
+    todoItemBtn.classList.toggle("add-todo-btn--active");
+  }
+
+  // console.log(todoItem.title);
+  titleInput.value = `${todoItem.title}`;
+  descInput.value = `${todoItem.description}`;
+  dateInput.value = `${todoItem.date}`;
+  
+  const todoItems2 = JSON.parse(localStorage.getItem("todoItems"));
+
+  const itemToEdit = todoItems2.filter(t => t.title === todoItem.title && t.description === todoItem.description && t.date === todoItem.date);
+
+  itemToEdit.title = titleInput.value;
+  itemToEdit.description = descInput.value;
+  itemToEdit.date = dateInput.value;
+
+  console.log(itemToEdit);
 }

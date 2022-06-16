@@ -112,6 +112,7 @@ async function renderCalendar() {
       })}`;
       dayDiv.innerHTML = i - (numberOfDaysBefore + numberOfDaysInMonth) + 1;
     } else {
+      
       if (holidays.dagar[i - numberOfDaysBefore]["röd dag"] === "Ja") {
         dayDiv.classList.add("holiday");
       }
