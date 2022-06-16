@@ -42,6 +42,11 @@
   border: solid 2px black;
 }
 
+.todo-header {
+  display: none;
+  font-size: 0.9rem;
+}
+
 .flag-occasion {
   display: none;
   font-size: 0.7rem;
@@ -64,6 +69,10 @@
   display: flex;
 }
 
+.day:hover .todo-header {
+  display: flex;
+}
+
 .day:hover .todo-icon-container {
   display: none;
 }
@@ -77,9 +86,10 @@
 }
 
 .day:hover .flag-day {
-  /* display: none; */
-  background: none;
   position: absolute;
+  bottom: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .day:hover .todo-container {
@@ -88,7 +98,7 @@
   margin-top: 0.5rem;
 }
 
-.day:hover .todo:nth-child(-n + 3) {
+.day:hover .todo:nth-child(-n + 4) {
   display: block;
 }
 
@@ -124,7 +134,6 @@
 }
 
 .flag-day {
-  background-size: cover;
   display: flex;
   max-height: 17%;
 }

@@ -151,19 +151,23 @@ async function renderCalendar() {
         const todoContainer = document.createElement("div");
         todoContainer.classList.add("todo-container");
 
+        const todoHeader = document.createElement("div");
+        todoHeader.classList.add("todo-header");
+        todoHeader.innerHTML = "Todays todos:";
+
+        todoContainer.appendChild(todoHeader);
         const todos = getTodosForDay(dayDiv.id);
         for (let i = 0; i < todos.length; i++) {
           const todo = document.createElement("div");
           todo.classList.add("todo");
           todo.innerHTML = todos[i].title;
-          todoContainer.appendChild(todo);
-        }
 
-        if (todos.length > 3) {
-          const moreTodos = document.createElement("div");
-          moreTodos.classList.add("more-todos");
-          moreTodos.innerHTML = `...${todos.length - 3} more`;
-          todoContainer.appendChild(moreTodos);
+          if (i === 2 && todos.length > 3) {
+            todo.innerHTML = `${todos[i].title} (${todos.length - 3} more)`;
+            todoContainer.appendChild(todo);
+            break;
+          }
+          todoContainer.appendChild(todo);
         }
 
         dayDiv.appendChild(todoContainer);
