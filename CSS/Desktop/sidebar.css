@@ -26,6 +26,9 @@
   flex-direction: column;
   align-items: center;
 }
+.welcome-segment {
+  height: 10vh;
+}
 .DateAndTime {
   display: flex;
   justify-content: space-between;
@@ -210,9 +213,14 @@
 
 .edit-delete-box {
   margin-right: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .delete-btn {
   margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.edit-btn {
+  font-size: 1rem;
 }

@@ -54,7 +54,7 @@
   color: white;
   cursor: pointer;
   width: 130%;
-  height: 200%;
+  height: 180%;
   z-index: 0;
   position: relative;
   flex-direction: column;
@@ -84,6 +84,8 @@
 
 .day:hover .todo-container {
   position: absolute;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
 .day:hover .todo:nth-child(-n + 3) {
@@ -95,7 +97,7 @@
 }
 
 .day:hover .todo {
-  max-width: 100%;
+  max-width: 80%;
   z-index: 3;
 }
 
