@@ -56,23 +56,27 @@ function showAllTodos() {
 
       const titleDiv = document.createElement("div");
       titleDiv.classList.add("title-div");
+
+      const titlebox = document.createElement("div");
+      titlebox.classList.add("title-box");
       const title = document.createTextNode(todoItems[i].title);
 
       dateDiv.appendChild(titleDiv);
-      titleDiv.appendChild(title);
+      titleDiv.appendChild(titlebox);
       titleDiv.appendChild(trashcan);
+      titlebox.appendChild(title);
     }
   }
 }
 
-function showDayInfo(dayDivId) {
+function showDayInfo(date) {
   todoListDiv.innerHTML = "";
 
   const dayInfo = document.createElement("div");
   dayInfo.classList.add("day-info");
 
   for (let i = 0; i < todoItems.length; i++) {
-    if (todoItems[i].date === dayDivId) {
+    if (todoItems[i].date === date) {
       const todoTitleDiv = document.createElement("div");
       todoTitleDiv.classList.add("selected-title-div");
       todoTitleDiv.innerHTML = `${todoItems[i].title}`;
