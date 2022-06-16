@@ -22,6 +22,7 @@ const addTodoItem = (ev) => {
 
 document.getElementById("add-btn").addEventListener("click", addTodoItem);
 document.getElementById("add-btn").addEventListener("click", renderCalendar);
+document.getElementById("add-btn").addEventListener("click", showAllTodos);
 
 function showAllTodos() {
   const dates = [];
@@ -101,12 +102,16 @@ function showDayInfo(date) {
       deleteBtn.addEventListener("click", () => {
         deleteTodoItem(todoItems[i]);
         renderCalendar();
+        showAllTodos();
       });
 
       const editDiv = document.createElement("div");
       const editBtn = document.createElement("i");
       editDiv.classList.add("edit-div");
       editBtn.classList.add("edit-btn", "fa-solid", "fa-pen-to-square");
+      editBtn.addEventListener("click", () =>
+        toggleEditTodoWindow(todoItems[i])
+      );
 
       dayInfo.appendChild(selectedDateItem);
       selectedDateItem.appendChild(titleDescBox);
@@ -127,6 +132,52 @@ function setLocalstorage() {
   localStorage.setItem("todoItems", JSON.stringify(todoItems));
 }
 
+// --------EDIT STUFFS---------
+
+const editBtn = document.createElement("button");
+
+function toggleEditTodoWindow(todoItem) {
+  toggleContent();
+  editBtn.innerHTML = "Edit";
+  editBtn.classList.add("save-edit-btn");
+  editBtn.addEventListener("click", (ev) => saveEdit(todoItem, ev));
+
+  const forms = document.querySelector(".forms");
+  forms.appendChild(editBtn);
+
+  
+
+  const titleInput = document.querySelector("#todo-title");
+  const descInput = document.querySelector("#todo-desc");
+  const dateInput = document.querySelector("#date");
+
+  titleInput.value = todoItem.title;
+  descInput.value = todoItem.description;
+  dateInput.value = todoItem.date;
+}
+
+function saveEdit(todoItem, ev) {
+  ev.preventDefault();
+
+  const editedTodoItem = {
+    title: document.getElementById("todo-title").value,
+    description: document.getElementById("todo-desc").value,
+    date: document.getElementById("date").value,
+    isDone: false,
+  };
+
+  const index = todoItems.findIndex(
+    (t) =>
+      t.title === todoItem.title &&
+      t.description === todoItem.description &&
+      t.date === todoItem.date
+  );
+
+  todoItems[index] = Object.assign({}, todoItems[index], editedTodoItem);
+
+  localStorage.setItem("todoItems", JSON.stringify(todoItems));
+}
+
 // add-todo-item-button----------------------------------
 
 const btn = document.querySelector(".add-todo-btn");
@@ -139,6 +190,7 @@ function toggleContent() {
     expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
   } else {
     expandedContent.style.maxHeight = 0;
+    document.forms[0].reset();
   }
 }
 

@@ -96,7 +96,7 @@
 
 .expanded-content {
   overflow: hidden;
-  max-height: 0;
+  max-height: 0px;
   transition: max-height 0.2s;
   padding: 0, 15px;
   background-color: #eeeeee;
@@ -118,6 +118,18 @@
   border: none;
   background-color: #133947;
   cursor: pointer;
+}
+
+/* EDIT TODO ------------------------------ */
+
+.save-edit-btn {
+  margin-top: 1rem;
+    color: white;
+    border-radius: 10rem;
+    padding: 5px 15px;
+    border: none;
+    background-color: #133947;
+    cursor: pointer;
 }
 
 /* todo list------------------------------------------------ */
