@@ -31,20 +31,3 @@ setInterval(clock, 1000);
 currentTime.innerText = welcomeContainer.appendChild(currentDay);
 dateAndTimeContainer.appendChild(currentDate);
 dateAndTimeContainer.appendChild(currentTime);
-
-// add-todo-item-button----------------------------------
-
-const btn = document.querySelector(".add-todo-btn");
-const expandedContent = document.querySelector(".expanded-content");
-
-function toggleContent() {
-  btn.classList.toggle("add-todo-btn--active");
-
-  if (btn.classList.contains("add-todo-btn--active")) {
-    expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
-  } else {
-    expandedContent.style.maxHeight = 0;
-  }
-}
-
-btn.addEventListener("click", toggleContent);

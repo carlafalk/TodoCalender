@@ -56,23 +56,27 @@ function showAllTodos() {
 
       const titleDiv = document.createElement("div");
       titleDiv.classList.add("title-div");
+
+      const titlebox = document.createElement("div");
+      titlebox.classList.add("title-box");
       const title = document.createTextNode(todoItems[i].title);
 
       dateDiv.appendChild(titleDiv);
-      titleDiv.appendChild(title);
+      titleDiv.appendChild(titlebox);
       titleDiv.appendChild(trashcan);
+      titlebox.appendChild(title);
     }
   }
 }
 
-function showDayInfo(dayDivId) {
+function showDayInfo(date) {
   todoListDiv.innerHTML = "";
 
   const dayInfo = document.createElement("div");
   dayInfo.classList.add("day-info");
 
   for (let i = 0; i < todoItems.length; i++) {
-    if (todoItems[i].date === dayDivId) {
+    if (todoItems[i].date === date) {
       const todoTitleDiv = document.createElement("div");
       todoTitleDiv.classList.add("selected-title-div");
       todoTitleDiv.innerHTML = `${todoItems[i].title}`;
@@ -124,32 +128,28 @@ function setLocalstorage() {
   localStorage.setItem("todoItems", JSON.stringify(todoItems));
 }
 
+
+const editBtn = document.createElement("button");
+
 function editTodoItem(todoItem) {
 
-  const todoExpandendContent = document.querySelector(".expanded-content");
-  const todoItemBtn = document.querySelector(".add-todo-btn") 
-  
+  toggleContent();
   const titleInput = document.querySelector("#todo-title");
   const descInput = document.querySelector("#todo-desc");
   const dateInput = document.querySelector("#date");
 
-  // console.log(window.getComputedStyle(todoExpandendContent).maxHeight);
-  if(todoExpandendContent.style.maxHeight === "0px") {
-   
-    todoExpandendContent.style.maxHeight = "186px";
-
-    todoItemBtn.classList.toggle("add-todo-btn--active");
-  } 
-  else if(todoExpandendContent.style.maxHeight === "186px") {
-
-    todoExpandendContent.style.maxHeight = "0px"
-    todoItemBtn.classList.toggle("add-todo-btn--active");
-  }
-
-  // console.log(todoItem.title);
   titleInput.value = `${todoItem.title}`;
   descInput.value = `${todoItem.description}`;
   dateInput.value = `${todoItem.date}`;
+
+
+  const forms = document.querySelector(".forms")
+  
+
+  editBtn.innerHTML = "Edit";
+  editBtn.classList.add('save-edit-btn');
+
+  forms.appendChild(editBtn);
   
   const todoItems2 = JSON.parse(localStorage.getItem("todoItems"));
 
@@ -161,3 +161,19 @@ function editTodoItem(todoItem) {
 
   console.log(itemToEdit);
 }
+// add-todo-item-button----------------------------------
+
+const btn = document.querySelector(".add-todo-btn");
+const expandedContent = document.querySelector(".expanded-content");
+
+function toggleContent() {
+  btn.classList.toggle("add-todo-btn--active");
+
+  if (btn.classList.contains("add-todo-btn--active")) {
+    expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
+  } else {
+    expandedContent.style.maxHeight = 0;
+  }
+}
+
+btn.addEventListener("click", toggleContent);

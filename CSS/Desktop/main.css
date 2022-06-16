@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: minmax(20px, auto);
+  grid-auto-columns: minmax(20px, auto);
   grid-gap: 2px;
   height: 93%;
 }
@@ -11,10 +12,20 @@
 .prev-month-day {
   display: flex;
   background-color: rgba(243, 243, 243, 0.331);
+  width: 100%; /* Used for transition */
+  height: 100%; /* Used for transition */
   font-size: 2rem;
+  padding: 0.5rem;
+  transition: all 0.5s;
+}
+
+.day i {
+  font-size: 0.8rem;
+  margin: 4px;
 }
 
 .todo-circle {
+  display: flex;
   height: 17%;
   width: 10%;
   margin: 4px;
@@ -22,15 +33,81 @@
   background-color: orange;
   color: white;
   font-size: 0.7rem;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s;
+}
+
+.nr-of-todos {
+  display: flex;
 }
 
 .selected-Day {
   border: solid 2px black;
 }
 
+/* DAY HOVER -------------------------------------------------------------------------------- */
+
 .day:hover {
-  background-color: #1339476e;
+  background-color: #133947;
+  color: white;
+  cursor: pointer;
+  width: 130%;
+  height: 200%;
+  z-index: 0;
+  position: relative;
+  flex-direction: column;
+}
+
+.day:hover .todo-circle,
+.flag-day {
+  display: none;
+}
+
+.day:hover .flag-day {
+  display: none;
+  background: none;
+  position: absolute;
+}
+
+.day:hover .todo-container {
+  position: absolute;
+}
+
+.day:hover .todo:nth-child(-n + 3) {
+  display: block;
+}
+
+.day:hover .more-todos {
+  display: block;
+}
+
+.day:hover .nr-of-todos {
+  display: none;
+}
+
+.day:hover .todo {
+  max-width: 100%;
+  z-index: 3;
+}
+
+.todo,
+.more-todos {
+  margin-left: 5%;
+  display: none;
+  color: white;
+  font-size: 0.7rem;
+  font-style: italic;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  top: 25%;
+  width: 100%;
 }
 
 .holiday {
@@ -38,11 +115,9 @@
 }
 
 .flag-day {
-  background: url("../../IMG/flagday-req.png") no-repeat center;
   background-size: cover;
-  height: 17%;
-  width: 10%;
-  margin: 4px;
+  display: flex;
+  max-height: 17%;
 }
 
 .prev-month-day,

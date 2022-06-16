@@ -120,6 +120,18 @@
   cursor: pointer;
 }
 
+/* EDIT TODO ------------------------------ */
+
+.save-edit-btn {
+  margin-top: 1rem;
+    color: white;
+    border-radius: 10rem;
+    padding: 5px 15px;
+    border: none;
+    background-color: #133947;
+    cursor: pointer;
+}
+
 /* todo list------------------------------------------------ */
 
 .todo-div {
@@ -129,6 +141,7 @@
 
 .date-todos {
   margin: 0.5rem 0;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   color: #133957;
@@ -153,6 +166,12 @@
   padding: 4px 0;
 }
 
+.title-box {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .trashcan {
   font-size: 1rem;
   margin-right: 1rem;
@@ -165,6 +184,9 @@
   font-weight: bold;
   margin-left: 1.5rem;
   font-size: 1.3rem;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .selected-desc-div {
