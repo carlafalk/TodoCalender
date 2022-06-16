@@ -126,3 +126,20 @@ function showDayInfo(date) {
 function setLocalstorage() {
   localStorage.setItem("todoItems", JSON.stringify(todoItems));
 }
+
+// add-todo-item-button----------------------------------
+
+const btn = document.querySelector(".add-todo-btn");
+const expandedContent = document.querySelector(".expanded-content");
+
+function toggleContent() {
+  btn.classList.toggle("add-todo-btn--active");
+
+  if (btn.classList.contains("add-todo-btn--active")) {
+    expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
+  } else {
+    expandedContent.style.maxHeight = 0;
+  }
+}
+
+btn.addEventListener("click", toggleContent);
