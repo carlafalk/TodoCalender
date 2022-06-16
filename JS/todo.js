@@ -22,6 +22,7 @@ const addTodoItem = (ev) => {
 
 document.getElementById("add-btn").addEventListener("click", addTodoItem);
 document.getElementById("add-btn").addEventListener("click", renderCalendar);
+document.getElementById("add-btn").addEventListener("click", showAllTodos);
 
 function showAllTodos() {
   const dates = [];
@@ -101,6 +102,7 @@ function showDayInfo(date) {
       deleteBtn.addEventListener("click", () => {
         deleteTodoItem(todoItems[i]);
         renderCalendar();
+        showAllTodos();
       });
 
       const editDiv = document.createElement("div");
@@ -142,10 +144,8 @@ function editTodoItem(todoItem) {
   descInput.value = `${todoItem.description}`;
   dateInput.value = `${todoItem.date}`;
 
-
   const forms = document.querySelector(".forms")
   
-
   editBtn.innerHTML = "Edit";
   editBtn.classList.add('save-edit-btn');
 
@@ -159,8 +159,12 @@ function editTodoItem(todoItem) {
   itemToEdit.description = descInput.value;
   itemToEdit.date = dateInput.value;
 
+  
+
   console.log(itemToEdit);
 }
+
+
 // add-todo-item-button----------------------------------
 
 const btn = document.querySelector(".add-todo-btn");
