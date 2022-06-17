@@ -112,7 +112,6 @@ async function renderCalendar() {
       })}`;
       dayDiv.innerHTML = i - (numberOfDaysBefore + numberOfDaysInMonth) + 1;
     } else {
-      
       if (holidays.dagar[i - numberOfDaysBefore]["röd dag"] === "Ja") {
         dayDiv.classList.add("holiday");
       }
@@ -137,38 +136,38 @@ async function renderCalendar() {
 
       // if there is todos for this day, add amount and todos
       if (getNumberOfTodos(dayDiv.id)) {
-        // new todo notification
-        const nrOfTodoIcon = document.createElement("i");
-        if (getNumberOfTodos(dayDiv.id) < 10) {
-          nrOfTodoIcon.classList.add(
-            "fa-solid",
-            `fa-${getNumberOfTodos(dayDiv.id)}`,
-            "nr-of-todos"
-          );
-        } else {
-          nrOfTodoIcon.classList.add("fa-solid", `fa-9`, "nr-of-todos");
-          nrOfTodoIcon.innerHTML = "+";
-        }
+        const todoIconContainer = document.createElement("div");
+        todoIconContainer.classList.add("todo-icon-container");
 
-        dayDiv.appendChild(nrOfTodoIcon);
+        // new todo notification
+        const nrOfTodos = document.createElement("div");
+        nrOfTodos.classList.add("nr-of-todos");
+        nrOfTodos.innerHTML = `${getNumberOfTodos(dayDiv.id)}`;
+
+        dayDiv.appendChild(todoIconContainer);
+        todoIconContainer.appendChild(nrOfTodos);
 
         // end new todo notification
         const todoContainer = document.createElement("div");
         todoContainer.classList.add("todo-container");
 
+        const todoHeader = document.createElement("div");
+        todoHeader.classList.add("todo-header");
+        todoHeader.innerHTML = "Todays todos:";
+
+        todoContainer.appendChild(todoHeader);
         const todos = getTodosForDay(dayDiv.id);
         for (let i = 0; i < todos.length; i++) {
           const todo = document.createElement("div");
           todo.classList.add("todo");
           todo.innerHTML = todos[i].title;
-          todoContainer.appendChild(todo);
-        }
 
-        if (todos.length > 3) {
-          const moreTodos = document.createElement("div");
-          moreTodos.classList.add("more-todos");
-          moreTodos.innerHTML = `...${todos.length - 3} more`;
-          todoContainer.appendChild(moreTodos);
+          if (i === 2 && todos.length > 3) {
+            todo.innerHTML = `${todos[i].title} (${todos.length - 3} more)`;
+            todoContainer.appendChild(todo);
+            break;
+          }
+          todoContainer.appendChild(todo);
         }
 
         dayDiv.appendChild(todoContainer);
@@ -177,11 +176,18 @@ async function renderCalendar() {
       if (holidays.dagar[i - numberOfDaysBefore].flaggdag !== "") {
         const flagDiv = document.createElement("div");
         flagDiv.classList.add("flag-day");
-        const sweFlag = document.createElement("i");
-        sweFlag.classList.add("fa-solid", "fa-flag");
-        flagDiv.appendChild(sweFlag);
 
-        dayDiv.append(flagDiv);
+        const flagIcon = document.createElement("i");
+        flagIcon.classList.add("fa-solid", "fa-flag");
+        flagDiv.appendChild(flagIcon);
+
+        const flagOccasion = document.createElement("span");
+        flagOccasion.classList.add("flag-occasion");
+        flagOccasion.innerHTML =
+          holidays.dagar[i - numberOfDaysBefore].flaggdag;
+
+        flagDiv.appendChild(flagOccasion);
+        dayDiv.appendChild(flagDiv);
       }
     }
     calendarContainer.appendChild(dayDiv);
