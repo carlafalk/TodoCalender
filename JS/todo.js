@@ -3,6 +3,16 @@ if (!todoItems) {
   todoItems = [];
 }
 
+function getTodaysDateFormattedAsSwedishDate() {
+  const today = new Date().toLocaleDateString("sv-SE", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+
+  return today;
+}
+
 const addTodoItem = (ev) => {
   ev.preventDefault();
 
@@ -13,11 +23,19 @@ const addTodoItem = (ev) => {
     isDone: false,
   };
 
-  todoItems.push(todoItem);
+  if (
+    todoItem.title === "" ||
+    todoItem.description === "" ||
+    todoItem.date < getTodaysDateFormattedAsSwedishDate()
+  ) {
+    alert("forms not filled correctly");
+  } else {
+    todoItems.push(todoItem);
 
-  setLocalstorage();
+    setLocalstorage();
 
-  document.forms[0].reset();
+    document.forms[0].reset();
+  }
 };
 
 document.getElementById("add-btn").addEventListener("click", addTodoItem);
@@ -144,8 +162,6 @@ function toggleEditTodoWindow(todoItem) {
 
   const forms = document.querySelector(".forms");
   forms.appendChild(editBtn);
-
-  
 
   const titleInput = document.querySelector("#todo-title");
   const descInput = document.querySelector("#todo-desc");
