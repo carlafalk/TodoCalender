@@ -1,3 +1,8 @@
+//global variable for todoitem-btn
+
+const btn = document.querySelector(".add-todo-btn");
+const expandedContent = document.querySelector(".expanded-content");
+
 let todoItems = JSON.parse(localStorage.getItem("todoItems"));
 if (!todoItems) {
   todoItems = [];
@@ -155,21 +160,30 @@ function setLocalstorage() {
 const editBtn = document.createElement("button");
 
 function toggleEditTodoWindow(todoItem) {
-  toggleContent();
-  editBtn.innerHTML = "Edit";
-  editBtn.classList.add("save-edit-btn");
-  editBtn.addEventListener("click", (ev) => saveEdit(todoItem, ev));
-
-  const forms = document.querySelector(".forms");
-  forms.appendChild(editBtn);
-
+  
   const titleInput = document.querySelector("#todo-title");
   const descInput = document.querySelector("#todo-desc");
   const dateInput = document.querySelector("#date");
 
-  titleInput.value = todoItem.title;
-  descInput.value = todoItem.description;
-  dateInput.value = todoItem.date;
+  if (btn.classList.contains("add-todo-btn--active")) {
+    titleInput.value = todoItem.title;
+    descInput.value = todoItem.description;
+    dateInput.value = todoItem.date;
+  }
+  else if (!btn.classList.contains("add-todo-btn--active")) {
+  toggleContent()
+    titleInput.value = todoItem.title;
+    descInput.value = todoItem.description;
+    dateInput.value = todoItem.date;
+  }
+
+  editBtn.innerHTML = "Save";
+  editBtn.classList.add("save-edit-btn");
+  editBtn.addEventListener("click", (ev) => saveEdit(todoItem, ev));
+
+  const forms = document.querySelector(".forms");
+
+  forms.appendChild(editBtn);
 }
 
 function saveEdit(todoItem, ev) {
@@ -192,12 +206,10 @@ function saveEdit(todoItem, ev) {
   todoItems[index] = Object.assign({}, todoItems[index], editedTodoItem);
 
   localStorage.setItem("todoItems", JSON.stringify(todoItems));
+  document.forms[0].reset();
 }
 
 // add-todo-item-button----------------------------------
-
-const btn = document.querySelector(".add-todo-btn");
-const expandedContent = document.querySelector(".expanded-content");
 
 function toggleContent() {
   btn.classList.toggle("add-todo-btn--active");
