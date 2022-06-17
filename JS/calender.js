@@ -73,6 +73,7 @@ async function renderCalendar() {
     1;
 
   let lastClickedDayArray = [];
+
   for (let i = 0; i < daysToRender; i++) {
     const dayDiv = document.createElement("div");
 
@@ -84,11 +85,11 @@ async function renderCalendar() {
 
       if (lastClickedDayArray.length > 1) {
         if (lastClickedDayArray[0] === lastClickedDayArray[1]) {
-          //snyggaste lösningen i mannaminne
+          lastClickedDayArray = [];
+        } else {
           lastClickedDayArray[0].classList.toggle("selected-Day");
+          lastClickedDayArray.shift();
         }
-        lastClickedDayArray[0].classList.toggle("selected-Day");
-        lastClickedDayArray.shift();
       }
 
       if (!dayDiv.classList.contains("selected-Day")) {
