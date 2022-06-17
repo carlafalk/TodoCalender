@@ -51,8 +51,6 @@ async function renderCalendar() {
   renderYearLabel();
   const holidays = await getHolidays();
 
-  console.log(holidays.dagar[2]["datum"]);
-
   const numberOfDaysBefore = new Date(
     selectedDate.getFullYear(),
     selectedDate.getMonth(),
