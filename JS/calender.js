@@ -189,6 +189,24 @@ async function renderCalendar() {
         flagDiv.appendChild(flagOccasion);
         dayDiv.appendChild(flagDiv);
       }
+
+      const nameDayContainer = document.createElement("div");
+      nameDayContainer.classList.add("name-day-container");
+
+      for (
+        let j = 0;
+        j < holidays.dagar[i - numberOfDaysBefore].namnsdag.length;
+        j++
+      ) {
+        const nameDay = document.createElement("div");
+        nameDay.classList.add("name-day");
+        nameDay.innerHTML = holidays.dagar[i - numberOfDaysBefore].namnsdag[j];
+        nameDayContainer.appendChild(nameDay);
+      }
+
+      console.log(holidays.dagar[i - numberOfDaysBefore].namnsdag);
+
+      dayDiv.appendChild(nameDayContainer);
     }
     calendarContainer.appendChild(dayDiv);
   }

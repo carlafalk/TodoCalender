@@ -30,6 +30,7 @@
   height: 1.2rem;
   border-radius: 10rem;
   display: block;
+  margin-left: 0.5rem;
 }
 
 .nr-of-todos {
@@ -52,6 +53,11 @@
   font-size: 0.7rem;
 }
 
+.name-day-container {
+  display: none;
+  font-size: 0.7rem;
+}
+
 /* DAY HOVER -------------------------------------------------------------------------------- */
 
 .day:hover {
@@ -63,6 +69,12 @@
   z-index: 0;
   position: relative;
   flex-direction: column;
+}
+
+.day:hover .name-day-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
 }
 
 .day:hover .flag-occasion {
