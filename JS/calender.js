@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", main);
+navigator.geolocation.getCurrentPosition(fetchCity, error);
 
 const calendarContainer = document.querySelector(".calendar-container");
 const todoListDiv = document.querySelector(".todo-list");
@@ -22,6 +23,7 @@ function main() {
   renderCalendar();
   showAllTodos();
   renderYearLabel();
+  
 }
 
 function addEventListeners() {
