@@ -3,6 +3,9 @@
 const btn = document.querySelector(".add-todo-btn");
 const expandedContent = document.querySelector(".expanded-content");
 
+const saveEditBtn = document.querySelector(".save-edit-btn");
+
+
 let todoItems = JSON.parse(localStorage.getItem("todoItems"));
 if (!todoItems) {
   todoItems = [];
@@ -228,6 +231,8 @@ btn.addEventListener("click", (e) => toggleTodoForm(e));
 //______ToGGle NeW?!_-_--__-_-
 
 function toggleTodoForm(e, todoItem) {
+
+  saveEditBtn.addEventListener("click", (x) => saveEdit(todoItem, x));
 
   if(e.target.classList.contains("edit-btn") && !e.target.classList.contains("open")) {
     btn.classList.add("add-todo-btn--active");
