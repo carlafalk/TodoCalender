@@ -137,68 +137,131 @@ async function renderCalendar() {
         day: "numeric",
       })}`;
 
+      // APPEND ELEMENTS TO DAY DIV ------------------------------ //
+
+      const contentContainer = document.createElement("div");
+      contentContainer.classList.add("content-container", "absolute");
+
+      const dayInfoContainer = document.createElement("div");
+      dayInfoContainer.classList.add(
+        "day-info-container",
+        "flex",
+        "space-between",
+        "align-center"
+      );
       const dayDate = document.createElement("div");
       dayDate.classList.add("day-date");
-
       dayDate.innerHTML = `${i - numberOfDaysBefore + 1}`;
 
-      dayDiv.appendChild(dayDate);
+      const nameDayContainer = document.createElement("div");
+      nameDayContainer.classList.add("name-day-container");
+      for (
+        let j = 0;
+        j < holidays.dagar[i - numberOfDaysBefore].namnsdag.length;
+        j++
+      ) {
+        const nameDay = document.createElement("div");
+        nameDay.classList.add("name-day");
+        nameDay.innerHTML = holidays.dagar[i - numberOfDaysBefore].namnsdag[j];
+        nameDayContainer.appendChild(nameDay);
+      }
 
-      // if there is todos for this day, add amount and todos
+      dayInfoContainer.appendChild(dayDate);
+
+      if (
+        getNumberOfTodos(dayDiv.id) ||
+        holidays.dagar[i - numberOfDaysBefore].flaggdag !== ""
+      ) {
+        const notificationContainer = document.createElement("div");
+        notificationContainer.classList.add("notification-container", "flex");
+
+        if (getNumberOfTodos(dayDiv.id)) {
+          const todoNotificationContainer = document.createElement("div");
+          todoNotificationContainer.classList.add(
+            "todo-notification-container"
+          );
+          const nrOfTodos = document.createElement("div");
+          nrOfTodos.classList.add("nr-of-todos");
+          nrOfTodos.innerHTML = `${getNumberOfTodos(dayDiv.id)}`;
+          todoNotificationContainer.appendChild(nrOfTodos);
+          notificationContainer.appendChild(todoNotificationContainer);
+        }
+
+        if (holidays.dagar[i - numberOfDaysBefore].flaggdag !== "") {
+          const flagIcon = document.createElement("i");
+          flagIcon.classList.add(
+            "fa-solid",
+            "fa-flag",
+            "flag-notification-icon"
+          );
+          notificationContainer.appendChild(flagIcon);
+        }
+        dayInfoContainer.appendChild(notificationContainer);
+      }
+
+      dayInfoContainer.appendChild(nameDayContainer);
+
+      contentContainer.appendChild(dayInfoContainer);
+
       if (getNumberOfTodos(dayDiv.id)) {
-        const todoIconContainer = document.createElement("div");
-        todoIconContainer.classList.add("todo-icon-container");
+        const todoListContainerOnHover = document.createElement("div");
+        todoListContainerOnHover.classList.add(
+          "todo-list-on-hover",
+          "display-none",
+          "flex",
+          "align-center",
+          "pb-1"
+        );
 
-        // new todo notification
-        const nrOfTodos = document.createElement("div");
-        nrOfTodos.classList.add("nr-of-todos");
-        nrOfTodos.innerHTML = `${getNumberOfTodos(dayDiv.id)}`;
+        const todoIcon = document.createElement("i");
+        todoIcon.classList.add("fa-solid", "fa-clipboard-list", "todo-icon");
+        todoListContainerOnHover.appendChild(todoIcon);
 
-        dayDiv.appendChild(todoIconContainer);
-        todoIconContainer.appendChild(nrOfTodos);
-
-        // end new todo notification
-        const todoContainer = document.createElement("div");
-        todoContainer.classList.add("todo-container");
-
-        const todoHeader = document.createElement("div");
-        todoHeader.classList.add("todo-header");
-        todoHeader.innerHTML = "Todays todos:";
-
-        todoContainer.appendChild(todoHeader);
         const todos = getTodosForDay(dayDiv.id);
+        const todoList = document.createElement("div");
+        todoList.classList.add("todo-title-list", "flex", "column", "grow-1");
+
         for (let i = 0; i < todos.length; i++) {
           const todo = document.createElement("div");
           todo.classList.add("todo");
-          todo.innerHTML = todos[i].title;
-
-          if (i === 2 && todos.length > 3) {
-            todo.innerHTML = `${todos[i].title} (${todos.length - 3} more)`;
-            todoContainer.appendChild(todo);
+          todo.innerHTML = `${todos[i].title}`;
+          if (i === 3 && todos.length > 3) {
+            const moreTodos = document.createElement("div");
+            moreTodos.classList.add("more-todos");
+            moreTodos.innerHTML = `(${todos.length - 3} more)`;
+            todoList.appendChild(moreTodos);
             break;
           }
-          todoContainer.appendChild(todo);
+
+          todoList.appendChild(todo);
         }
-
-        dayDiv.appendChild(todoContainer);
+        todoListContainerOnHover.appendChild(todoList);
+        contentContainer.appendChild(todoListContainerOnHover);
       }
-
       if (holidays.dagar[i - numberOfDaysBefore].flaggdag !== "") {
-        const flagDiv = document.createElement("div");
-        flagDiv.classList.add("flag-day");
+        const flagDayContainer = document.createElement("div");
+        flagDayContainer.classList.add(
+          "flag-day-container",
+          "display-none",
+          "align-center",
+          "pb-1"
+        );
 
         const flagIcon = document.createElement("i");
-        flagIcon.classList.add("fa-solid", "fa-flag");
-        flagDiv.appendChild(flagIcon);
+        flagIcon.classList.add("fa-solid", "fa-flag", "flag-hover-icon");
 
-        const flagOccasion = document.createElement("span");
-        flagOccasion.classList.add("flag-occasion");
-        flagOccasion.innerHTML =
+        flagDayContainer.appendChild(flagIcon);
+
+        const flagOccasionDiv = document.createElement("div");
+        flagOccasionDiv.classList.add("flag-occasion");
+        flagOccasionDiv.innerHTML =
           holidays.dagar[i - numberOfDaysBefore].flaggdag;
 
-        flagDiv.appendChild(flagOccasion);
-        dayDiv.appendChild(flagDiv);
+        flagDayContainer.appendChild(flagOccasionDiv);
+
+        contentContainer.appendChild(flagDayContainer);
       }
+      dayDiv.appendChild(contentContainer);
     }
     calendarContainer.appendChild(dayDiv);
   }
