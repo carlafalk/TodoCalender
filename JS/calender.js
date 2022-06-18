@@ -51,8 +51,6 @@ async function renderCalendar() {
   renderYearLabel();
   const holidays = await getHolidays();
 
-  console.log(holidays.dagar[2]["datum"]);
-
   const numberOfDaysBefore = new Date(
     selectedDate.getFullYear(),
     selectedDate.getMonth(),
@@ -74,14 +72,26 @@ async function renderCalendar() {
     numberOfDaysBefore +
     1;
 
+  let lastClickedDayArray = [];
+
   for (let i = 0; i < daysToRender; i++) {
     const dayDiv = document.createElement("div");
 
-    dayDiv.addEventListener("click", () => {
+    dayDiv.addEventListener("click", (e) => {
       showDayInfo(dayDiv.id);
       dayDiv.classList.toggle("selected-Day");
 
-      //TODO: Create separate toggle function later
+      lastClickedDayArray.push(dayDiv);
+
+      if (lastClickedDayArray.length > 1) {
+        if (lastClickedDayArray[0] === lastClickedDayArray[1]) {
+          lastClickedDayArray = [];
+        } else {
+          lastClickedDayArray[0].classList.toggle("selected-Day");
+          lastClickedDayArray.shift();
+        }
+      }
+
       if (!dayDiv.classList.contains("selected-Day")) {
         showAllTodos();
       }
