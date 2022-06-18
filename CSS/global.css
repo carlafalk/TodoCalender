@@ -26,3 +26,27 @@ body {
 .column {
   flex-direction: column;
 }
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.display-none {
+  display: none;
+}
+
+.grow-1 {
+  flex-grow: 1;
+}
+
+.pb-1 {
+  padding-bottom: 1rem;
+}
+
+.absolute {
+  position: absolute;
+}

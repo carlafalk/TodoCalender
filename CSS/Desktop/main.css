@@ -17,15 +17,21 @@
   font-size: 2rem;
   padding: 0.5rem;
   transition: all 0.5s;
+  flex-direction: column;
 }
 
+.content-container {
+  max-width: 100%;
+}
+/* Icons ----------------------------------------------- */
 .day i {
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin: 4px;
   padding: 0.1rem;
 }
 
-.todo-icon-container {
+/* day structrure -------------------------------------- */
+.todo-notification-container {
   background-color: orange;
   height: 1.2rem;
   border-radius: 10rem;
@@ -39,13 +45,12 @@
   display: block;
 }
 
-.selected-Day {
-  border: solid 2px black;
+.day-info-container {
+  background: #fbfbfb;
+  padding: 0 0.5rem 0 0.2rem;
 }
 
-.todo-header {
-  display: none;
-  font-size: 0.9rem;
+.hover-text {
 }
 
 .flag-occasion {
@@ -58,63 +63,90 @@
   font-size: 0.7rem;
 }
 
+.selected-Day {
+  border: solid 2px black;
+}
 /* DAY HOVER -------------------------------------------------------------------------------- */
 
 .day:hover {
-  background-color: #133947;
   color: white;
   cursor: pointer;
   width: 130%;
   height: 180%;
-  z-index: 0;
+  z-index: 1;
   position: relative;
   flex-direction: column;
+}
+.day:hover .day-info-container {
+  background-color: #133947;
+  box-shadow: 0.1rem 0.1rem 2px black;
+}
+
+.day:hover .content-container {
+  min-width: 100%;
+}
+
+.day:hover .todo-list-on-hover {
+  color: #133947;
+  display: flex;
+  padding: 0.5rem 0;
+  margin: 0.3rem 0 0 0;
+  box-shadow: 0.1rem 0.1rem 2px black;
+  background-color: rgb(255 255 255);
+}
+
+.day:hover .flag-notification-icon {
+  display: none;
 }
 
 .day:hover .name-day-container {
   display: flex;
   flex-direction: column;
-  position: absolute;
 }
 
 .day:hover .flag-occasion {
   display: flex;
 }
 
-.day:hover .todo-header {
+.day:hover .todo-icon {
   display: flex;
 }
 
-.day:hover .todo-icon-container {
+.day:hover .todo-notification-container {
   display: none;
 }
-.day:hover .todo-circle,
+
+.day:hover .flag-day-container {
+  display: flex;
+  padding: 0.5rem 0;
+  color: #133947;
+  margin: 0.3rem 0 0 0;
+  background: #ffffff;
+  box-shadow: 0.1rem 0.1rem 2px black;
+}
+/* .day:hover .todo-circle,
 .flag-day {
   display: none;
-}
+} */
 
 .day:hover i {
   color: orange;
 }
 
-.day:hover .flag-day {
+/* .day:hover .flag-day {
   position: absolute;
   bottom: 10px;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.day:hover .todo-container {
+.day:hover .todo-list-hover-container {
   position: absolute;
   width: 100%;
   margin-top: 0.5rem;
 }
 
 .day:hover .todo:nth-child(-n + 4) {
-  display: block;
-}
-
-.day:hover .more-todos {
   display: block;
 }
 
@@ -126,8 +158,9 @@
 .todo,
 .more-todos {
   margin-left: 5%;
-  display: none;
-  color: white;
+  /* display: none; */
+  /* color: white; */
+  color: #133947;
   font-size: 0.7rem;
   font-style: italic;
   max-width: 80%;
@@ -135,9 +168,8 @@
   text-overflow: ellipsis;
 }
 
-.todo-container {
+.todo-list-hover-container {
   display: flex;
-  flex-direction: column;
   top: 25%;
 }
 
@@ -145,10 +177,10 @@
   color: red;
 }
 
-.flag-day {
+/* .flag-day {
   display: flex;
   max-height: 17%;
-}
+} */
 
 .prev-month-day,
 .next-month-day {
