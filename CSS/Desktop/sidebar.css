@@ -135,6 +135,10 @@
     cursor: pointer;
 }
 
+.hidden {
+  display: none;
+}
+
 /* todo list------------------------------------------------ */
 
 .todo-div {
