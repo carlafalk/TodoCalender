@@ -78,10 +78,12 @@ async function renderCalendar() {
 
   for (let i = 0; i < daysToRender; i++) {
     const dayDiv = document.createElement("div");
+    const contentContainer = document.createElement("div");
 
     dayDiv.addEventListener("click", (e) => {
       showDayInfo(dayDiv.id);
       dayDiv.classList.toggle("selected-Day");
+      contentContainer.classList.toggle("selected-Day");
 
       lastClickedDayArray.push(dayDiv);
 
@@ -110,7 +112,14 @@ async function renderCalendar() {
         month: "numeric",
         day: "numeric",
       })}`;
-      dayDiv.innerHTML = startPrevMonth + i;
+
+      const dateDiv = document.createElement("div");
+      dateDiv.classList.add("date");
+
+      dateDiv.innerHTML = startPrevMonth + i;
+      contentContainer.appendChild(dateDiv);
+      contentContainer.classList.add("content-container", "absolute");
+      dayDiv.appendChild(contentContainer);
     } else if (i >= numberOfDaysBefore + numberOfDaysInMonth) {
       dayDiv.classList.add("next-month-day");
       dayDiv.id = `${new Date(
@@ -122,7 +131,14 @@ async function renderCalendar() {
         month: "numeric",
         day: "numeric",
       })}`;
-      dayDiv.innerHTML = i - (numberOfDaysBefore + numberOfDaysInMonth) + 1;
+
+      const dateDiv = document.createElement("div");
+      dateDiv.classList.add("date");
+
+      dateDiv.innerHTML = i - (numberOfDaysBefore + numberOfDaysInMonth) + 1;
+      contentContainer.appendChild(dateDiv);
+      contentContainer.classList.add("content-container", "absolute");
+      dayDiv.appendChild(contentContainer);
     } else {
       if (holidays.dagar[i - numberOfDaysBefore]["röd dag"] === "Ja") {
         dayDiv.classList.add("holiday");
@@ -141,7 +157,6 @@ async function renderCalendar() {
 
       // APPEND ELEMENTS TO DAY DIV ------------------------------ //
 
-      const contentContainer = document.createElement("div");
       contentContainer.classList.add("content-container", "absolute");
 
       const dayInfoContainer = document.createElement("div");
@@ -265,6 +280,7 @@ async function renderCalendar() {
       }
       dayDiv.appendChild(contentContainer);
     }
+
     calendarContainer.appendChild(dayDiv);
   }
 }
