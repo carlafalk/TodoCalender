@@ -132,8 +132,8 @@ function showDayInfo(date) {
       const editBtn = document.createElement("i");
       editDiv.classList.add("edit-div");
       editBtn.classList.add("edit-btn", "fa-solid", "fa-pen-to-square");
-      editBtn.addEventListener("click", () =>
-        toggleEditTodoWindow(todoItems[i])
+      editBtn.addEventListener("click", (e) =>
+        toggleTodoForm(e,todoItems[i])
       );
 
       dayInfo.appendChild(selectedDateItem);
@@ -222,4 +222,49 @@ function toggleContent() {
   }
 }
 
-btn.addEventListener("click", toggleContent);
+btn.addEventListener("click", (e) => toggleTodoForm(e));
+
+
+//______ToGGle NeW?!_-_--__-_-
+
+function toggleTodoForm(e, todoItem) {
+
+  if(e.target.classList.contains("edit-btn") && !e.target.classList.contains("open")) {
+    btn.classList.add("add-todo-btn--active");
+    console.log(e.target)
+    e.target.classList.add("open")
+    expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
+    const titleInput = document.querySelector("#todo-title");
+    const descInput = document.querySelector("#todo-desc");
+    const dateInput = document.querySelector("#date");
+
+    titleInput.value = todoItem.title;
+    descInput.value = todoItem.description;
+    dateInput.value = todoItem.date;
+
+    document.querySelector(".add-btn").classList.add("hidden");    
+    document.querySelector(".save-edit-btn").classList.remove("hidden");
+  }
+  else if(e.target.classList.contains("add-todo-btn") && !e.target.classList.contains("open")) {
+
+    console.log("addBtn");
+
+    btn.classList.add("add-todo-btn--active");
+
+    e.target.classList.add("open");
+
+    expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
+
+    document.querySelector(".save-edit-btn").classList.add("hidden");
+    document.querySelector(".add-btn").classList.remove("hidden");
+    console.log(e.target)
+
+  }
+  else if (e.target.classList.contains("open")) {
+    e.target.classList.remove("open");
+    btn.classList.remove("add-todo-btn--active");
+    expandedContent.style.maxHeight = 0;
+    document.forms[0].reset();
+    console.log(e.target)
+  }
+}
