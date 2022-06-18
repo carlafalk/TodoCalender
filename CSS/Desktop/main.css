@@ -12,8 +12,7 @@
 .prev-month-day {
   display: flex;
   background-color: rgba(243, 243, 243, 0.331);
-  width: 100%; /* Used for transition */
-  height: 100%; /* Used for transition */
+
   font-size: 2rem;
   padding: 0.5rem;
   transition: all 0.5s;
@@ -71,8 +70,6 @@
 .day:hover {
   color: white;
   cursor: pointer;
-  width: 130%;
-  height: 180%;
   z-index: 1;
   position: relative;
   flex-direction: column;
@@ -83,7 +80,7 @@
 }
 
 .day:hover .content-container {
-  min-width: 100%;
+  min-width: 130%;
 }
 
 .day:hover .todo-list-on-hover {
@@ -124,22 +121,10 @@
   background: #ffffff;
   box-shadow: 0.1rem 0.1rem 2px black;
 }
-/* .day:hover .todo-circle,
-.flag-day {
-  display: none;
-} */
 
 .day:hover i {
   color: orange;
 }
-
-/* .day:hover .flag-day {
-  position: absolute;
-  bottom: 10px;
-  justify-content: center;
-  align-items: center;
-} */
-
 .day:hover .todo-list-hover-container {
   position: absolute;
   width: 100%;
@@ -158,8 +143,6 @@
 .todo,
 .more-todos {
   margin-left: 5%;
-  /* display: none; */
-  /* color: white; */
   color: #133947;
   font-size: 0.7rem;
   font-style: italic;
@@ -177,14 +160,10 @@
   color: red;
 }
 
-/* .flag-day {
-  display: flex;
-  max-height: 17%;
-} */
-
 .prev-month-day,
 .next-month-day {
   color: #3b829c47;
+  max-height: 100%;
 }
 
 .weekday-container {
