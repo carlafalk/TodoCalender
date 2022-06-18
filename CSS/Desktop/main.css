@@ -45,7 +45,7 @@
 }
 
 .day-info-container {
-  background: #fbfbfb;
+  background: none;
   padding: 0 0.5rem 0 0.2rem;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .selected-Day {
-  border: solid 2px black;
+  background-color: #d9d9d9;
 }
 /* DAY HOVER -------------------------------------------------------------------------------- */
 

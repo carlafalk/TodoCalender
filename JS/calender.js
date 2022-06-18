@@ -23,7 +23,6 @@ function main() {
   renderCalendar();
   showAllTodos();
   renderYearLabel();
-  
 }
 
 function addEventListeners() {
@@ -83,7 +82,8 @@ async function renderCalendar() {
     dayDiv.addEventListener("click", (e) => {
       showDayInfo(dayDiv.id);
       dayDiv.classList.toggle("selected-Day");
-      contentContainer.classList.toggle("selected-Day");
+
+      // contentContainer.classList.toggle("selected-Day");
 
       lastClickedDayArray.push(dayDiv);
 
@@ -166,6 +166,7 @@ async function renderCalendar() {
         "space-between",
         "align-center"
       );
+
       const dayDate = document.createElement("div");
       dayDate.classList.add("day-date");
       dayDate.innerHTML = `${i - numberOfDaysBefore + 1}`;
