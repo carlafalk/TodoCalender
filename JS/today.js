@@ -9,7 +9,7 @@ currentDay.classList.add("welcome-weekday");
 currentDate.classList.add("welcome-date");
 currentTime.classList.add("welcome-time");
 
-currentDay.innerHTML = new Date().toLocaleString('en-us', {weekday:'long'})
+currentDay.innerHTML = new Date().toLocaleString("en-us", { weekday: "long" });
 currentDate.innerText = new Date().toISOString().slice(0, 10);
 
 function clock() {
@@ -23,7 +23,7 @@ dateAndTimeContainer.appendChild(currentDate);
 dateAndTimeContainer.appendChild(weatherDiv);
 dateAndTimeContainer.appendChild(currentTime);
 
-// Wheater stuff 
+// Weather stuff
 const apiKeyWeather = "5ff7192628b7984a48b5001e7291871f";
 const apiKeyLocation = "pk.47dfd2e322a8290e5b985e428e6e8cbe";
 
@@ -48,16 +48,27 @@ function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-function fetchWheater(city) {
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKeyWeather}&units=metric`)
+function fetchWeather(city) {
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKeyWeather}&units=metric`
+  )
     .then((response) => {
       return response.json();
     })
-  .then((data) => { weatherDiv.innerHTML = `${data.main.temp} °C`});
+    .then((data) => {
+      weatherDiv.innerHTML = `${data.main.temp} °C`;
+    });
 }
 
-function fetchCity(position) {
+function fetchCity(position,success,options) {
   fetch(`https://eu1.locationiq.com/v1/reverse.php?key=${apiKeyLocation}&lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`)
     .then((response) => response.json())
-    .then((data) => { fetchWheater(data.address.town) });
+    .then((data) => {
+      if (data.address.town) {
+        fetchWeather(data.address.town);
+      }
+      else if (data.address.city) {
+        fetchWeather(data.address.city);
+      }
+    });
 }
