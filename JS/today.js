@@ -9,18 +9,7 @@ currentDay.classList.add("welcome-weekday");
 currentDate.classList.add("welcome-date");
 currentTime.classList.add("welcome-time");
 
-const d = new Date();
-const weekday = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-currentDay.innerText = weekday[d.getDay()];
+currentDay.innerHTML = new Date().toLocaleString("en-us", { weekday: "long" });
 currentDate.innerText = new Date().toISOString().slice(0, 10);
 
 function clock() {
