@@ -1,56 +1,44 @@
 document.addEventListener("DOMContentLoaded", main);
-navigator.geolocation.getCurrentPosition(fetchCity, error);
-
-const calendarContainer = document.querySelector(".calendar-container");
-const todoListDiv = document.querySelector(".todo-list");
-
-const prevBtn = document.createElement("i");
-const nextBtn = document.createElement("i");
+navigator.geolocation.getCurrentPosition(fetchCity, error); // should this be in the main function?
 
 let selectedDate = new Date();
 
-const getNumberOfDays = () => {
-  return new Date(
-    selectedDate.getFullYear(),
-    selectedDate.getMonth() + 1,
-    0
-  ).getDate();
-};
-
 function main() {
-  renderHeaderMonth();
+  renderHeader();
   addEventListeners();
   renderCalendar();
   showAllTodos();
-  renderYearLabel();
-  
+  renderYear();
 }
 
 function addEventListeners() {
+  // previous month button //
   prevBtn.addEventListener("click", () => {
-    selectedDate.setMonth(selectedDate.getMonth() - 1);
+    selectedDate.setMonth(prevMonth(selectedDate));
     if (selectedDate.getMonth() === -1) {
       selectedDate.setFullYear(selectedDate.getFullYear() - 1);
       selectedDate.setMonth(11);
     }
-    changeHeaderBackground();
+    changeBG(); // rename?
     renderCalendar();
   });
 
+  // next month button //
   nextBtn.addEventListener("click", () => {
-    selectedDate.setMonth(selectedDate.getMonth() + 1);
+    selectedDate.setMonth(nextMonth(selectedDate));
     if (selectedDate.getMonth() === 12) {
       selectedDate.setFullYear(selectedDate.getFullYear() + 1);
       selectedDate.setMonth(0);
     }
-    changeHeaderBackground();
+    changeBG();
     renderCalendar();
   });
 }
 
 async function renderCalendar() {
-  renderHeaderMonth();
-  renderYearLabel();
+  renderHeader();
+  renderMonth(); // one function in header?
+  renderYear();
   const holidays = await getHolidays();
 
   const numberOfDaysBefore = new Date(
@@ -66,8 +54,6 @@ async function renderCalendar() {
     selectedDate.getMonth() + 1,
     0
   ).getDate();
-
-  const daysToRender = 42;
 
   const startPrevMonth =
     new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 0).getDate() -

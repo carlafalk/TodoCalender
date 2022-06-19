@@ -11,16 +11,16 @@ currentTime.classList.add("welcome-time");
 
 const d = new Date();
 const weekday = [
+  "Sunday",
   "Monday",
   "Tuesday",
   "Wednesday",
   "Thursday",
   "Friday",
   "Saturday",
-  "Sunday",
 ];
 
-currentDay.innerText = weekday[d.getDay() - 1];
+currentDay.innerText = weekday[d.getDay()];
 currentDate.innerText = new Date().toISOString().slice(0, 10);
 
 function clock() {
@@ -34,7 +34,7 @@ dateAndTimeContainer.appendChild(currentDate);
 dateAndTimeContainer.appendChild(weatherDiv);
 dateAndTimeContainer.appendChild(currentTime);
 
-// Wheater stuff 
+// Wheater stuff
 const apiKey = "5ff7192628b7984a48b5001e7291871f";
 
 const options = {
@@ -59,15 +59,23 @@ function error(err) {
 }
 
 function fetchWheater(city) {
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+  )
     .then((response) => {
       return response.json();
     })
-  .then((data) => { weatherDiv.innerHTML = `${data.main.temp} °C`});
+    .then((data) => {
+      weatherDiv.innerHTML = `${data.main.temp} °C`;
+    });
 }
 
 function fetchCity(position) {
-  fetch(`https://geocode.xyz/${position.coords.latitude},${position.coords.longitude}?geoit=json`)
+  fetch(
+    `https://geocode.xyz/${position.coords.latitude},${position.coords.longitude}?geoit=json`
+  )
     .then((response) => response.json())
-    .then((data) => { fetchWheater(data.city) });
+    .then((data) => {
+      fetchWheater(data.city);
+    });
 }

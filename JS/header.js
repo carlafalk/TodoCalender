@@ -1,4 +1,4 @@
-function changeHeaderBackground() {
+function changeBG() {
   const headerContainer = document.querySelector(".header-container");
   headerContainer.style.background = `url(../../IMG/BG/${selectedDate.toLocaleString(
     "en-EN",
@@ -6,7 +6,12 @@ function changeHeaderBackground() {
   )}.jpg)`;
 }
 
-function renderYearLabel() {
+function renderHeader() {
+  renderYear();
+  renderMonth();
+}
+
+function renderYear() {
   const centuryDiv = document.querySelector(".century");
   centuryDiv.innerHTML = `${selectedDate
     .getFullYear()
@@ -20,7 +25,7 @@ function renderYearLabel() {
     .substring(2, 4)}`;
 }
 
-function renderHeaderMonth() {
+function renderMonth() {
   const monthControllerDiv = document.querySelector(".month-controller");
   monthControllerDiv.innerHTML = ``;
   const monthDiv = document.createElement("div");
