@@ -35,7 +35,8 @@ dateAndTimeContainer.appendChild(weatherDiv);
 dateAndTimeContainer.appendChild(currentTime);
 
 // Wheater stuff
-const apiKey = "5ff7192628b7984a48b5001e7291871f";
+const apiKeyWeather = "5ff7192628b7984a48b5001e7291871f";
+const apiKeyLocation = "pk.47dfd2e322a8290e5b985e428e6e8cbe";
 
 const options = {
   enableHighAccuracy: true,
@@ -60,7 +61,7 @@ function error(err) {
 
 function fetchWheater(city) {
   fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKeyWeather}&units=metric`
   )
     .then((response) => {
       return response.json();
@@ -72,10 +73,10 @@ function fetchWheater(city) {
 
 function fetchCity(position) {
   fetch(
-    `https://geocode.xyz/${position.coords.latitude},${position.coords.longitude}?geoit=json`
+    `https://eu1.locationiq.com/v1/reverse.php?key=${apiKeyLocation}&lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`
   )
     .then((response) => response.json())
     .then((data) => {
-      fetchWheater(data.city);
+      fetchWheater(data.address.town);
     });
 }

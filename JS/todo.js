@@ -5,7 +5,6 @@ const expandedContent = document.querySelector(".expanded-content");
 
 const saveEditBtn = document.querySelector(".save-edit-btn");
 
-
 let todoItems = JSON.parse(localStorage.getItem("todoItems"));
 if (!todoItems) {
   todoItems = [];
@@ -52,6 +51,7 @@ document.getElementById("add-btn").addEventListener("click", showAllTodos);
 
 function showAllTodos() {
   const dates = [];
+  todoItems.sort((a, b) => a.date.localeCompare(b.date));
   todoListDiv.innerHTML = "";
 
   for (let i = 0; i < todoItems.length; i++) {
