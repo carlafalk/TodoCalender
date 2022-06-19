@@ -4,7 +4,7 @@ navigator.geolocation.getCurrentPosition(fetchCity, error); // should this be in
 let selectedDate = new Date();
 
 function main() {
-  renderHeader();
+  // renderHeader();
   addEventListeners();
   renderCalendar();
   showAllTodos();
@@ -37,27 +37,15 @@ function addEventListeners() {
 
 async function renderCalendar() {
   renderHeader();
-  renderMonth(); // one function in header?
-  renderYear();
-  const holidays = await getHolidays();
-
-  const numberOfDaysBefore = new Date(
-    selectedDate.getFullYear(),
-    selectedDate.getMonth(),
-    0
-  ).getDay();
-
   calendarContainer.innerHTML = "";
 
-  const numberOfDaysInMonth = new Date(
-    selectedDate.getFullYear(),
-    selectedDate.getMonth() + 1,
-    0
-  ).getDate();
+  const holidays = await fetchHolidays();
+  const monthLength = getMonthLength(selectedDate);
+  const paddingDays = getPaddingDays(selectedDate);
 
   const startPrevMonth =
     new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 0).getDate() -
-    numberOfDaysBefore +
+    paddingDays +
     1;
 
   let lastClickedDayArray = [];
@@ -88,7 +76,7 @@ async function renderCalendar() {
       }
     });
 
-    if (i < numberOfDaysBefore) {
+    if (i < paddingDays) {
       dayDiv.classList.add("prev-month-day");
       dayDiv.id = `${new Date(
         selectedDate.getFullYear(),
@@ -107,7 +95,7 @@ async function renderCalendar() {
       contentContainer.appendChild(dateDiv);
       contentContainer.classList.add("content-container", "absolute");
       dayDiv.appendChild(contentContainer);
-    } else if (i >= numberOfDaysBefore + numberOfDaysInMonth) {
+    } else if (i >= paddingDays + monthLength) {
       dayDiv.classList.add("next-month-day");
       dayDiv.id = `${new Date(
         selectedDate.getFullYear(),
@@ -122,12 +110,12 @@ async function renderCalendar() {
       const dateDiv = document.createElement("div");
       dateDiv.classList.add("date");
 
-      dateDiv.innerHTML = i - (numberOfDaysBefore + numberOfDaysInMonth) + 1;
+      dateDiv.innerHTML = i - (paddingDays + monthLength) + 1;
       contentContainer.appendChild(dateDiv);
       contentContainer.classList.add("content-container", "absolute");
       dayDiv.appendChild(contentContainer);
     } else {
-      if (holidays.dagar[i - numberOfDaysBefore]["röd dag"] === "Ja") {
+      if (holidays.dagar[i - paddingDays]["röd dag"] === "Ja") {
         dayDiv.classList.add("holiday");
       }
 
@@ -135,7 +123,7 @@ async function renderCalendar() {
       dayDiv.id = `${new Date(
         selectedDate.getFullYear(),
         selectedDate.getMonth(),
-        i + 1 - numberOfDaysBefore
+        i + 1 - paddingDays
       ).toLocaleDateString("sv-SE", {
         year: "numeric",
         month: "numeric",
@@ -156,18 +144,18 @@ async function renderCalendar() {
 
       const dayDate = document.createElement("div");
       dayDate.classList.add("day-date");
-      dayDate.innerHTML = `${i - numberOfDaysBefore + 1}`;
+      dayDate.innerHTML = `${i - paddingDays + 1}`;
 
       const nameDayContainer = document.createElement("div");
       nameDayContainer.classList.add("name-day-container");
       for (
         let j = 0;
-        j < holidays.dagar[i - numberOfDaysBefore].namnsdag.length;
+        j < holidays.dagar[i - paddingDays].namnsdag.length;
         j++
       ) {
         const nameDay = document.createElement("div");
         nameDay.classList.add("name-day");
-        nameDay.innerHTML = holidays.dagar[i - numberOfDaysBefore].namnsdag[j];
+        nameDay.innerHTML = holidays.dagar[i - paddingDays].namnsdag[j];
         nameDayContainer.appendChild(nameDay);
       }
 
@@ -175,7 +163,7 @@ async function renderCalendar() {
 
       if (
         getNumberOfTodos(dayDiv.id) ||
-        holidays.dagar[i - numberOfDaysBefore].flaggdag !== ""
+        holidays.dagar[i - paddingDays].flaggdag !== ""
       ) {
         const notificationContainer = document.createElement("div");
         notificationContainer.classList.add("notification-container", "flex");
@@ -192,7 +180,7 @@ async function renderCalendar() {
           notificationContainer.appendChild(todoNotificationContainer);
         }
 
-        if (holidays.dagar[i - numberOfDaysBefore].flaggdag !== "") {
+        if (holidays.dagar[i - paddingDays].flaggdag !== "") {
           const flagIcon = document.createElement("i");
           flagIcon.classList.add(
             "fa-solid",
@@ -243,7 +231,7 @@ async function renderCalendar() {
         todoListContainerOnHover.appendChild(todoList);
         contentContainer.appendChild(todoListContainerOnHover);
       }
-      if (holidays.dagar[i - numberOfDaysBefore].flaggdag !== "") {
+      if (holidays.dagar[i - paddingDays].flaggdag !== "") {
         const flagDayContainer = document.createElement("div");
         flagDayContainer.classList.add(
           "flag-day-container",
@@ -259,8 +247,7 @@ async function renderCalendar() {
 
         const flagOccasionDiv = document.createElement("div");
         flagOccasionDiv.classList.add("flag-occasion");
-        flagOccasionDiv.innerHTML =
-          holidays.dagar[i - numberOfDaysBefore].flaggdag;
+        flagOccasionDiv.innerHTML = holidays.dagar[i - paddingDays].flaggdag;
 
         flagDayContainer.appendChild(flagOccasionDiv);
 
@@ -289,7 +276,7 @@ function deleteTodoItem(todoItem) {
   setLocalstorage();
 }
 
-function getHolidays() {
+function fetchHolidays() {
   const url = "http://sholiday.faboul.se/dagar/v2.1/";
 
   const holidays = fetch(
