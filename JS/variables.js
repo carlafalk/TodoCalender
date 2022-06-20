@@ -1,20 +1,35 @@
+let currentDate = new Date();
+
 const daysToRender = 42;
 
-const prevMonth = (date) => {
-  return new Date(date.getFullYear(), date.getMonth() - 1, 1).getMonth();
+const nextYear = new Date(currentDate.getFullYear() + 1);
+
+const prevMonth = currentDate.getMonth() - 1;
+
+const nextMonth = () => {
+  return currentDate.getMonth() + 1;
 };
 
-const nextMonth = (date) => {
-  return new Date(date.getFullYear(), date.getMonth() + 1, 1).getMonth();
-};
+const monthLength = new Date(
+  currentDate.getFullYear(),
+  currentDate.getMonth() + 1,
+  0
+).getDate();
 
-const getMonthLength = (date) => {
-  return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-};
+const paddingDays = new Date(
+  currentDate.getFullYear(),
+  currentDate.getMonth(),
+  0
+).getDay();
 
-const getPaddingDays = (date) => {
-  return new Date(date.getFullYear(), date.getMonth(), 0).getDay();
-};
+const paddingDaysStartDate =
+  new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate() -
+  paddingDays +
+  1;
+
+function setNextMonth() {
+  currentDate.setMonth(nextMonth);
+}
 
 // does all of these need to be globals? ⬇
 const calendarContainer = document.querySelector(".calendar-container");

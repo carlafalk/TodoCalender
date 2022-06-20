@@ -1,16 +1,16 @@
 const welcomeContainer = document.querySelector(".welcome-segment");
 const dateAndTimeContainer = document.querySelector(".DateAndTime");
 const currentDay = document.createElement("h2");
-const currentDate = document.createElement("h4");
+const currentDateH4 = document.createElement("h4");
 const currentTime = document.createElement("h4");
 const weatherDiv = document.createElement("div");
 
 currentDay.classList.add("welcome-weekday");
-currentDate.classList.add("welcome-date");
+currentDateH4.classList.add("welcome-date");
 currentTime.classList.add("welcome-time");
 
 currentDay.innerHTML = new Date().toLocaleString("en-us", { weekday: "long" });
-currentDate.innerText = new Date().toISOString().slice(0, 10);
+currentDateH4.innerText = new Date().toISOString().slice(0, 10);
 
 function clock() {
   currentTime.innerText = new Date().toLocaleTimeString();
@@ -19,7 +19,7 @@ function clock() {
 setInterval(clock, 1000);
 
 currentTime.innerText = welcomeContainer.appendChild(currentDay);
-dateAndTimeContainer.appendChild(currentDate);
+dateAndTimeContainer.appendChild(currentDateH4);
 dateAndTimeContainer.appendChild(weatherDiv);
 dateAndTimeContainer.appendChild(currentTime);
 
@@ -66,6 +66,10 @@ function fetchCity(position) {
   )
     .then((response) => response.json())
     .then((data) => {
-      fetchWheater(data.address.town);
+      if (data.address.town) {
+        fetchWheater(data.address.town);
+      } else if (data.address.city) {
+        fetchWheater(data.address.city);
+      }
     });
 }
