@@ -1,0 +1,39 @@
+@media (max-width: 768px) {
+  /* HEADER------------------------------------------------- */
+
+  /* WELCOME-SEGMENT---------------------------------------- */
+
+  /* ASIDE ------------------------------------------------- */
+  .aside {
+    height: 100%;
+  }
+  .todo-list {
+    height: 100%;
+    overflow: visible;
+  }
+  .todo-list-container {
+    height: 100%;
+  }
+  .formBox {
+    width: 80%;
+  }
+  .formBox input {
+    width: 100%;
+  }
+  /* MAIN -------------------------------------------------- */
+  .content-container {
+    display: none;
+  }
+  .weekday-container {
+    display: none;
+  }
+  main {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-weekday {
+    font-size: 3rem;
+  }
+}
