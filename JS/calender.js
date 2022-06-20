@@ -1,89 +1,60 @@
 document.addEventListener("DOMContentLoaded", main);
-navigator.geolocation.getCurrentPosition(fetchCity, error);
-
-const calendarContainer = document.querySelector(".calendar-container");
-const todoListDiv = document.querySelector(".todo-list");
-
-const prevBtn = document.createElement("i");
-const nextBtn = document.createElement("i");
-
-let selectedDate = new Date();
-
-const getNumberOfDays = () => {
-  return new Date(
-    selectedDate.getFullYear(),
-    selectedDate.getMonth() + 1,
-    0
-  ).getDate();
-};
 
 function main() {
-  renderHeaderMonth();
-  addEventListeners();
+  navigator.geolocation.getCurrentPosition(fetchCity, error);
   renderCalendar();
+  addEventListeners();
   showAllTodos();
-  renderYearLabel();
+  renderYear();
 }
 
 function addEventListeners() {
+  // previous month button //
+
   prevBtn.addEventListener("click", () => {
-    selectedDate.setMonth(selectedDate.getMonth() - 1);
-    if (selectedDate.getMonth() === -1) {
-      selectedDate.setFullYear(selectedDate.getFullYear() - 1);
-      selectedDate.setMonth(11);
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    console.log(currentDate);
+
+    if (currentDate.getMonth() === -1) {
+      currentDate.setFullYear(currentDate.getFullYear() - 1);
+      currentDate.setMonth(11);
     }
-    changeHeaderBackground();
+    changeHeaderBG();
     renderCalendar();
   });
 
+  // next month button //
   nextBtn.addEventListener("click", () => {
-    selectedDate.setMonth(selectedDate.getMonth() + 1);
-    if (selectedDate.getMonth() === 12) {
-      selectedDate.setFullYear(selectedDate.getFullYear() + 1);
-      selectedDate.setMonth(0);
+    // setNextMonth();
+    currentDate.setMonth(currentDate.getMonth() + 1);
+
+    if (currentDate.getMonth() === 12) {
+      currentDate.setFullYear(currentDate.getFullYear() + 1);
+      currentDate.setMonth(0);
     }
-    changeHeaderBackground();
+    changeHeaderBG();
     renderCalendar();
   });
 }
 
 async function renderCalendar() {
-  renderHeaderMonth();
-  renderYearLabel();
-  const holidays = await getHolidays();
-
-  const numberOfDaysBefore = new Date(
-    selectedDate.getFullYear(),
-    selectedDate.getMonth(),
-    0
-  ).getDay();
-
+  renderHeader();
   calendarContainer.innerHTML = "";
 
-  const numberOfDaysInMonth = new Date(
-    selectedDate.getFullYear(),
-    selectedDate.getMonth() + 1,
-    0
-  ).getDate();
-
-  const daysToRender = 42;
-
-  const startPrevMonth =
-    new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 0).getDate() -
-    numberOfDaysBefore +
-    1;
+  const holidays = await fetchHolidays();
 
   let lastClickedDayArray = [];
 
+  // render days //
   for (let i = 0; i < daysToRender; i++) {
     const dayDiv = document.createElement("div");
     const contentContainer = document.createElement("div");
+    contentContainer.classList.add("content-container", "absolute");
 
+    // event listener for day //
     dayDiv.addEventListener("click", (e) => {
       showDayInfo(dayDiv.id);
       dayDiv.classList.toggle("selected-Day");
-
-      // contentContainer.classList.toggle("selected-Day");
 
       lastClickedDayArray.push(dayDiv);
 
@@ -95,104 +66,86 @@ async function renderCalendar() {
           lastClickedDayArray.shift();
         }
       }
-
       if (!dayDiv.classList.contains("selected-Day")) {
         showAllTodos();
       }
     });
 
-    if (i < numberOfDaysBefore) {
+    // render padding days //
+    if (i < paddingDays) {
       dayDiv.classList.add("prev-month-day");
-      dayDiv.id = `${new Date(
-        selectedDate.getFullYear(),
-        selectedDate.getMonth(),
-        i - 1
-      ).toLocaleDateString("sv-SE", {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-      })}`;
+      dayDiv.id = generateId(i);
 
       const dateDiv = document.createElement("div");
       dateDiv.classList.add("date");
 
-      dateDiv.innerHTML = startPrevMonth + i;
+      dateDiv.innerHTML = paddingDaysStartDate + i;
       contentContainer.appendChild(dateDiv);
-      contentContainer.classList.add("content-container", "absolute");
       dayDiv.appendChild(contentContainer);
-    } else if (i >= numberOfDaysBefore + numberOfDaysInMonth) {
+    }
+
+    // render next month//
+    else if (i >= paddingDays + monthLength) {
       dayDiv.classList.add("next-month-day");
-      dayDiv.id = `${new Date(
-        selectedDate.getFullYear(),
-        selectedDate.getMonth(),
-        i - 1
-      ).toLocaleDateString("sv-SE", {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-      })}`;
+      dayDiv.id = generateId(i);
 
       const dateDiv = document.createElement("div");
       dateDiv.classList.add("date");
 
-      dateDiv.innerHTML = i - (numberOfDaysBefore + numberOfDaysInMonth) + 1;
+      dateDiv.innerHTML = i - (paddingDays + monthLength) + 1;
       contentContainer.appendChild(dateDiv);
-      contentContainer.classList.add("content-container", "absolute");
       dayDiv.appendChild(contentContainer);
-    } else {
-      if (holidays.dagar[i - numberOfDaysBefore]["röd dag"] === "Ja") {
+    }
+
+    // render current month //
+    else {
+      if (holidays.dagar[i - paddingDays]["röd dag"] === "Ja") {
         dayDiv.classList.add("holiday");
       }
-
       dayDiv.classList.add("day");
-      dayDiv.id = `${new Date(
-        selectedDate.getFullYear(),
-        selectedDate.getMonth(),
-        i + 1 - numberOfDaysBefore
-      ).toLocaleDateString("sv-SE", {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-      })}`;
+      dayDiv.id = generateId(i);
 
-      // APPEND ELEMENTS TO DAY DIV ------------------------------ //
-
-      contentContainer.classList.add("content-container", "absolute");
-
-      const dayInfoContainer = document.createElement("div");
-      dayInfoContainer.classList.add(
+      // append content to dayDiv //
+      // append day info (date & nameday names) to dayInfoContainerDiv //
+      const dayInfoContainerDiv = document.createElement("div");
+      dayInfoContainerDiv.classList.add(
         "day-info-container",
         "flex",
         "space-between",
         "align-center"
       );
 
-      const dayDate = document.createElement("div");
-      dayDate.classList.add("day-date");
-      dayDate.innerHTML = `${i - numberOfDaysBefore + 1}`;
+      // date
+      const dayDateDiv = document.createElement("div");
+      dayDateDiv.classList.add("day-date");
+      dayDateDiv.innerHTML = `${i - paddingDays + 1}`;
 
-      const nameDayContainer = document.createElement("div");
-      nameDayContainer.classList.add("name-day-container");
+      // name day
+      const nameDayContainerDiv = document.createElement("div");
+      nameDayContainerDiv.classList.add("name-day-container");
       for (
         let j = 0;
-        j < holidays.dagar[i - numberOfDaysBefore].namnsdag.length;
+        j < holidays.dagar[i - paddingDays].namnsdag.length;
         j++
       ) {
-        const nameDay = document.createElement("div");
-        nameDay.classList.add("name-day");
-        nameDay.innerHTML = holidays.dagar[i - numberOfDaysBefore].namnsdag[j];
-        nameDayContainer.appendChild(nameDay);
+        const nameDayDiv = document.createElement("div");
+        nameDayDiv.classList.add("name-day");
+        nameDayDiv.innerHTML = holidays.dagar[i - paddingDays].namnsdag[j];
+        nameDayContainerDiv.appendChild(nameDayDiv);
       }
 
-      dayInfoContainer.appendChild(dayDate);
+      dayInfoContainerDiv.appendChild(dayDateDiv);
 
+      // if there are todos for this day, append notification to dayInfoContainerDiv //
+      // and/or if day is flagday, append flagday notification to dayInfoContainerDiv //
       if (
         getNumberOfTodos(dayDiv.id) ||
-        holidays.dagar[i - numberOfDaysBefore].flaggdag !== ""
+        holidays.dagar[i - paddingDays].flaggdag !== ""
       ) {
         const notificationContainer = document.createElement("div");
         notificationContainer.classList.add("notification-container", "flex");
 
+        // if day has todos
         if (getNumberOfTodos(dayDiv.id)) {
           const todoNotificationContainer = document.createElement("div");
           todoNotificationContainer.classList.add(
@@ -205,7 +158,7 @@ async function renderCalendar() {
           notificationContainer.appendChild(todoNotificationContainer);
         }
 
-        if (holidays.dagar[i - numberOfDaysBefore].flaggdag !== "") {
+        if (holidays.dagar[i - paddingDays].flaggdag !== "") {
           const flagIcon = document.createElement("i");
           flagIcon.classList.add(
             "fa-solid",
@@ -214,12 +167,12 @@ async function renderCalendar() {
           );
           notificationContainer.appendChild(flagIcon);
         }
-        dayInfoContainer.appendChild(notificationContainer);
+        dayInfoContainerDiv.appendChild(notificationContainer);
       }
 
-      dayInfoContainer.appendChild(nameDayContainer);
+      dayInfoContainerDiv.appendChild(nameDayContainerDiv);
 
-      contentContainer.appendChild(dayInfoContainer);
+      contentContainer.appendChild(dayInfoContainerDiv);
 
       if (getNumberOfTodos(dayDiv.id)) {
         const todoListContainerOnHover = document.createElement("div");
@@ -256,7 +209,7 @@ async function renderCalendar() {
         todoListContainerOnHover.appendChild(todoList);
         contentContainer.appendChild(todoListContainerOnHover);
       }
-      if (holidays.dagar[i - numberOfDaysBefore].flaggdag !== "") {
+      if (holidays.dagar[i - paddingDays].flaggdag !== "") {
         const flagDayContainer = document.createElement("div");
         flagDayContainer.classList.add(
           "flag-day-container",
@@ -272,8 +225,7 @@ async function renderCalendar() {
 
         const flagOccasionDiv = document.createElement("div");
         flagOccasionDiv.classList.add("flag-occasion");
-        flagOccasionDiv.innerHTML =
-          holidays.dagar[i - numberOfDaysBefore].flaggdag;
+        flagOccasionDiv.innerHTML = holidays.dagar[i - paddingDays].flaggdag;
 
         flagDayContainer.appendChild(flagOccasionDiv);
 
@@ -302,16 +254,27 @@ function deleteTodoItem(todoItem) {
   setLocalstorage();
 }
 
-function getHolidays() {
+async function fetchHolidays() {
   const url = "http://sholiday.faboul.se/dagar/v2.1/";
 
   const holidays = fetch(
-    `${url}${selectedDate.getFullYear()}/${selectedDate.getMonth() + 1}`
+    `${url}${currentDate.getFullYear()}/${currentDate.getMonth() + 1}`
   )
     .then((response) => response.json())
     .then((data) => {
       return data;
     });
-
   return holidays;
+}
+
+function generateId(index) {
+  return new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    index - 1
+  ).toLocaleDateString("sv-SE", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
 }
