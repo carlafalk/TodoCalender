@@ -1,6 +1,9 @@
 @media (max-width: 970px) {
   /* HEADER------------------------------------------------- */
 
+  .header-content img {
+    width: 80px;
+  }
   /* WELCOME-SEGMENT---------------------------------------- */
   .welcome-segment {
     display: flex;
@@ -29,13 +32,15 @@
   .formBox {
     text-align: center;
     font-size: 1.5rem;
+    width: 100%;
   }
   .formBox input {
-    width: 30rem;
+    width: 60%;
     height: 2rem;
     font-size: 1rem;
     border: none;
     margin-bottom: 5px;
+    min-width: 300px;
   }
   .formBox-date {
     text-align: center;

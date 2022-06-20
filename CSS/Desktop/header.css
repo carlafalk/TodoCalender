@@ -116,9 +116,6 @@ i {
     margin-bottom: 0.5rem;
   }
 
-  .header-content img {
-    width: 80px;
-  }
   .year-banner {
     flex-direction: row;
     top: 25px;
