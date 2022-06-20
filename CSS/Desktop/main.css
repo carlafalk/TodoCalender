@@ -181,3 +181,20 @@ main {
 .extra {
   background-color: lightgreen;
 }
+
+@media (max-width: 1400px) {
+  .day:hover .content-container {
+    min-width: 100%;
+    left: 0;
+  }
+  .day:hover .flag-occasion {
+    display: flex;
+    /* flex-wrap: wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 80%; */
+  }
+  .day:hover .flag-day-container {
+    display: flex;
+  }
+}
