@@ -21,7 +21,7 @@
   justify-content: flex-end;
   background: url(../../IMG/BG/June.jpg);
   background-size: cover;
-  background-position: center center;
+  background-position: left center;
   height: 40vh;
 }
 
@@ -56,13 +56,14 @@
 
 .header-content img {
   margin-top: -10%;
-  width: 25%;
+  width: 130px;
 }
 
 .month {
   font-size: 3rem;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
+  margin: 0 20px;
 }
 
 .year-banner {
@@ -77,7 +78,7 @@
   top: -15px;
   right: 5%;
   height: 30%;
-  width: 7%;
+  width: 90px;
   background-color: orange;
   color: white;
   font-size: 3rem;
@@ -88,6 +89,8 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 5px orange solid;
+  /* max-width: 360px;
+  min-width: 240px; */
   width: 80%;
   margin-bottom: 25px;
   padding: 0 1rem;
@@ -97,4 +100,31 @@ i {
   font-size: 1.5rem;
   color: #133957;
   cursor: pointer;
+}
+
+@media (max-width: 1170px) {
+  .month-controller {
+    max-width: 300px;
+    margin-top: 20px;
+  }
+  .month {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-content img {
+    width: 80px;
+  }
+  .year-banner {
+    flex-direction: row;
+    top: 25px;
+    right: 0;
+    height: 15%;
+    width: 10%;
+    font-size: 2rem;
+  }
 }

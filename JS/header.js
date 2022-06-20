@@ -4,6 +4,8 @@ function changeHeaderBG() {
     "en-EN",
     { month: "long" }
   )}.jpg)`;
+  headerContainer.style.backgroundSize = "cover";
+  headerContainer.style.backgroundPosition = "left center";
 }
 
 function renderHeader() {
