@@ -23,7 +23,7 @@ dateAndTimeContainer.appendChild(currentDateH4);
 dateAndTimeContainer.appendChild(weatherDiv);
 dateAndTimeContainer.appendChild(currentTime);
 
-// Wheater stuff
+// Weather stuff
 const apiKeyWeather = "5ff7192628b7984a48b5001e7291871f";
 const apiKeyLocation = "pk.47dfd2e322a8290e5b985e428e6e8cbe";
 
@@ -48,7 +48,7 @@ function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-function fetchWheater(city) {
+function fetchWeather(city) {
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKeyWeather}&units=metric`
   )
@@ -60,16 +60,16 @@ function fetchWheater(city) {
     });
 }
 
-function fetchCity(position) {
+function fetchCity(position, success, options) {
   fetch(
     `https://eu1.locationiq.com/v1/reverse.php?key=${apiKeyLocation}&lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`
   )
     .then((response) => response.json())
     .then((data) => {
       if (data.address.town) {
-        fetchWheater(data.address.town);
+        fetchWeather(data.address.town);
       } else if (data.address.city) {
-        fetchWheater(data.address.city);
+        fetchWeather(data.address.city);
       }
     });
 }
