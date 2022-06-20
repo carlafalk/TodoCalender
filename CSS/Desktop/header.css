@@ -126,5 +126,6 @@ i {
     height: 15%;
     width: 10%;
     font-size: 2rem;
+    min-width: 115px;
   }
 }
