@@ -1,9 +1,48 @@
 @media (max-width: 768px) {
   /* HEADER------------------------------------------------- */
+  .header-container {
+    height: 15vh;
+    justify-content: flex-start;
+  }
+
+  .header-content {
+    flex-direction: row;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.657);
+    padding: 0 10px;
+  }
+
+  .header-content img {
+    margin-top: 0;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+  }
+  .header-separator {
+    display: none;
+  }
+
+  .header-skew {
+    display: none;
+  }
+
+  .month-controller {
+    color: black;
+    margin: auto 0;
+    border: none;
+  }
+  .month-controller i {
+    color: black;
+  }
+
+  .year-banner {
+    height: 30%;
+    top: 15px;
+  }
 
   /* WELCOME-SEGMENT---------------------------------------- */
 
   /* ASIDE ------------------------------------------------- */
+
   .aside {
     height: 100%;
   }
@@ -14,9 +53,9 @@
   .todo-list-container {
     height: 100%;
   }
-  .formBox {
+  /* .formBox {
     width: 80%;
-  }
+  } */
   .formBox input {
     width: 100%;
   }
