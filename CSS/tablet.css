@@ -1,0 +1,26 @@
+@media (max-width: 970px) {
+  /* HEADER------------------------------------------------- */
+
+  /* WELCOME-SEGMENT---------------------------------------- */
+
+  /* MAIN--------------------------------------------------- */
+  .calendarWrapper {
+    flex-direction: column;
+    height: 100%;
+  }
+  .aside {
+    width: 100%;
+  }
+  .todo-list {
+    height: 20vh;
+  }
+  .wrapper {
+    height: 100vh;
+  }
+  main {
+    height: 100%;
+  }
+  .day:hover .content-container {
+    min-width: 100%;
+  }
+}

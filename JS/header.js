@@ -4,6 +4,8 @@ function changeHeaderBackground() {
     "en-EN",
     { month: "long" }
   )}.jpg)`;
+  headerContainer.style.backgroundSize = "cover";
+  headerContainer.style.backgroundPosition = "left center";
 }
 
 function renderYearLabel() {
