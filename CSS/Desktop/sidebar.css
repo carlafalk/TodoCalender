@@ -199,6 +199,10 @@
   margin-right: 10px;
 }
 
+.checked-todo {
+  color: lightgreen;
+}
+
 /* Selected date info-------------------------------------------------------------------------------- */
 
 .selected-title-div {
