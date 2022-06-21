@@ -84,4 +84,7 @@
   .day:hover .content-container {
     min-width: 100%;
   }
+  .notification-container {
+    flex-direction: row;
+  }
 }

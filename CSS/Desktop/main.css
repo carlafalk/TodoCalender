@@ -35,7 +35,6 @@
   height: 1.2rem;
   border-radius: 10rem;
   display: block;
-  margin-left: 0.5rem;
 }
 
 .nr-of-todos {
@@ -69,6 +68,10 @@
 }
 .todo-title-list {
   max-width: 80%;
+}
+.notification-container {
+  align-items: center;
+  margin-left: 0.5rem;
 }
 /* DAY HOVER -------------------------------------------------------------------------------- */
 
@@ -204,5 +207,13 @@ main {
   }
   .day:hover .flag-day-container {
     display: flex;
+  }
+}
+
+@media (max-width: 1170px) {
+  .notification-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
