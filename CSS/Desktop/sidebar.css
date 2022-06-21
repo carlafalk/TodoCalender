@@ -250,13 +250,12 @@
   background-color: white;
   justify-content: space-around;
   width: 20%;
-  height: 20%;
   flex-direction: column;
   padding: 1rem;
 }
 
 .editform-modal button {
-  margin: 0 auto;
+  margin: 0.5rem auto;
 }
 
 .close-editform  {
