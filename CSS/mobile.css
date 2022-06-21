@@ -12,17 +12,14 @@
     padding: 0 10px;
   }
 
+  .header-gradient {
+    display: none;
+  }
+
   .header-content img {
     margin-top: 0;
     background-color: rgb(255, 255, 255);
     border-radius: 50%;
-  }
-  .header-separator {
-    display: none;
-  }
-
-  .header-skew {
-    display: none;
   }
 
   .month-controller {

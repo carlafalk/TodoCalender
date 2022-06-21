@@ -32,6 +32,7 @@
 .icon-temp i {
   color: orange;
   font-size: 1rem;
+  cursor: auto;
 }
 
 .icon-temp {
@@ -47,7 +48,6 @@
 
 .DateAndTime {
   display: flex;
-  /* justify-content: space-between; */
   flex-direction: column;
 }
 .welcome-weekday {
