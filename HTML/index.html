@@ -68,12 +68,24 @@
                   </div>
                   <div class="btn-box">
                     <button id="add-btn" class="add-btn">Add</button>
-                    <button id="save-edit-btn" class="save-edit-btn">
-                      Save
-                    </button>
                   </div>
                 </form>
               </div>
+            </div>
+            <div class="modal-container hidden">
+              
+                <form class="editform-modal">
+                  <h2>Edit todo</h2>
+                  <label for="title">Title </label>
+                  <input type="text" name="title" class="edit-title-form" />
+                  <label for="description">description</label>
+                  <input type="text" name="description" class="edit-description-form" />
+                  <label for="date">Date</label>
+                  <input type="date" name="date" class="edit-date-form"/>
+                  <button class="save-edit-btn">Save</button>
+                  <button class="close-editform">Close</button>
+                </form>
+              
             </div>
             <!-- todo list -->
 
