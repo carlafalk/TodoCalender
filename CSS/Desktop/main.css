@@ -216,4 +216,16 @@ main {
     align-items: center;
     justify-content: center;
   }
+
+  
+    .editform-modal input {
+        
+        height: 2rem;
+        font-size: 1rem;
+        border: none;
+        /* margin-bottom: 5px; */
+        margin: 2.5px 10px;
+        min-width: 220px;
+      }
+  
 }

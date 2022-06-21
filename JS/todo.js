@@ -74,12 +74,19 @@ function showAllTodos() {
     if (dates.includes(todoItems[i].date)) {
       const dateDiv = document.getElementById(`${todoItems[i].date}`);
 
+      const buttonsDiv = document.createElement("div");
+      buttonsDiv.classList.add("buttons-div");
+
       const trashcan = document.createElement("i");
       trashcan.classList.add("trashcan", "fa-solid", "fa-trash-can");
       trashcan.addEventListener("click", () => {
         deleteTodoItem(todoItems[i]);
         location.reload();   
       });
+
+      const editButton = document.createElement("i");
+      editButton.classList.add("edit-btn", "fa-solid", "fa-pen-to-square");
+      editButton.addEventListener("click", () => {openEditForm(todoItems[i])});
 
       const titleDiv = document.createElement("div");
       titleDiv.classList.add("title-div");
@@ -90,7 +97,9 @@ function showAllTodos() {
 
       dateDiv.appendChild(titleDiv);
       titleDiv.appendChild(titlebox);
-      titleDiv.appendChild(trashcan);
+      titleDiv.appendChild(buttonsDiv);
+      buttonsDiv.appendChild(trashcan);
+      buttonsDiv.appendChild(editButton);
       titlebox.appendChild(title);
     }
   }
