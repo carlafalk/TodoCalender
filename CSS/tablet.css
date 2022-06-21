@@ -15,6 +15,10 @@
     justify-content: space-around;
     padding-left: 20px;
   }
+
+  .weather-container {
+    padding-left: 20px;
+  }
   .DateAndTime h4 {
     margin: 0;
   }

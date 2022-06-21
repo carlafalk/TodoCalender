@@ -1,27 +1,42 @@
 const welcomeContainer = document.querySelector(".welcome-segment");
 const dateAndTimeContainer = document.querySelector(".DateAndTime");
-const currentDay = document.createElement("h2");
+const dayInfoDiv = document.querySelector(".day-info");
+const currentDayH2 = document.createElement("h2");
 const currentDateH4 = document.createElement("h4");
-const currentTime = document.createElement("h4");
-const weatherDiv = document.createElement("div");
+const currentTimeH4 = document.createElement("h4");
+const currentWeatherH4 = document.createElement("h4");
+const weatherLocationH4 = document.createElement("h4");
+const weatherContainerDiv = document.createElement("div");
+const iconTempDiv = document.createElement("div");
+const iconI = document.createElement("i");
+const tempSpan = document.createElement("span");
 
-currentDay.classList.add("welcome-weekday");
+currentDayH2.classList.add("welcome-weekday");
 currentDateH4.classList.add("welcome-date");
-currentTime.classList.add("welcome-time");
+currentTimeH4.classList.add("welcome-time");
+currentWeatherH4.classList.add("welcome-weather");
+weatherContainerDiv.classList.add("weather-container");
+iconTempDiv.classList.add("icon-temp");
 
-currentDay.innerHTML = new Date().toLocaleString("en-us", { weekday: "long" });
+currentDayH2.innerHTML = new Date().toLocaleString("en-us", {
+  weekday: "long",
+});
 currentDateH4.innerText = new Date().toISOString().slice(0, 10);
 
 function clock() {
-  currentTime.innerText = new Date().toLocaleTimeString();
+  currentTimeH4.innerText = new Date().toLocaleTimeString();
 }
 
 setInterval(clock, 1000);
 
-currentTime.innerText = welcomeContainer.appendChild(currentDay);
+currentTimeH4.innerText = welcomeContainer.appendChild(currentDayH2);
 dateAndTimeContainer.appendChild(currentDateH4);
-dateAndTimeContainer.appendChild(weatherDiv);
-dateAndTimeContainer.appendChild(currentTime);
+dateAndTimeContainer.appendChild(currentTimeH4);
+iconTempDiv.appendChild(iconI);
+iconTempDiv.appendChild(tempSpan);
+weatherContainerDiv.appendChild(weatherLocationH4);
+weatherContainerDiv.appendChild(iconTempDiv);
+dayInfoDiv.appendChild(weatherContainerDiv);
 
 // Weather stuff
 const apiKeyWeather = "5ff7192628b7984a48b5001e7291871f";
@@ -56,7 +71,11 @@ function fetchWeather(city) {
       return response.json();
     })
     .then((data) => {
-      weatherDiv.innerHTML = `${data.main.temp} °C`;
+      console.log(data);
+      currentWeatherH4.innerHTML = `${data.main.temp}°C`;
+      weatherLocationH4.innerHTML = `${data.name}`;
+      iconI.classList.add("fa-solid", `${weatherIcon[data.weather[0].icon]}`);
+      tempSpan.innerHTML = `${Math.round(parseFloat(data.main.temp))}°C`;
     });
 }
 
