@@ -10,22 +10,13 @@ const nextMonth = () => {
   return currentDate.getMonth() + 1;
 };
 
-const monthLength = new Date(
-  currentDate.getFullYear(),
-  currentDate.getMonth() + 1,
-  0
-).getDate();
-
-const paddingDays = new Date(
-  currentDate.getFullYear(),
-  currentDate.getMonth(),
-  0
-).getDay();
-
-const paddingDaysStartDate =
-  new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate() -
-  paddingDays +
-  1;
+function getPaddingStartDate() {
+  return (
+    new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate() -
+    paddingDays() +
+    1
+  );
+}
 
 function setNextMonth() {
   currentDate.setMonth(nextMonth);
