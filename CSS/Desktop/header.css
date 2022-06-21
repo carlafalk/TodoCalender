@@ -19,17 +19,22 @@
   position: relative;
   display: flex;
   justify-content: flex-end;
-  background-image: linear-gradient(
-      110deg,
-      rgba(255, 255, 255, 0) 59%,
-      rgba(255, 255, 255, 0.5) 59%,
-      rgba(255, 255, 255, 0.5) 63%,
-      rgba(255, 255, 255, 1) 63%
-    ),
-    url(../../IMG/BG/June.jpg);
+  background: url(../../IMG/BG/June.jpg);
   background-size: cover;
   background-position: left center;
   height: 40vh;
+}
+
+.header-gradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0) 59%,
+    rgba(255, 255, 255, 0.5) 59%,
+    rgba(255, 255, 255, 0.5) 63%,
+    rgba(255, 255, 255, 1) 63%
+  );
 }
 
 .header-skew {

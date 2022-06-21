@@ -1,6 +1,6 @@
 function changeHeaderBG() {
   const headerContainer = document.querySelector(".header-container");
-  headerContainer.style.backgroundImage = `linear-gradient(110deg, rgba(255, 255, 255, 0) 59%, rgba(255, 255, 255, 0.5) 59%, rgba(255, 255, 255, 0.5) 63%, rgba(255, 255, 255, 1) 63%), url(../../IMG/BG/${currentDate.toLocaleString(
+  headerContainer.style.background = `url(../../IMG/BG/${currentDate.toLocaleString(
     "en-EN",
     {
       month: "long",
