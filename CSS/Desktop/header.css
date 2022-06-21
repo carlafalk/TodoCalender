@@ -20,7 +20,7 @@
   display: flex;
   justify-content: flex-end;
   background: url(../../IMG/BG/June.jpg);
-  background-size: cover;
+  background-size: stretch;
   background-position: left center;
   height: 40vh;
 }
