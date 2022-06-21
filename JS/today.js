@@ -71,7 +71,6 @@ function fetchWeather(city) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       currentWeatherH4.innerHTML = `${data.main.temp}°C`;
       weatherLocationH4.innerHTML = `${data.name}`;
       iconI.classList.add("fa-solid", `${weatherIcon[data.weather[0].icon]}`);
