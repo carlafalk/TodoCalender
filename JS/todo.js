@@ -78,7 +78,7 @@ function showAllTodos() {
       trashcan.classList.add("trashcan", "fa-solid", "fa-trash-can");
       trashcan.addEventListener("click", () => {
         deleteTodoItem(todoItems[i]);
-        renderCalendar();
+        location.reload();   
       });
 
       const titleDiv = document.createElement("div");
@@ -135,9 +135,7 @@ function showDayInfo(date) {
       const editBtn = document.createElement("i");
       editDiv.classList.add("edit-div");
       editBtn.classList.add("edit-btn", "fa-solid", "fa-pen-to-square");
-      editBtn.addEventListener("click", (e) =>
-        toggleTodoForm(e,todoItems[i])
-      );
+      editBtn.addEventListener("click", () => {openEditForm(todoItems[i])});
 
       dayInfo.appendChild(selectedDateItem);
       selectedDateItem.appendChild(titleDescBox);
@@ -160,42 +158,39 @@ function setLocalstorage() {
 
 // --------EDIT STUFFS---------
 
-const editBtn = document.createElement("button");
-
-function toggleEditTodoWindow(todoItem) {
+function openEditForm(todoItem) {
+  document.querySelector(".modal-container").classList.toggle("hidden");
+  const closeEditBtn = document.querySelector(".close-editform");
+  closeEditBtn.addEventListener("click" , closeEditForm)
   
-  const titleInput = document.querySelector("#todo-title");
-  const descInput = document.querySelector("#todo-desc");
-  const dateInput = document.querySelector("#date");
+  const saveEditBtn = document.querySelector(".save-edit-btn");
 
-  if (btn.classList.contains("add-todo-btn--active")) {
-    titleInput.value = todoItem.title;
-    descInput.value = todoItem.description;
-    dateInput.value = todoItem.date;
-  }
-  else if (!btn.classList.contains("add-todo-btn--active")) {
-  toggleContent()
-    titleInput.value = todoItem.title;
-    descInput.value = todoItem.description;
-    dateInput.value = todoItem.date;
-  }
+  saveEditBtn.addEventListener("click",(ev) => saveEdit(todoItem, ev));
+  saveEditBtn.addEventListener("click",closeEditForm);
+  saveEditBtn.addEventListener("click",() => { showDayInfo(todoItem.date) });
 
-  editBtn.innerHTML = "Save";
-  editBtn.classList.add("save-edit-btn");
-  editBtn.addEventListener("click", (ev) => saveEdit(todoItem, ev));
+  const titleInput = document.querySelector(".edit-title-form");
+  const descInput = document.querySelector(".edit-description-form");
+  const dateInput = document.querySelector(".edit-date-form");
 
-  const forms = document.querySelector(".forms");
+  titleInput.value = todoItem.title;
+  descInput.value = todoItem.description;
+  dateInput.value = todoItem.date;
 
-  forms.appendChild(editBtn);
 }
+
+function closeEditForm() {
+  document.querySelector(".modal-container").classList.toggle("hidden");
+}
+const editBtn = document.createElement("button");
 
 function saveEdit(todoItem, ev) {
   ev.preventDefault();
 
   const editedTodoItem = {
-    title: document.getElementById("todo-title").value,
-    description: document.getElementById("todo-desc").value,
-    date: document.getElementById("date").value,
+    title: document.querySelector(".edit-title-form").value,
+    description: document.querySelector(".edit-description-form").value,
+    date: document.querySelector(".edit-date-form").value,
     isDone: false,
   };
 
@@ -206,11 +201,46 @@ function saveEdit(todoItem, ev) {
       t.date === todoItem.date
   );
 
-  todoItems[index] = Object.assign({}, todoItems[index], editedTodoItem);
+  if(editedTodoItem.title === "" || editedTodoItem.description === "" || editedTodoItem.date < getTodaysDateFormattedAsSwedishDate())
+  {
+    alert("Please, fill in all forms");
+  }
+  else {
+    todoItems[index] = Object.assign({}, todoItems[index], editedTodoItem);
+  
+    localStorage.setItem("todoItems", JSON.stringify(todoItems));
+    document.forms[0].reset(); 
+  }
 
-  localStorage.setItem("todoItems", JSON.stringify(todoItems));
-  document.forms[0].reset();
 }
+
+// function toggleEditTodoWindow(todoItem) {
+  
+//   const titleInput = document.querySelector("#todo-title");
+//   const descInput = document.querySelector("#todo-desc");
+//   const dateInput = document.querySelector("#date");
+
+//   if (btn.classList.contains("add-todo-btn--active")) {
+//     titleInput.value = todoItem.title;
+//     descInput.value = todoItem.description;
+//     dateInput.value = todoItem.date;
+//   }
+//   else if (!btn.classList.contains("add-todo-btn--active")) {
+//   toggleContent()
+//     titleInput.value = todoItem.title;
+//     descInput.value = todoItem.description;
+//     dateInput.value = todoItem.date;
+//   }
+
+//   editBtn.innerHTML = "Save";
+//   editBtn.classList.add("save-edit-btn");
+//   editBtn.addEventListener("click", (ev) => saveEdit(todoItem, ev));
+
+//   const forms = document.querySelector(".forms");
+
+//   forms.appendChild(editBtn);
+// }
+
 
 // add-todo-item-button----------------------------------
 
@@ -225,51 +255,51 @@ function toggleContent() {
   }
 }
 
-btn.addEventListener("click", (e) => toggleTodoForm(e));
+btn.addEventListener("click", toggleContent);
 
 
 //______ToGGle NeW?!_-_--__-_-
 
-function toggleTodoForm(e, todoItem) {
+// function toggleTodoForm(e, todoItem) {
 
-  saveEditBtn.addEventListener("click", (x) => saveEdit(todoItem, x));
+//   saveEditBtn.addEventListener("click", (x) => saveEdit(todoItem, x));
 
-  if(e.target.classList.contains("edit-btn") && !e.target.classList.contains("open")) {
-    btn.classList.add("add-todo-btn--active");
-    console.log(e.target)
-    e.target.classList.add("open")
-    expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
-    const titleInput = document.querySelector("#todo-title");
-    const descInput = document.querySelector("#todo-desc");
-    const dateInput = document.querySelector("#date");
+//   if(e.target.classList.contains("edit-btn") && !e.target.classList.contains("open")) {
+//     btn.classList.add("add-todo-btn--active");
+//     console.log(e.target)
+//     e.target.classList.add("open")
+//     expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
+//     const titleInput = document.querySelector("#todo-title");
+//     const descInput = document.querySelector("#todo-desc");
+//     const dateInput = document.querySelector("#date");
 
-    titleInput.value = todoItem.title;
-    descInput.value = todoItem.description;
-    dateInput.value = todoItem.date;
+//     titleInput.value = todoItem.title;
+//     descInput.value = todoItem.description;
+//     dateInput.value = todoItem.date;
 
-    document.querySelector(".add-btn").classList.add("hidden");    
-    document.querySelector(".save-edit-btn").classList.remove("hidden");
-  }
-  else if(e.target.classList.contains("add-todo-btn") && !e.target.classList.contains("open")) {
+//     document.querySelector(".add-btn").classList.add("hidden");    
+//     document.querySelector(".save-edit-btn").classList.remove("hidden");
+//   }
+//   else if(e.target.classList.contains("add-todo-btn") && !e.target.classList.contains("open")) {
 
-    console.log("addBtn");
+//     console.log("addBtn");
 
-    btn.classList.add("add-todo-btn--active");
+//     btn.classList.add("add-todo-btn--active");
 
-    e.target.classList.add("open");
+//     e.target.classList.add("open");
 
-    expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
+//     expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
 
-    document.querySelector(".save-edit-btn").classList.add("hidden");
-    document.querySelector(".add-btn").classList.remove("hidden");
-    console.log(e.target)
+//     document.querySelector(".save-edit-btn").classList.add("hidden");
+//     document.querySelector(".add-btn").classList.remove("hidden");
+//     console.log(e.target)
 
-  }
-  else if (e.target.classList.contains("open")) {
-    e.target.classList.remove("open");
-    btn.classList.remove("add-todo-btn--active");
-    expandedContent.style.maxHeight = 0;
-    document.forms[0].reset();
-    console.log(e.target)
-  }
-}
+//   }
+//   else if (e.target.classList.contains("open")) {
+//     e.target.classList.remove("open");
+//     btn.classList.remove("add-todo-btn--active");
+//     expandedContent.style.maxHeight = 0;
+//     document.forms[0].reset();
+//     console.log(e.target)
+//   }
+// }
