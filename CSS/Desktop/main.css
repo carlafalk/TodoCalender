@@ -55,6 +55,8 @@
 .flag-occasion {
   display: none;
   font-size: 0.7rem;
+  text-overflow: ellipsis;
+  max-width: 80px;
 }
 
 .name-day-container {
@@ -64,6 +66,9 @@
 
 .selected-Day {
   background-color: #d9d9d9;
+}
+.todo-title-list {
+  max-width: 80%;
 }
 /* DAY HOVER -------------------------------------------------------------------------------- */
 
@@ -103,6 +108,8 @@
 
 .day:hover .flag-occasion {
   display: flex;
+  max-width: 100%;
+  word-break: break-word;
 }
 
 .day:hover .todo-icon {
@@ -120,6 +127,7 @@
   margin: 0.3rem 0 0 0;
   background: #ffffff;
   box-shadow: 0.1rem 0.1rem 2px black;
+  width: 100%;
 }
 
 .day:hover i {
