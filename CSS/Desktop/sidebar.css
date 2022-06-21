@@ -38,7 +38,7 @@
   display: flex;
   justify-content: space-around;
 }
-.day-info {
+.today-info {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -276,12 +276,12 @@
 }
 
 .editform-modal input {
-    width: 60%;
-    height: 2rem;
-    font-size: 1rem;
-    border: none;
-    margin: 2.5px 10px;
-    min-width: 250px;
+  width: 60%;
+  height: 2rem;
+  font-size: 1rem;
+  border: none;
+  margin: 2.5px 10px;
+  min-width: 250px;
 }
 
 .editform-modal button {

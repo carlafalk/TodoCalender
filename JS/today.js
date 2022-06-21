@@ -1,6 +1,6 @@
 const welcomeContainer = document.querySelector(".welcome-segment");
 const dateAndTimeContainer = document.querySelector(".DateAndTime");
-const dayInfoDiv = document.querySelector(".day-info");
+const dayInfoDiv = document.querySelector(".today-info");
 const currentDayH2 = document.createElement("h2");
 const currentDateH4 = document.createElement("h4");
 const currentTimeH4 = document.createElement("h4");
