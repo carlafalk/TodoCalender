@@ -88,6 +88,15 @@ function showAllTodos() {
       editButton.classList.add("edit-btn", "fa-solid", "fa-pen-to-square");
       editButton.addEventListener("click", () => {openEditForm(todoItems[i])});
 
+      const checkBtn = document.createElement("i");
+      checkBtn.classList.add("check-btn", "fa-solid", "fa-check");
+      
+      if (todoItems[i].isDone === true) {
+        checkBtn.classList.toggle("checked-todo");
+      }
+
+      checkBtn.addEventListener("click", () =>  { checkTodoItem(todoItems[i]), showAllTodos() })
+
       const titleDiv = document.createElement("div");
       titleDiv.classList.add("title-div");
 
@@ -98,8 +107,10 @@ function showAllTodos() {
       dateDiv.appendChild(titleDiv);
       titleDiv.appendChild(titlebox);
       titleDiv.appendChild(buttonsDiv);
+      buttonsDiv.appendChild(checkBtn);
       buttonsDiv.appendChild(trashcan);
       buttonsDiv.appendChild(editButton);
+      
       titlebox.appendChild(title);
     }
   }
@@ -223,34 +234,6 @@ function saveEdit(todoItem, ev) {
 
 }
 
-// function toggleEditTodoWindow(todoItem) {
-  
-//   const titleInput = document.querySelector("#todo-title");
-//   const descInput = document.querySelector("#todo-desc");
-//   const dateInput = document.querySelector("#date");
-
-//   if (btn.classList.contains("add-todo-btn--active")) {
-//     titleInput.value = todoItem.title;
-//     descInput.value = todoItem.description;
-//     dateInput.value = todoItem.date;
-//   }
-//   else if (!btn.classList.contains("add-todo-btn--active")) {
-//   toggleContent()
-//     titleInput.value = todoItem.title;
-//     descInput.value = todoItem.description;
-//     dateInput.value = todoItem.date;
-//   }
-
-//   editBtn.innerHTML = "Save";
-//   editBtn.classList.add("save-edit-btn");
-//   editBtn.addEventListener("click", (ev) => saveEdit(todoItem, ev));
-
-//   const forms = document.querySelector(".forms");
-
-//   forms.appendChild(editBtn);
-// }
-
-
 // add-todo-item-button----------------------------------
 
 function toggleContent() {
@@ -267,48 +250,23 @@ function toggleContent() {
 btn.addEventListener("click", toggleContent);
 
 
-//______ToGGle NeW?!_-_--__-_-
+function checkTodoItem(todoItem) {
+  
+  const index = todoItems.findIndex(
+    (t) =>
+      t.title === todoItem.title &&
+      t.description === todoItem.description &&
+      t.date === todoItem.date
+  );
+  
+  const todoItemToCheck = {
+    title: todoItem.title,
+    description: todoItem.description,
+    date: todoItem.date,
+    isDone: todoItem.isDone !== true
+  };
 
-// function toggleTodoForm(e, todoItem) {
-
-//   saveEditBtn.addEventListener("click", (x) => saveEdit(todoItem, x));
-
-//   if(e.target.classList.contains("edit-btn") && !e.target.classList.contains("open")) {
-//     btn.classList.add("add-todo-btn--active");
-//     console.log(e.target)
-//     e.target.classList.add("open")
-//     expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
-//     const titleInput = document.querySelector("#todo-title");
-//     const descInput = document.querySelector("#todo-desc");
-//     const dateInput = document.querySelector("#date");
-
-//     titleInput.value = todoItem.title;
-//     descInput.value = todoItem.description;
-//     dateInput.value = todoItem.date;
-
-//     document.querySelector(".add-btn").classList.add("hidden");    
-//     document.querySelector(".save-edit-btn").classList.remove("hidden");
-//   }
-//   else if(e.target.classList.contains("add-todo-btn") && !e.target.classList.contains("open")) {
-
-//     console.log("addBtn");
-
-//     btn.classList.add("add-todo-btn--active");
-
-//     e.target.classList.add("open");
-
-//     expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
-
-//     document.querySelector(".save-edit-btn").classList.add("hidden");
-//     document.querySelector(".add-btn").classList.remove("hidden");
-//     console.log(e.target)
-
-//   }
-//   else if (e.target.classList.contains("open")) {
-//     e.target.classList.remove("open");
-//     btn.classList.remove("add-todo-btn--active");
-//     expandedContent.style.maxHeight = 0;
-//     document.forms[0].reset();
-//     console.log(e.target)
-//   }
-// }
+  todoItems[index] = Object.assign({}, todoItems[index], todoItemToCheck);
+  
+  localStorage.setItem("todoItems", JSON.stringify(todoItems));
+}
