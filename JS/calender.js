@@ -10,7 +10,6 @@ function main() {
 
 function addEventListeners() {
   // previous month button //
-
   prevBtn.addEventListener("click", () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
     console.log(currentDate);
@@ -25,7 +24,6 @@ function addEventListeners() {
 
   // next month button //
   nextBtn.addEventListener("click", () => {
-    // setNextMonth();
     currentDate.setMonth(currentDate.getMonth() + 1);
 
     if (currentDate.getMonth() === 12) {
@@ -40,9 +38,7 @@ function addEventListeners() {
 async function renderCalendar() {
   renderHeader();
   calendarContainer.innerHTML = "";
-
   const holidays = await fetchHolidays();
-
   let lastClickedDayArray = [];
 
   // render days //
@@ -84,7 +80,7 @@ async function renderCalendar() {
       dayDiv.appendChild(contentContainer);
     }
 
-    // render next month//
+    // render next month //
     else if (i >= paddingDays + monthLength) {
       dayDiv.classList.add("next-month-day");
       dayDiv.id = generateId(i);
@@ -106,7 +102,6 @@ async function renderCalendar() {
       dayDiv.id = generateId(i);
 
       // append content to dayDiv //
-      // append day info (date & nameday names) to dayInfoContainerDiv //
       const dayInfoContainerDiv = document.createElement("div");
       dayInfoContainerDiv.classList.add(
         "day-info-container",
@@ -115,12 +110,12 @@ async function renderCalendar() {
         "align-center"
       );
 
-      // date
+      // render date
       const dayDateDiv = document.createElement("div");
       dayDateDiv.classList.add("day-date");
       dayDateDiv.innerHTML = `${i - paddingDays + 1}`;
 
-      // name day
+      // render name day names
       const nameDayContainerDiv = document.createElement("div");
       nameDayContainerDiv.classList.add("name-day-container");
       for (
@@ -136,8 +131,7 @@ async function renderCalendar() {
 
       dayInfoContainerDiv.appendChild(dayDateDiv);
 
-      // if there are todos for this day, append notification to dayInfoContainerDiv //
-      // and/or if day is flagday, append flagday notification to dayInfoContainerDiv //
+      // append notifications for todos/flag day //
       if (
         getNumberOfTodos(dayDiv.id) ||
         holidays.dagar[i - paddingDays].flaggdag !== ""
@@ -145,7 +139,7 @@ async function renderCalendar() {
         const notificationContainer = document.createElement("div");
         notificationContainer.classList.add("notification-container", "flex");
 
-        // if day has todos
+        // number of todos notification
         if (getNumberOfTodos(dayDiv.id)) {
           const todoNotificationContainer = document.createElement("div");
           todoNotificationContainer.classList.add(
@@ -158,6 +152,7 @@ async function renderCalendar() {
           notificationContainer.appendChild(todoNotificationContainer);
         }
 
+        // flag day notification
         if (holidays.dagar[i - paddingDays].flaggdag !== "") {
           const flagIcon = document.createElement("i");
           flagIcon.classList.add(
@@ -169,11 +164,10 @@ async function renderCalendar() {
         }
         dayInfoContainerDiv.appendChild(notificationContainer);
       }
-
       dayInfoContainerDiv.appendChild(nameDayContainerDiv);
-
       contentContainer.appendChild(dayInfoContainerDiv);
 
+      // append hover information //
       if (getNumberOfTodos(dayDiv.id)) {
         const todoListContainerOnHover = document.createElement("div");
         todoListContainerOnHover.classList.add(
@@ -184,6 +178,7 @@ async function renderCalendar() {
           "pb-1"
         );
 
+        // todo list (lists max 3)
         const todoIcon = document.createElement("i");
         todoIcon.classList.add("fa-solid", "fa-clipboard-list", "todo-icon");
         todoListContainerOnHover.appendChild(todoIcon);
@@ -203,12 +198,13 @@ async function renderCalendar() {
             todoList.appendChild(moreTodos);
             break;
           }
-
           todoList.appendChild(todo);
         }
         todoListContainerOnHover.appendChild(todoList);
         contentContainer.appendChild(todoListContainerOnHover);
       }
+
+      // flag occasion
       if (holidays.dagar[i - paddingDays].flaggdag !== "") {
         const flagDayContainer = document.createElement("div");
         flagDayContainer.classList.add(
@@ -217,7 +213,6 @@ async function renderCalendar() {
           "align-center",
           "pb-1"
         );
-
         const flagIcon = document.createElement("i");
         flagIcon.classList.add("fa-solid", "fa-flag", "flag-hover-icon");
 
@@ -228,7 +223,6 @@ async function renderCalendar() {
         flagOccasionDiv.innerHTML = holidays.dagar[i - paddingDays].flaggdag;
 
         flagDayContainer.appendChild(flagOccasionDiv);
-
         contentContainer.appendChild(flagDayContainer);
       }
       dayDiv.appendChild(contentContainer);
