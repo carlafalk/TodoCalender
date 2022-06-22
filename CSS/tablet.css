@@ -22,7 +22,7 @@
   .DateAndTime h4 {
     margin: 0;
   }
-  .add-todo-btn {
+  .toggle-add-form {
     margin: 0;
   }
 
@@ -33,12 +33,14 @@
     flex-direction: column;
     align-items: center;
   }
-  .formBox , .editform-modal{
+  .formBox,
+  .editform-modal {
     text-align: center;
     font-size: 1.5rem;
     width: 100%;
   }
-  .formBox input, .editform-modal input {
+  .formBox input,
+  .editform-modal input {
     width: 60%;
     height: 2rem;
     font-size: 1rem;
@@ -51,7 +53,8 @@
     font-size: 1.5rem;
     margin-bottom: 5px;
   }
-  .formBox-date input, .edit-date-form {
+  .formBox-date input,
+  .edit-date-form {
     border: none;
     height: 2rem;
     font-size: 1.2rem;
@@ -91,7 +94,6 @@
     flex-direction: row;
   }
 
-
   /* EDIT TODOITEM FORM MODAL */
   .editform-modal {
     width: 90%;
@@ -101,13 +103,11 @@
   }
 
   .editform-modal input {
-      width: 80%;
-      height: 2rem;
-      font-size: 1rem;
-      border: none;
-      margin: 2.5px 10px;
-      min-width: 250px;
+    width: 80%;
+    height: 2rem;
+    font-size: 1rem;
+    border: none;
+    margin: 2.5px 10px;
+    min-width: 250px;
   }
 }
-
-

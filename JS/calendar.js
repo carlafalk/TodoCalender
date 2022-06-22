@@ -12,7 +12,6 @@ function addEventListeners() {
   // previous month button //
   prevBtn.addEventListener("click", () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
-    console.log(currentDate);
 
     if (currentDate.getMonth() === -1) {
       currentDate.setFullYear(currentDate.getFullYear() - 1);
@@ -25,6 +24,8 @@ function addEventListeners() {
   // next month button //
   nextBtn.addEventListener("click", () => {
     currentDate.setMonth(currentDate.getMonth() + 1);
+    console.log("padding start date: " + getPaddingStartDate());
+    console.log("paddingdays: " + paddingDays());
 
     if (currentDate.getMonth() === 12) {
       currentDate.setFullYear(currentDate.getFullYear() + 1);
@@ -265,7 +266,7 @@ function generateId(index) {
   return new Date(
     currentDate.getFullYear(),
     currentDate.getMonth(),
-    index - 1
+    index - paddingDays() + 1
   ).toLocaleDateString("sv-SE", {
     year: "numeric",
     month: "numeric",

@@ -1,14 +1,8 @@
 let currentDate = new Date();
 
 const daysToRender = 42;
-
-const nextYear = new Date(currentDate.getFullYear() + 1);
-
-const prevMonth = currentDate.getMonth() - 1;
-
-const nextMonth = () => {
-  return currentDate.getMonth() + 1;
-};
+const apiKeyWeather = "5ff7192628b7984a48b5001e7291871f";
+const apiKeyLocation = "pk.47dfd2e322a8290e5b985e428e6e8cbe";
 
 function getPaddingStartDate() {
   return (
@@ -17,11 +11,6 @@ function getPaddingStartDate() {
     1
   );
 }
-
-function setNextMonth() {
-  currentDate.setMonth(nextMonth);
-}
-
 const weatherIcon = {
   "01d": "fa-sun",
   "02d": "fa-cloud-sun",
@@ -43,8 +32,21 @@ const weatherIcon = {
   "50n": "fa-smog",
 };
 
-// does all of these need to be globals? ⬇
+// Element creation ----------------------------- //
+
 const calendarContainer = document.querySelector(".calendar-container");
 const todoListDiv = document.querySelector(".todo-list");
 const prevBtn = document.createElement("i");
 const nextBtn = document.createElement("i");
+const welcomeContainer = document.querySelector(".welcome-segment");
+const dateAndTimeContainer = document.querySelector(".DateAndTime");
+const dayInfoDiv = document.querySelector(".today-info");
+const currentDayH2 = document.createElement("h2");
+const currentDateH4 = document.createElement("h4");
+const currentTimeH4 = document.createElement("h4");
+const currentWeatherH4 = document.createElement("h4");
+const weatherLocationH4 = document.createElement("h4");
+const weatherContainerDiv = document.createElement("div");
+const iconTempDiv = document.createElement("div");
+const iconI = document.createElement("i");
+const tempSpan = document.createElement("span");
