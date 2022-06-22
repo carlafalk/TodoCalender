@@ -1,27 +1,11 @@
-/* .container {
-  display: flex;
-  background-color: rgb(126, 36, 36);
-  position: fixed;
-  width: 100%;
-  max-height: 69px;
-}
-.title {
-  color: rgb(255, 255, 255);
-  padding: 1rem;
-  margin: auto;
-  font-family: "Courier New", Courier, monospace;
-  font-size: xx-large;
-  font-weight: 800;
-} */
-
 .header-container {
   border-top: 15px solid #133957;
   position: relative;
   display: flex;
   justify-content: flex-end;
   background: url(../../IMG/BG/June.jpg) no-repeat;
-  background-size: 100% 100%;
-  /* background-position: left center; */
+  background-size: cover;
+  background-position: center center;
   height: 40vh;
 }
 
