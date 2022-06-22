@@ -6,7 +6,7 @@ function changeHeaderBG() {
       month: "long",
     }
   )}.jpg)`;
-  headerContainer.style.backgroundSize = "stretch";
+  headerContainer.style.backgroundSize = "100% 100%";
   headerContainer.style.backgroundPosition = "left center";
 }
 
