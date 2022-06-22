@@ -81,21 +81,25 @@ function showAllTodos() {
       trashcan.classList.add("trashcan", "fa-solid", "fa-trash-can");
       trashcan.addEventListener("click", () => {
         deleteTodoItem(todoItems[i]);
-        location.reload();   
+        location.reload();
       });
 
       const editButton = document.createElement("i");
       editButton.classList.add("edit-btn", "fa-solid", "fa-pen-to-square");
-      editButton.addEventListener("click", () => {openEditForm(todoItems[i])});
+      editButton.addEventListener("click", () => {
+        openEditForm(todoItems[i]);
+      });
 
       const checkBtn = document.createElement("i");
       checkBtn.classList.add("check-btn", "fa-solid", "fa-check");
-      
+
       if (todoItems[i].isDone === true) {
         checkBtn.classList.toggle("checked-todo");
       }
 
-      checkBtn.addEventListener("click", () =>  { checkTodoItem(todoItems[i]), showAllTodos() })
+      checkBtn.addEventListener("click", () => {
+        checkTodoItem(todoItems[i]), showAllTodos();
+      });
 
       const titleDiv = document.createElement("div");
       titleDiv.classList.add("title-div");
@@ -110,7 +114,7 @@ function showAllTodos() {
       buttonsDiv.appendChild(checkBtn);
       buttonsDiv.appendChild(trashcan);
       buttonsDiv.appendChild(editButton);
-      
+
       titlebox.appendChild(title);
     }
   }
@@ -155,7 +159,9 @@ function showDayInfo(date) {
       const editBtn = document.createElement("i");
       editDiv.classList.add("edit-div");
       editBtn.classList.add("edit-btn", "fa-solid", "fa-pen-to-square");
-      editBtn.addEventListener("click", () => {openEditForm(todoItems[i])});
+      editBtn.addEventListener("click", () => {
+        openEditForm(todoItems[i]);
+      });
 
       dayInfo.appendChild(selectedDateItem);
       selectedDateItem.appendChild(titleDescBox);
@@ -181,22 +187,29 @@ function setLocalstorage() {
 function openEditForm(todoItem) {
   document.querySelector(".modal-container").classList.toggle("hidden");
   const closeEditBtn = document.querySelector(".close-editform");
-  closeEditBtn.addEventListener("click" , closeEditForm)
-  
+  closeEditBtn.addEventListener("click", closeEditForm);
+
   const saveEditBtn = document.querySelector(".save-edit-btn");
 
-  saveEditBtn.addEventListener("click",(ev) => saveEdit(todoItem, ev));
-  saveEditBtn.addEventListener("click",closeEditForm);
-  saveEditBtn.addEventListener("click",() => { showDayInfo(todoItem.date) });
+  saveEditBtn.addEventListener("click", (ev) => saveEdit(todoItem, ev));
+  saveEditBtn.addEventListener("click", closeEditForm);
+  saveEditBtn.addEventListener("click", () => {
+    showDayInfo(todoItem.date);
+    location.reload();
+  });
 
   const titleInput = document.querySelector(".edit-title-form");
   const descInput = document.querySelector(".edit-description-form");
   const dateInput = document.querySelector(".edit-date-form");
 
+  if (todoItem.date < getTodaysDateFormattedAsSwedishDate()) {
+    dateInput.value = getTodaysDateFormattedAsSwedishDate();
+  } else {
+    dateInput.value = todoItem.date;
+  }
+
   titleInput.value = todoItem.title;
   descInput.value = todoItem.description;
-  dateInput.value = todoItem.date;
-
 }
 
 function closeEditForm() {
@@ -221,17 +234,18 @@ function saveEdit(todoItem, ev) {
       t.date === todoItem.date
   );
 
-  if(editedTodoItem.title === "" || editedTodoItem.description === "" || editedTodoItem.date < getTodaysDateFormattedAsSwedishDate())
-  {
+  if (
+    editedTodoItem.title === "" ||
+    editedTodoItem.description === "" ||
+    editedTodoItem.date < getTodaysDateFormattedAsSwedishDate()
+  ) {
     alert("Please, fill in all forms");
-  }
-  else {
+  } else {
     todoItems[index] = Object.assign({}, todoItems[index], editedTodoItem);
-  
-    localStorage.setItem("todoItems", JSON.stringify(todoItems));
-    document.forms[0].reset(); 
-  }
 
+    localStorage.setItem("todoItems", JSON.stringify(todoItems));
+    document.forms[0].reset();
+  }
 }
 
 // add-todo-item-button----------------------------------
@@ -249,24 +263,22 @@ function toggleContent() {
 
 btn.addEventListener("click", toggleContent);
 
-
 function checkTodoItem(todoItem) {
-  
   const index = todoItems.findIndex(
     (t) =>
       t.title === todoItem.title &&
       t.description === todoItem.description &&
       t.date === todoItem.date
   );
-  
+
   const todoItemToCheck = {
     title: todoItem.title,
     description: todoItem.description,
     date: todoItem.date,
-    isDone: todoItem.isDone !== true
+    isDone: todoItem.isDone !== true,
   };
 
   todoItems[index] = Object.assign({}, todoItems[index], todoItemToCheck);
-  
+
   localStorage.setItem("todoItems", JSON.stringify(todoItems));
 }
