@@ -139,11 +139,11 @@ function showDayInfo(date) {
       const titleDescBox = document.createElement("div");
       titleDescBox.classList.add("title-desc-box");
 
-      const editDeleteBox = document.createElement("div");
-      editDeleteBox.classList.add("edit-delete-box");
-
       const selectedDateItem = document.createElement("div");
       selectedDateItem.classList.add("selected-date-item");
+
+      const buttonsDiv = document.createElement("div");
+      buttonsDiv.classList.add("buttons-div");
 
       const deleteDiv = document.createElement("div");
       const deleteBtn = document.createElement("i");
@@ -152,7 +152,7 @@ function showDayInfo(date) {
       deleteBtn.addEventListener("click", () => {
         deleteTodoItem(todoItems[i]);
         renderCalendar();
-        showAllTodos();
+        showDayInfo(todoItems[i].date);
       });
 
       const editDiv = document.createElement("div");
@@ -163,15 +163,28 @@ function showDayInfo(date) {
         openEditForm(todoItems[i]);
       });
 
+      const checkBtn = document.createElement("i");
+      checkBtn.classList.add("check-btn", "fa-solid", "fa-check");
+
+      if (todoItems[i].isDone === true) {
+        checkBtn.classList.toggle("checked-todo");
+      }
+      checkBtn.addEventListener("click", () => {
+        checkTodoItem(todoItems[i]);
+        showDayInfo(todoItems[i].date);
+      });
+
       dayInfo.appendChild(selectedDateItem);
       selectedDateItem.appendChild(titleDescBox);
-      selectedDateItem.appendChild(editDeleteBox);
+      
+      buttonsDiv.appendChild(checkBtn);
+      buttonsDiv.appendChild(deleteBtn)
+      buttonsDiv.appendChild(editBtn)
+
+      selectedDateItem.appendChild(buttonsDiv);
+      
       titleDescBox.appendChild(todoTitleDiv);
       titleDescBox.appendChild(todoDescriptionDiv);
-      editDeleteBox.appendChild(deleteDiv);
-      editDeleteBox.appendChild(editDiv);
-      editDiv.appendChild(editBtn);
-      deleteDiv.appendChild(deleteBtn);
     }
   }
 
