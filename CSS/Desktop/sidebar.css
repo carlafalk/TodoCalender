@@ -26,19 +26,32 @@
   flex-direction: column;
   align-items: center;
 }
+
 .welcome-segment {
   height: 10vh;
 }
-.icon-temp i {
-  color: orange;
-  font-size: 1rem;
-  cursor: auto;
+
+.weather-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .icon-temp {
   display: flex;
-  justify-content: space-around;
 }
+
+.icon-temp i {
+  color: orange;
+  font-size: 1rem;
+  cursor: auto;
+  margin: 0 10px;
+}
+
+.icon-temp span {
+  margin: 0 10px;
+}
+
 .today-info {
   display: flex;
   align-items: center;
@@ -51,7 +64,7 @@
   flex-direction: column;
 }
 .welcome-weekday {
-  font-size: 4rem;
+  font-size: 3rem;
   font-family: "Courier New", Courier, monospace;
   font-weight: 400;
 }
@@ -177,6 +190,7 @@
 .title-div {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-left: 2rem;
   font-weight: 500;
   background-color: rgba(243, 243, 243, 0.698);
@@ -192,11 +206,13 @@
 
 .trashcan {
   font-size: 1rem;
-  margin-right: 1rem;
 }
 
 .buttons-div {
   margin-right: 10px;
+  display: flex;
+  gap: 0.655rem;
+  align-items: center;
 }
 
 .checked-todo {
@@ -235,6 +251,8 @@
 }
 
 .edit-delete-box {
+  display: flex;
+  gap: 0.655rem;
   margin-right: 1rem;
   margin-top: 1rem;
 }
