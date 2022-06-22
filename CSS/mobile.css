@@ -67,26 +67,21 @@
     display: none;
   }
 
-  /* EDIT TODOITEM FORM MODAL */
-  /* .editform-modal {
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-      background-color: #eeeeee;
-  }
-
-  .editform-modal input {
-    width: 60%;
-    height: 2rem;
-    font-size: 1rem;
-    border: none;
-    margin: 2.5px 10px;
-  } */
 }
 
 @media (max-width: 768px) {
+
+  .welcome-segment {
+    flex-direction: column;
+  }
+
   .welcome-weekday {
-    font-size: 3rem;
+    font-size: 2rem;
+    flex-direction: column;
+  }
+
+  .today-info {
+    justify-content: space-between;
   }
 
   .editform-modal {

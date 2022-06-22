@@ -33,12 +33,12 @@
     flex-direction: column;
     align-items: center;
   }
-  .formBox {
+  .formBox , .editform-modal{
     text-align: center;
     font-size: 1.5rem;
     width: 100%;
   }
-  .formBox input {
+  .formBox input, .editform-modal input {
     width: 60%;
     height: 2rem;
     font-size: 1rem;
@@ -51,7 +51,7 @@
     font-size: 1.5rem;
     margin-bottom: 5px;
   }
-  .formBox-date input {
+  .formBox-date input, .edit-date-form {
     border: none;
     height: 2rem;
     font-size: 1.2rem;
@@ -61,6 +61,9 @@
     font-size: 1.5rem;
   }
   .save-edit-btn {
+    font-size: 1.5rem;
+  }
+  .close-editform {
     font-size: 1.5rem;
   }
 
