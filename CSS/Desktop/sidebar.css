@@ -1,8 +1,6 @@
 .calendarWrapper {
-  /* position: fixed; */
   height: 60vh;
   display: flex;
-  /* height: 100%; */
   width: 100%;
 }
 
@@ -10,7 +8,6 @@
   margin-right: 1rem;
   display: flex;
   width: 20%;
-  /* height: 100%; */
   background-color: rgb(254, 254, 254);
   flex-direction: column;
   top: 68px;
@@ -95,7 +92,7 @@
 
 /* add-todo------------------------------------------------ */
 
-.add-todo-btn {
+.toggle-add-form {
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
@@ -109,7 +106,7 @@
   transition: background 0.2s;
 }
 
-.add-todo-btn::after {
+.toggle-add-form::after {
   content: "\25be";
   float: right;
   transform: scale(1.5);
@@ -117,15 +114,15 @@
   padding-top: 8px;
 }
 
-.add-todo-btn--active {
+.toggle-add-form--active {
   background-color: #215467;
 }
 
-.add-todo-btn--active::after {
+.toggle-add-form--active::after {
   content: "\25b4";
 }
 
-.expanded-content {
+.add-todo-form-container {
   overflow: hidden;
   max-height: 0px;
   transition: max-height 0.2s;
@@ -236,18 +233,12 @@
   margin-left: 2rem;
 }
 
-.day-info {
-}
-
 .selected-date-item {
   display: flex;
   justify-content: space-between;
   margin: 0.5rem 0;
   padding: 0.5rem 0;
   background-color: rgba(243, 243, 243, 0.698);
-}
-
-.title-desc-box {
 }
 
 .edit-delete-box {

@@ -1,25 +1,14 @@
-//global variable for todoitem-btn
-
-const btn = document.querySelector(".add-todo-btn");
-const expandedContent = document.querySelector(".expanded-content");
-
+const openFormBtn = document.querySelector(".toggle-add-form");
+const addFormContainerDiv = document.querySelector(".add-todo-form-container");
 const saveEditBtn = document.querySelector(".save-edit-btn");
 
+// get / create local storage array
 let todoItems = JSON.parse(localStorage.getItem("todoItems"));
 if (!todoItems) {
   todoItems = [];
 }
 
-function getTodaysDateFormattedAsSwedishDate() {
-  const today = new Date().toLocaleDateString("sv-SE", {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-  });
-
-  return today;
-}
-
+// create todo
 const addTodoItem = (ev) => {
   ev.preventDefault();
 
@@ -29,19 +18,19 @@ const addTodoItem = (ev) => {
     date: document.getElementById("date").value,
     isDone: false,
   };
-
+  // check that input is not empty
   if (
     todoItem.title === "" ||
     todoItem.description === "" ||
-    todoItem.date < getTodaysDateFormattedAsSwedishDate()
+    todoItem.date < getTodaysDateString()
   ) {
-    alert("forms not filled correctly");
+    alert("Title or description is empty or date is in the past");
   } else {
     todoItems.push(todoItem);
 
     setLocalstorage();
 
-    document.forms[0].reset();
+    emptyForms();
   }
 };
 
@@ -176,13 +165,13 @@ function showDayInfo(date) {
 
       dayInfo.appendChild(selectedDateItem);
       selectedDateItem.appendChild(titleDescBox);
-      
+
       buttonsDiv.appendChild(checkBtn);
-      buttonsDiv.appendChild(deleteBtn)
-      buttonsDiv.appendChild(editBtn)
+      buttonsDiv.appendChild(deleteBtn);
+      buttonsDiv.appendChild(editBtn);
 
       selectedDateItem.appendChild(buttonsDiv);
-      
+
       titleDescBox.appendChild(todoTitleDiv);
       titleDescBox.appendChild(todoDescriptionDiv);
     }
@@ -215,8 +204,8 @@ function openEditForm(todoItem) {
   const descInput = document.querySelector(".edit-description-form");
   const dateInput = document.querySelector(".edit-date-form");
 
-  if (todoItem.date < getTodaysDateFormattedAsSwedishDate()) {
-    dateInput.value = getTodaysDateFormattedAsSwedishDate();
+  if (todoItem.date < getTodaysDateString()) {
+    dateInput.value = getTodaysDateString();
   } else {
     dateInput.value = todoItem.date;
   }
@@ -250,31 +239,32 @@ function saveEdit(todoItem, ev) {
   if (
     editedTodoItem.title === "" ||
     editedTodoItem.description === "" ||
-    editedTodoItem.date < getTodaysDateFormattedAsSwedishDate()
+    editedTodoItem.date < getTodaysDateString()
   ) {
     alert("Please, fill in all forms");
   } else {
     todoItems[index] = Object.assign({}, todoItems[index], editedTodoItem);
 
     localStorage.setItem("todoItems", JSON.stringify(todoItems));
-    document.forms[0].reset();
+    emptyForms();
   }
 }
 
 // add-todo-item-button----------------------------------
 
 function toggleContent() {
-  btn.classList.toggle("add-todo-btn--active");
+  openFormBtn.classList.toggle("toggle-add-form--active");
 
-  if (btn.classList.contains("add-todo-btn--active")) {
-    expandedContent.style.maxHeight = expandedContent.scrollHeight + "px";
+  if (openFormBtn.classList.contains("toggle-add-form--active")) {
+    addFormContainerDiv.style.maxHeight =
+      addFormContainerDiv.scrollHeight + "px";
   } else {
-    expandedContent.style.maxHeight = 0;
-    document.forms[0].reset();
+    addFormContainerDiv.style.maxHeight = 0;
+    emptyForms();
   }
 }
 
-btn.addEventListener("click", toggleContent);
+openFormBtn.addEventListener("click", toggleContent);
 
 function checkTodoItem(todoItem) {
   const index = todoItems.findIndex(
@@ -294,4 +284,18 @@ function checkTodoItem(todoItem) {
   todoItems[index] = Object.assign({}, todoItems[index], todoItemToCheck);
 
   localStorage.setItem("todoItems", JSON.stringify(todoItems));
+}
+
+function getTodaysDateString() {
+  const today = new Date().toLocaleDateString("sv-SE", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+
+  return today;
+}
+
+function emptyForms() {
+  document.forms[0].reset();
 }
