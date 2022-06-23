@@ -1,15 +1,12 @@
 .calendarWrapper {
   height: 60vh;
-  display: flex;
   width: 100%;
 }
 
-.aside {
+aside {
   margin-right: 1rem;
-  display: flex;
   width: 20%;
   background-color: rgb(254, 254, 254);
-  flex-direction: column;
   top: 68px;
   min-width: 345px;
 }
@@ -28,16 +25,6 @@
   height: 10vh;
 }
 
-.weather-container {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.icon-temp {
-  display: flex;
-}
-
 .icon-temp i {
   color: orange;
   font-size: 1rem;
@@ -50,27 +37,17 @@
 }
 
 .today-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
   margin-top: 10px;
 }
 
-.DateAndTime {
-  display: flex;
-  flex-direction: column;
-}
 .welcome-weekday {
   font-size: 3rem;
-  font-family: "Courier New", Courier, monospace;
   font-weight: 400;
 }
 .welcome-date {
-  font-family: "Courier New", Courier, monospace;
   font-weight: 400;
 }
 .welcome-time {
-  font-family: "Courier New", Courier, monospace;
   font-weight: 400;
 }
 
@@ -94,8 +71,6 @@
 
 .toggle-add-form {
   margin-top: 1rem;
-  display: flex;
-  justify-content: space-between;
   width: 100%;
   border: none;
   outline: none;
@@ -170,10 +145,7 @@
 .date-todos {
   margin: 0.5rem 0;
   padding: 1rem 0;
-  display: flex;
-  flex-direction: column;
   color: #133957;
-  background-color: rgba(255, 0, 0, 0);
   background-color: rgba(243, 243, 243, 0.698);
 }
 
@@ -185,9 +157,6 @@
 }
 
 .title-div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-left: 2rem;
   font-weight: 500;
   background-color: rgba(243, 243, 243, 0.698);
@@ -209,7 +178,6 @@
   margin-right: 10px;
   display: flex;
   gap: 0.655rem;
-  align-items: center;
 }
 
 .checked-todo {
@@ -234,18 +202,9 @@
 }
 
 .selected-date-item {
-  display: flex;
-  justify-content: space-between;
   margin: 0.5rem 0;
   padding: 0.5rem 0;
   background-color: rgba(243, 243, 243, 0.698);
-}
-
-.edit-delete-box {
-  display: flex;
-  gap: 0.655rem;
-  margin-right: 1rem;
-  margin-top: 1rem;
 }
 
 .delete-btn {
@@ -264,9 +223,6 @@
 
 /* EDIT FORM MODAL STYLES */
 .modal-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -277,13 +233,8 @@
 }
 
 .editform-modal {
-  display: flex;
   background-color: #eeeeee;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-around;
   width: 35%;
-  flex-direction: column;
   padding: 1rem;
 }
 
@@ -309,8 +260,4 @@
   background-color: #133947;
   cursor: pointer;
   font-family: "Courier New", Courier, monospace;
-}
-
-.hidden {
-  display: none;
 }

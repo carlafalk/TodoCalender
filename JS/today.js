@@ -3,8 +3,13 @@ currentDayH2.classList.add("welcome-weekday");
 currentDateH4.classList.add("welcome-date");
 currentTimeH4.classList.add("welcome-time");
 currentWeatherH4.classList.add("welcome-weather");
-weatherContainerDiv.classList.add("weather-container");
-iconTempDiv.classList.add("icon-temp");
+weatherContainerDiv.classList.add(
+  "weather-container",
+  "flex",
+  "column",
+  "align-center"
+);
+iconTempDiv.classList.add("icon-temp", "flex");
 
 // welcome segment ----------------------------- //
 // weekday in welcome segment
