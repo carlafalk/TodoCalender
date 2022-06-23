@@ -42,10 +42,11 @@
 
   .aside {
     height: 100%;
+    overflow: scroll
   }
   .todo-list {
     height: 100%;
-    overflow: visible;
+    overflow: scroll;
   }
   .todo-list-container {
     height: 100%;

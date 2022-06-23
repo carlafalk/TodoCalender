@@ -12,6 +12,7 @@
   flex-direction: column;
   top: 68px;
   min-width: 345px;
+  overflow: hidden;
 }
 
 /* welcome-segment------------------------------------------------ */
