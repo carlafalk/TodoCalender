@@ -1,6 +1,6 @@
 function changeHeaderBG() {
   const headerContainer = document.querySelector(".header-container");
-  headerContainer.style.background = `url(../../IMG/BG/${currentDate.toLocaleString(
+  headerContainer.style.background = `url(IMG/BG/${currentDate.toLocaleString(
     "en-EN",
     {
       month: "long",
