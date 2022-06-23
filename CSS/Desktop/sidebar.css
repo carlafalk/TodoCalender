@@ -9,6 +9,7 @@ aside {
   background-color: rgb(254, 254, 254);
   top: 68px;
   min-width: 345px;
+  overflow: hidden;
 }
 
 /* welcome-segment------------------------------------------------ */
