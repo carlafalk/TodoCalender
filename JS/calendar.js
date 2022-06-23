@@ -34,6 +34,9 @@ function addEventListeners() {
     changeHeaderBG();
     renderCalendar();
   });
+
+  //openForm button
+  openFormBtn.addEventListener("click", toggleContent);
 }
 
 async function renderCalendar() {

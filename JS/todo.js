@@ -205,7 +205,7 @@ function setLocalstorage() {
   localStorage.setItem("todoItems", JSON.stringify(todoItems));
 }
 
-// --------EDIT STUFFS---------
+// EDIT TODO ITEMS ________
 
 function openEditForm(todoItem) {
   document.querySelector(".modal-container").classList.toggle("hidden");
@@ -238,7 +238,6 @@ function openEditForm(todoItem) {
 function closeEditForm() {
   document.querySelector(".modal-container").classList.toggle("hidden");
 }
-const editBtn = document.createElement("button");
 
 function saveEdit(todoItem, ev) {
   ev.preventDefault();
@@ -266,7 +265,7 @@ function saveEdit(todoItem, ev) {
   } else {
     todoItems[index] = Object.assign({}, todoItems[index], editedTodoItem);
 
-    localStorage.setItem("todoItems", JSON.stringify(todoItems));
+    setLocalstorage();
     emptyForms();
   }
 }
@@ -284,8 +283,6 @@ function toggleContent() {
     emptyForms();
   }
 }
-
-openFormBtn.addEventListener("click", toggleContent);
 
 function checkTodoItem(todoItem) {
   const index = todoItems.findIndex(
