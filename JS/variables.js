@@ -4,13 +4,6 @@ const daysToRender = 42;
 const apiKeyWeather = "5ff7192628b7984a48b5001e7291871f";
 const apiKeyLocation = "pk.47dfd2e322a8290e5b985e428e6e8cbe";
 
-function getPaddingStartDate() {
-  return (
-    new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate() -
-    paddingDays() +
-    1
-  );
-}
 const weatherIcon = {
   "01d": "fa-sun",
   "02d": "fa-cloud-sun",

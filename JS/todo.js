@@ -48,7 +48,7 @@ function showAllTodos() {
       dates.push(todoItems[i].date);
 
       const dateTodos = document.createElement("div");
-      dateTodos.classList.add("date-todos");
+      dateTodos.classList.add("date-todos", "flex", "column");
       dateTodos.id = todoItems[i].date;
 
       const dateDiv = document.createElement("div");
@@ -64,7 +64,7 @@ function showAllTodos() {
       const dateDiv = document.getElementById(`${todoItems[i].date}`);
 
       const buttonsDiv = document.createElement("div");
-      buttonsDiv.classList.add("buttons-div");
+      buttonsDiv.classList.add("buttons-div", "align-center");
 
       const trashcan = document.createElement("i");
       trashcan.classList.add("trashcan", "fa-solid", "fa-trash-can");
@@ -91,7 +91,12 @@ function showAllTodos() {
       });
 
       const titleDiv = document.createElement("div");
-      titleDiv.classList.add("title-div");
+      titleDiv.classList.add(
+        "title-div",
+        "flex",
+        "space-between",
+        "align-center"
+      );
 
       const titlebox = document.createElement("div");
       titlebox.classList.add("title-box");
@@ -129,10 +134,14 @@ function showDayInfo(date) {
       titleDescBox.classList.add("title-desc-box");
 
       const selectedDateItem = document.createElement("div");
-      selectedDateItem.classList.add("selected-date-item");
+      selectedDateItem.classList.add(
+        "selected-date-item",
+        "flex",
+        "space-between"
+      );
 
       const buttonsDiv = document.createElement("div");
-      buttonsDiv.classList.add("buttons-div");
+      buttonsDiv.classList.add("buttons-div", "align-center");
 
       const deleteDiv = document.createElement("div");
       const deleteBtn = document.createElement("i");

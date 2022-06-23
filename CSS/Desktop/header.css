@@ -1,7 +1,5 @@
 .header-container {
   border-top: 15px solid #133957;
-  position: relative;
-  display: flex;
   justify-content: flex-end;
   background: url(../../IMG/BG/June.jpg) no-repeat;
   background-size: cover;
@@ -21,33 +19,13 @@
   );
 }
 
-.header-skew {
-  background-color: white;
-  transform: skew(-20deg);
-  height: 100%;
-  width: 35%;
-}
-
-.header-separator {
-  background-color: rgba(255, 255, 255, 0.429);
-  transform: skew(-20deg);
-  width: 5%;
-}
-
 .header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-direction: column;
   width: 35%;
   height: 50%;
   background-color: rgb(255, 255, 255);
-  position: absolute;
   bottom: 0;
   right: 0;
-}
-.logo {
-  width: 50%;
 }
 
 .header-content img {
@@ -57,19 +35,13 @@
 
 .month {
   font-size: 3rem;
-  font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   margin: 0 20px;
 }
 
 .year-banner {
-  font-family: "Courier New", Courier, monospace;
-  font-weight: bold;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  font-weight: bold;
   padding: 10px;
   top: -15px;
   right: 5%;
@@ -81,12 +53,7 @@
 }
 
 .month-controller {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   border-bottom: 5px orange solid;
-  /* max-width: 360px;
-  min-width: 240px; */
   width: 80%;
   margin-bottom: 25px;
   padding: 0 1rem;

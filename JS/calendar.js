@@ -45,6 +45,7 @@ async function renderCalendar() {
   // render days //
   for (let i = 0; i < daysToRender; i++) {
     const dayDiv = document.createElement("div");
+    dayDiv.classList.add("flex", "column");
     const contentContainer = document.createElement("div");
     contentContainer.classList.add("content-container", "absolute");
 
@@ -118,7 +119,7 @@ async function renderCalendar() {
 
       // render name day names
       const nameDayContainerDiv = document.createElement("div");
-      nameDayContainerDiv.classList.add("name-day-container");
+      nameDayContainerDiv.classList.add("name-day-container", "column");
       for (
         let j = 0;
         j < holidays.dagar[i - paddingDays()].namnsdag.length;
@@ -138,7 +139,11 @@ async function renderCalendar() {
         holidays.dagar[i - paddingDays()].flaggdag !== ""
       ) {
         const notificationContainer = document.createElement("div");
-        notificationContainer.classList.add("notification-container", "flex");
+        notificationContainer.classList.add(
+          "notification-container",
+          "flex",
+          "align-center"
+        );
 
         // number of todos notification
         if (getNumberOfTodos(dayDiv.id)) {
@@ -288,4 +293,12 @@ function paddingDays() {
     currentDate.getMonth(),
     0
   ).getDay();
+}
+
+function getPaddingStartDate() {
+  return (
+    new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate() -
+    paddingDays() +
+    1
+  );
 }
