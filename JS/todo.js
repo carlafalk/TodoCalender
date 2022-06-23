@@ -107,9 +107,6 @@ function showAllTodos() {
       const descriptionDiv = document.createElement("div");
       descriptionDiv.classList.add("hidden");
 
-      if(descriptionDiv.classList.contains("hidden")) {
-      }
-
       descriptionDiv.appendChild(description);
 
       titlebox.addEventListener("click", () => {
