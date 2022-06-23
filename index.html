@@ -9,40 +9,40 @@
       src="https://kit.fontawesome.com/1e55190e54.js"
       crossorigin="anonymous"
     ></script>
-    <script defer src="../JS/variables.js"></script>
-    <script defer src="../JS/today.js"></script>
-    <script defer src="../JS/calendar.js"></script>
-    <script defer src="../JS/todo.js"></script>
-    <script defer src="../JS/header.js"></script>
-    <link rel="stylesheet" href="../CSS/Desktop/header.css" />
-    <link rel="stylesheet" href="../CSS/Desktop/sidebar.css" />
-    <link rel="stylesheet" href="../CSS/Desktop/main.css" />
-    <link rel="stylesheet" href="../CSS/tablet.css" />
-    <link rel="stylesheet" href="../CSS/mobile.css" />
-    <link rel="stylesheet" href="../CSS/global.css" />
+    <script defer src="/JS/variables.js"></script>
+    <script defer src="/JS/today.js"></script>
+    <script defer src="/JS/calendar.js"></script>
+    <script defer src="/JS/todo.js"></script>
+    <script defer src="/JS/header.js"></script>
+    <link rel="stylesheet" href="/CSS/Desktop/header.css" />
+    <link rel="stylesheet" href="/CSS/Desktop/sidebar.css" />
+    <link rel="stylesheet" href="/CSS/Desktop/main.css" />
+    <link rel="stylesheet" href="/CSS/tablet.css" />
+    <link rel="stylesheet" href="/CSS/mobile.css" />
+    <link rel="stylesheet" href="/CSS/global.css" />
   </head>
   <body>
     <div class="wrapper">
-      <header class="header-container">
+      <header class="header-container flex relative">
         <div class="header-gradient"></div>
-        <div class="header-content">
+        <div class="header-content flex align-center space-between absolute">
           <img src="../IMG/colt-logo.png" />
-          <div class="month-controller"></div>
+          <div class="month-controller flex align-center space-between"></div>
         </div>
-        <div class="year-banner">
+        <div class="year-banner flex absolute justify-center align-center">
           <div class="century"></div>
           <div class="year"></div>
         </div>
       </header>
 
-      <div class="calendarWrapper">
-        <aside class="aside">
+      <div class="calendarWrapper flex">
+        <aside class="flex column">
           <!-- welcome-segment -->
 
           <div class="welcome-segment-container">
             <div class="welcome-segment">
-              <div class="today-info">
-                <div class="DateAndTime"></div>
+              <div class="today-info flex align-center space-around">
+                <div class="DateAndTime flex column"></div>
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@
             <!-- add todo-item button -->
 
             <div class="add-todo-item">
-              <button class="toggle-add-form">
+              <button class="toggle-add-form flex space-between">
                 <p class="plus-btn">+</p>
               </button>
               <div class="add-todo-form-container" style="max-height: 0px">
@@ -77,8 +77,12 @@
             </div>
 
             <!-- edit modal -->
-            <div class="modal-container hidden">
-              <form class="editform-modal">
+            <div
+              class="modal-container flex justify-center align-center hidden"
+            >
+              <form
+                class="editform-modal flex column align-center space-around"
+              >
                 <h2>Edit todo</h2>
                 <label for="title">Title </label>
                 <input type="text" name="title" class="edit-title-form" />

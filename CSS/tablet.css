@@ -75,7 +75,7 @@
     flex-direction: column;
     height: 100%;
   }
-  .aside {
+  aside {
     width: 100%;
     overflow: visible;
     height: max-content;

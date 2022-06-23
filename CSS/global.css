@@ -31,6 +31,14 @@ body {
   justify-content: space-between;
 }
 
+.space-around {
+  justify-content: space-around;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
 .align-center {
   align-items: center;
 }
@@ -49,4 +57,12 @@ body {
 
 .absolute {
   position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.hidden {
+  display: none;
 }
