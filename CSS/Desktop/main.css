@@ -190,9 +190,9 @@ main {
   width: 100%;
 }
 
-.extra {
+/* .extra {
   background-color: lightgreen;
-}
+} */
 
 @media (max-width: 1400px) {
   .day:hover .content-container {

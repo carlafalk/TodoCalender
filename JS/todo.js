@@ -97,6 +97,21 @@ function showAllTodos() {
       titlebox.classList.add("title-box");
       const title = document.createTextNode(todoItems[i].title);
 
+      const description = document.createTextNode(`- ${todoItems[i].description}`)
+      
+      const descriptionDiv = document.createElement("div");
+      descriptionDiv.classList.add("hidden");
+
+      if(descriptionDiv.classList.contains("hidden")) {
+      }
+
+      descriptionDiv.appendChild(description);
+
+      titlebox.addEventListener("click", () => {
+        titlebox.appendChild(descriptionDiv);
+        descriptionDiv.classList.toggle("hidden");
+      })
+
       dateDiv.appendChild(titleDiv);
       titleDiv.appendChild(titlebox);
       titleDiv.appendChild(buttonsDiv);
