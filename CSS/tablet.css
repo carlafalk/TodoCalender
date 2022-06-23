@@ -81,7 +81,8 @@
     height: max-content;
   }
   .todo-list {
-    height: 40vh;
+    max-height: 40vh;
+    height: 100%;
   }
   .wrapper {
     height: 100vh;

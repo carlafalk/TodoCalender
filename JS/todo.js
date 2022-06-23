@@ -34,10 +34,6 @@ const addTodoItem = (ev) => {
   }
 };
 
-document.getElementById("add-btn").addEventListener("click", addTodoItem);
-document.getElementById("add-btn").addEventListener("click", renderCalendar);
-document.getElementById("add-btn").addEventListener("click", showAllTodos);
-
 function showAllTodos() {
   const dates = [];
   todoItems.sort((a, b) => a.date.localeCompare(b.date));
@@ -102,6 +98,18 @@ function showAllTodos() {
       titlebox.classList.add("title-box");
       const title = document.createTextNode(todoItems[i].title);
 
+      const description = document.createTextNode(`- ${todoItems[i].description}`)
+      
+      const descriptionDiv = document.createElement("div");
+      descriptionDiv.classList.add("hidden");
+
+      descriptionDiv.appendChild(description);
+
+      titlebox.addEventListener("click", () => {
+        titlebox.appendChild(descriptionDiv);
+        descriptionDiv.classList.toggle("hidden");
+      })
+
       dateDiv.appendChild(titleDiv);
       titleDiv.appendChild(titlebox);
       titleDiv.appendChild(buttonsDiv);
@@ -149,8 +157,8 @@ function showDayInfo(date) {
       deleteBtn.classList.add("delete-btn", "fa-solid", "fa-trash-can");
       deleteBtn.addEventListener("click", () => {
         deleteTodoItem(todoItems[i]);
+        showAllTodos();
         renderCalendar();
-        showDayInfo(todoItems[i].date);
       });
 
       const editDiv = document.createElement("div");
@@ -193,7 +201,7 @@ function setLocalstorage() {
   localStorage.setItem("todoItems", JSON.stringify(todoItems));
 }
 
-// --------EDIT STUFFS---------
+// EDIT TODO ITEMS ________
 
 function openEditForm(todoItem) {
   document.querySelector(".modal-container").classList.toggle("hidden");
@@ -226,7 +234,6 @@ function openEditForm(todoItem) {
 function closeEditForm() {
   document.querySelector(".modal-container").classList.toggle("hidden");
 }
-const editBtn = document.createElement("button");
 
 function saveEdit(todoItem, ev) {
   ev.preventDefault();
@@ -254,7 +261,7 @@ function saveEdit(todoItem, ev) {
   } else {
     todoItems[index] = Object.assign({}, todoItems[index], editedTodoItem);
 
-    localStorage.setItem("todoItems", JSON.stringify(todoItems));
+    setLocalstorage();
     emptyForms();
   }
 }
@@ -272,8 +279,6 @@ function toggleContent() {
     emptyForms();
   }
 }
-
-openFormBtn.addEventListener("click", toggleContent);
 
 function checkTodoItem(todoItem) {
   const index = todoItems.findIndex(

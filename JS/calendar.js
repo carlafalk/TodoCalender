@@ -34,6 +34,14 @@ function addEventListeners() {
     changeHeaderBG();
     renderCalendar();
   });
+
+  //openForm button
+  openFormBtn.addEventListener("click", toggleContent);
+
+  //Add todoitem button
+  document.getElementById("add-btn").addEventListener("click", addTodoItem);
+  document.getElementById("add-btn").addEventListener("click", renderCalendar);
+  document.getElementById("add-btn").addEventListener("click", showAllTodos);
 }
 
 async function renderCalendar() {
