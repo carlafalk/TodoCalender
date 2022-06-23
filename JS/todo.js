@@ -34,10 +34,6 @@ const addTodoItem = (ev) => {
   }
 };
 
-// document.getElementById("add-btn").addEventListener("click", addTodoItem);
-// document.getElementById("add-btn").addEventListener("click", renderCalendar);
-// document.getElementById("add-btn").addEventListener("click", showAllTodos);
-
 function showAllTodos() {
   const dates = [];
   todoItems.sort((a, b) => a.date.localeCompare(b.date));
