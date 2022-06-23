@@ -157,8 +157,8 @@ function showDayInfo(date) {
       deleteBtn.classList.add("delete-btn", "fa-solid", "fa-trash-can");
       deleteBtn.addEventListener("click", () => {
         deleteTodoItem(todoItems[i]);
+        showAllTodos();
         renderCalendar();
-        showDayInfo(todoItems[i].date);
       });
 
       const editDiv = document.createElement("div");
