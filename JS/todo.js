@@ -34,9 +34,9 @@ const addTodoItem = (ev) => {
   }
 };
 
-document.getElementById("add-btn").addEventListener("click", addTodoItem);
-document.getElementById("add-btn").addEventListener("click", renderCalendar);
-document.getElementById("add-btn").addEventListener("click", showAllTodos);
+// document.getElementById("add-btn").addEventListener("click", addTodoItem);
+// document.getElementById("add-btn").addEventListener("click", renderCalendar);
+// document.getElementById("add-btn").addEventListener("click", showAllTodos);
 
 function showAllTodos() {
   const dates = [];
