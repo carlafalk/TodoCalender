@@ -263,7 +263,7 @@ function deleteTodoItem(todoItem) {
 }
 
 async function fetchHolidays() {
-  const url = "http://sholiday.faboul.se/dagar/v2.1/";
+  const url = "https://sholiday.faboul.se/dagar/v2.1/";
 
   const holidays = fetch(
     `${url}${currentDate.getFullYear()}/${currentDate.getMonth() + 1}`
